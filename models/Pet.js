@@ -9,9 +9,13 @@ const Pet = new Schema({
   address: String,
   city: String,
   state: String,
-  users: [{
+  user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
+  },
+  notes: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Note'
   }]
 })
 

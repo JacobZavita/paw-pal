@@ -8,6 +8,10 @@ const User = new Schema({
   favorites: [{
     type: Schema.Types.ObjectId,
     ref: 'Pet'
+  }],
+  notes: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Note'
   }]
 })
 
