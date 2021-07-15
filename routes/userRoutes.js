@@ -47,7 +47,7 @@ router.put('/users', passport.authenticate('jwt'), (req, res) => User.findByIdAn
   .catch(err => console.log(err)))
 
 // DELETE the user
-router.put('/users', passport.authenticate('jwt'), (req, res) => User.findByIdAndDelete(req.user._id)
+router.delete('/users', passport.authenticate('jwt'), (req, res) => User.findByIdAndDelete(req.user._id)
   .then(() => res.sendStatus(200))
   .catch(err => console.log(err)))
 

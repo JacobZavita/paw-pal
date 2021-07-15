@@ -1,6 +1,6 @@
 const { model, Schema } = require('mongoose')
 
-const User = new Schema({
+const Note = new Schema({
   title: String,
   body: String,
   pet: {
@@ -13,6 +13,4 @@ const User = new Schema({
   }
 })
 
-User.plugin(require('passport-local-mongoose'))
-
-module.exports = model('User', User)
+module.exports = model('Note', Note)

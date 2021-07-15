@@ -43,7 +43,7 @@ router.put('/notes/:id', passport.authenticate('jwt'), (req, res) => Note.findBy
   .catch(err => console.log(err)))
 
 // DELETE one Note
-router.put('/notes/:id', passport.authenticate('jwt'), (req, res) => Note.findByIdAndDelete(req.params.id)
+router.delete('/notes/:id', passport.authenticate('jwt'), (req, res) => Note.findByIdAndDelete(req.params.id)
   .then(() => res.sendStatus(200))
   .catch(err => console.log(err)))
 
