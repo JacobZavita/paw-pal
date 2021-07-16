@@ -17,6 +17,7 @@ import Register from './pages/Register'
 import Search from './pages/Search'
 import Share from './pages/Share'
 
+// component imports
 import NavBar from './components/Drawer'
 
 const App = () => {
