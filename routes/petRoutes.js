@@ -40,7 +40,7 @@ router.put('/pets/:id', passport.authenticate('jwt'), (req, res) => Pet.findById
   .catch(err => console.log(err)))
 
 // DELETE one pet
-router.put('/pets/:id', passport.authenticate('jwt'), (req, res) => Pet.findByIdAndDelete(req.params.id)
+router.delete('/pets/:id', passport.authenticate('jwt'), (req, res) => Pet.findByIdAndDelete(req.params.id)
   .then(() => res.sendStatus(200))
   .catch(err => console.log(err)))
 
