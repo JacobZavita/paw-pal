@@ -7,8 +7,11 @@ router.get('/pets/my', passport.authenticate('jwt'), (req, res) => {
   Pet.find({
     user: req.user._id
   })
-    .popualte('notes')
-    .then(posts => res.json(posts))
+    .populate({
+      path: 'notes',
+      model: 'Note'
+    })
+    .then(pets => res.json(pets))
     .catch(err => console.log(err))
 })
 
@@ -19,7 +22,7 @@ router.post('/pets', passport.authenticate('jwt'), (req, res) => {
     name: req.body.name,
     image: req.body.image,
     phone: req.body.phone,
-    emial: req.body.email,
+    email: req.body.email,
     address: req.body.address,
     city: req.body.city,
     state: req.body.state,
