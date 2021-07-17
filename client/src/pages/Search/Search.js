@@ -30,6 +30,7 @@ const Search = () => {
 
     client.animal.search({
       type: `${value}`,
+      location: '92617',
       page: 1,
       limit: 100,
     })
@@ -74,7 +75,6 @@ const Search = () => {
                   variant="contained"
                   color="primary"
                   fullWidth
-
                 >
                   Search
                 </Button>
