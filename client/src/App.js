@@ -3,8 +3,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
-  useHistory
+  // Redirect,
+  // useHistory
 } from 'react-router-dom'
 
 // Page imports
@@ -25,6 +25,7 @@ const App = () => {
     <Router>
       <div>
         <NavBar />
+        {/* <Search /> */}
         <Switch>
           <Route exact path='/'>
             <Landing />

@@ -1,14 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import { useState } from 'react'
-import axios from 'axios'
-import { Button } from '@material-ui/core'
+// import axios from 'axios'
+import { Button, Typography, Card, CardContent, Grid } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
   root: {
     '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-      width: '25ch'
+      // margin: theme.spacing(1)
     }
   }
 }))
@@ -22,34 +21,68 @@ const Search = () => {
     setValue(event.target.value)
   }
 
-  const handleOnClick = () => {
-    // make axios request here
-    axios({
-      headers: {'Authorization': `Bearer ${process.env.API_TOKEN}`},
-      method: 'get',
-      url: `https://api.petfinder.com/v2/animals?type=${value}&page=1&limit=1`,
-      responseType: 'json'
+  const handleOnClick = event => {
+    event.preventDefault()
+    // query petfinder api via petfinder-js-sdk
+    // NEED TO REPLACE apiKey and secret with values on dotenv
+    const petfinder = require("@petfinder/petfinder-js")
+    const client = new petfinder.Client({ apiKey: "ebM3qj6GjEBSeVtG6E4W9Fi5kEXL5RP9f89j9zGUBBH43AowZf", secret: "4eGx1p1KMjIfoolHJBgqj8Z0bf4LD50XYnxQ0XNZ"})
+
+    client.animal.search({
+      type: `${value}`,
+      page: 1,
+      limit: 100,
     })
-    .then(data => {
-      console.log(data)
-    })
-    .catch(err => console.log(err))
+      .then(function (response) {
+        console.log(response.data.animals)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
   }
 
   return (
-    <form className={classes.root} noValidate autoComplete="off">
-      <TextField
-        id="standard-multiline-flexible"
-        label="Multiline"
-        multiline
-        maxRows={4}
-        value={value}
-        onChange={handleChange}
-      />
-      <Button onClick={handleOnClick} variant="contained" color="primary">
-        Search
-      </Button>
-    </form>
+    <>
+    <br></br>
+    <br></br>
+    <br></br>
+      <Typography
+        gutterBottom
+        variant='h4'
+        align='center'
+        style={{ margin: '15px auto' }}
+      >
+        Find Your New Friend
+      </Typography>
+      <Card style={{ maxWidth: 500, margin: '0 auto', padding: '20px 5px' }}>
+        <CardContent>
+          <form className={classes.root} noValidate autoComplete="off">
+            <Grid container spacing={1}>
+              <Grid xs={12} item>
+                <TextField
+                  id="standard-multiline-flexible"
+                  label="Dog, Cat, Bird, etc... "
+                  variant='outlined'
+                  value={value}
+                  fullWidth
+                  onChange={handleChange}
+                />
+                <br></br>
+                <br></br>
+                <Button
+                  onClick={handleOnClick}
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                >
+                  Search
+                </Button>
+              </Grid>
+            </Grid>
+          </form>
+        </CardContent>
+      </Card>
+    </>
   )
 }
 
