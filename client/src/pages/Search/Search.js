@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import { useState } from 'react'
 // import axios from 'axios'
-import { Button, Typography, Card, CardContent, Grid } from '@material-ui/core'
+import { Button, Typography, Card, CardContent, Grid, Link } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -74,9 +74,20 @@ const Search = () => {
                   variant="contained"
                   color="primary"
                   fullWidth
+
                 >
                   Search
                 </Button>
+                <Typography
+                  variant='body2'
+                  component='p'
+                  align='center'
+                  style={{ marginTop: '10px' }}
+                >
+                  <Link>
+                    Advanced Search
+                  </Link>
+                </Typography>
               </Grid>
             </Grid>
           </form>
