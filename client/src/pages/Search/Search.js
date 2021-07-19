@@ -23,10 +23,6 @@ const Search = (props) => {
   const handleOnClick = event => {
     event.preventDefault()
     // query petfinder api via petfinder-js-sdk
-    // NEED TO REPLACE apiKey and secret with values on dotenv
-    // apikey: ebM3qj6GjEBSeVtG6E4W9Fi5kEXL5RP9f89j9zGUBBH43AowZf
-    // secret: 4eGx1p1KMjIfoolHJBgqj8Z0bf4LD50XYnxQ0XNZ
-    // const petfinder = require("@petfinder/petfinder-js")
     const client = new Client({ apiKey: process.env.REACT_APP_API_KEY, secret: process.env.REACT_APP_SECRET})
 
     client.animal.search({
@@ -60,14 +56,11 @@ const Search = (props) => {
 
   return (
     <>
-    <br></br>
-    <br></br>
-    <br></br>
       <Typography
         gutterBottom
         variant='h4'
         align='center'
-        style={{ margin: '15px auto' }}
+        style={{ margin: '75px auto 15px auto' }}
       >
         Find Your New Friend
       </Typography>
