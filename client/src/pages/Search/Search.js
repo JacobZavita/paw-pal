@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField'
 import { useState } from 'react'
 // import axios from 'axios'
 import { Button, Typography, Card, CardContent, Grid, Link } from '@material-ui/core'
+import AccordionDisplay from '../../components/AccordionDisplay'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -84,9 +85,7 @@ const Search = () => {
                   align='center'
                   style={{ marginTop: '10px' }}
                 >
-                  <Link>
-                    Advanced Search
-                  </Link>
+                  <AccordionDisplay advancedSearch="Yes" title="Advanced Search" />
                 </Typography>
               </Grid>
             </Grid>
