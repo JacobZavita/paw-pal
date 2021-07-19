@@ -5,9 +5,9 @@ const passport = require('passport')
 // GET Pet's notes
 router.get('/notes/:petid', passport.authenticate('jwt'), (req, res) => {
   Note.find({
-    pet: req.params.postid
+    pet: req.params.petid
   })
-    .popualte('pet')
+    .populate('pet')
     .then(notes => res.json(notes))
     .catch(err => console.log(err))
 })
@@ -43,7 +43,7 @@ router.put('/notes/:id', passport.authenticate('jwt'), (req, res) => Note.findBy
   .catch(err => console.log(err)))
 
 // DELETE one Note
-router.put('/notes/:id', passport.authenticate('jwt'), (req, res) => Note.findByIdAndDelete(req.params.id)
+router.delete('/notes/:id', passport.authenticate('jwt'), (req, res) => Note.findByIdAndDelete(req.params.id)
   .then(() => res.sendStatus(200))
   .catch(err => console.log(err)))
 

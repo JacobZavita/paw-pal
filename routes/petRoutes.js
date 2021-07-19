@@ -7,8 +7,11 @@ router.get('/pets/my', passport.authenticate('jwt'), (req, res) => {
   Pet.find({
     user: req.user._id
   })
-    .popualte('notes')
-    .then(posts => res.json(posts))
+    .populate({
+      path: 'notes',
+      model: 'Note'
+    })
+    .then(pets => res.json(pets))
     .catch(err => console.log(err))
 })
 
@@ -19,7 +22,7 @@ router.post('/pets', passport.authenticate('jwt'), (req, res) => {
     name: req.body.name,
     image: req.body.image,
     phone: req.body.phone,
-    emial: req.body.email,
+    email: req.body.email,
     address: req.body.address,
     city: req.body.city,
     state: req.body.state,
@@ -40,7 +43,7 @@ router.put('/pets/:id', passport.authenticate('jwt'), (req, res) => Pet.findById
   .catch(err => console.log(err)))
 
 // DELETE one pet
-router.put('/pets/:id', passport.authenticate('jwt'), (req, res) => Pet.findByIdAndDelete(req.params.id)
+router.delete('/pets/:id', passport.authenticate('jwt'), (req, res) => Pet.findByIdAndDelete(req.params.id)
   .then(() => res.sendStatus(200))
   .catch(err => console.log(err)))
 

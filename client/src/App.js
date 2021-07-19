@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+// Router imports
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  useHistory
+} from 'react-router-dom'
 
-function App() {
+// Page imports
+import Favorites from './pages/Favorites'
+import Landing from './pages/Landing'
+import Login from './pages/Login'
+import Pets from './pages/Pets'
+import Profile from './pages/Profile'
+import Register from './pages/Register'
+import Search from './pages/Search'
+import Share from './pages/Share'
+
+// component imports
+import NavBar from './components/Drawer'
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <div>
+        <NavBar />
+        <Switch>
+          <Route exact path='/'>
+            <Landing />
+          </Route>
+          <Route path='/login'>
+            <Login />
+          </Route>
+          <Route path='/register'>
+            <Register />
+          </Route>
+          <Route path='/search'>
+            <Search />
+          </Route>
+          <Route path='/pets'>
+            <Pets />
+          </Route>
+          <Route path='/profile'>
+            <Profile />
+          </Route>
+          <Route path='/favorites'>
+            <Favorites />
+          </Route>
+          <Route path='/share'>
+            <Share />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  )
 }
 
-export default App;
+export default App
