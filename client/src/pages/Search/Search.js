@@ -27,7 +27,7 @@ const Search = (props) => {
     // apikey: ebM3qj6GjEBSeVtG6E4W9Fi5kEXL5RP9f89j9zGUBBH43AowZf
     // secret: 4eGx1p1KMjIfoolHJBgqj8Z0bf4LD50XYnxQ0XNZ
     // const petfinder = require("@petfinder/petfinder-js")
-    const client = new Client({ apiKey: "ebM3qj6GjEBSeVtG6E4W9Fi5kEXL5RP9f89j9zGUBBH43AowZf", secret: "4eGx1p1KMjIfoolHJBgqj8Z0bf4LD50XYnxQ0XNZ"})
+    const client = new Client({ apiKey: process.env.REACT_APP_API_KEY, secret: process.env.REACT_APP_SECRET})
 
     client.animal.search({
       type: `${value}`,
@@ -43,7 +43,7 @@ const Search = (props) => {
         // current petState before adding anything
         const temp = [...props.petState.pets]
         console.log(temp)
-        
+
         // code to add search data to petState.pets
         props.setPetState({ ...props.petState, pets: petfinder })
 
