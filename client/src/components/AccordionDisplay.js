@@ -34,7 +34,7 @@ const AccordionDisplay = props => {
           <Typography>
             {/* conditionally renders certain components based on what props are passed in */}
             {
-              (props.advancedSearch) ? <CheckboxInfo /> : null
+              (props.advancedSearch) ? <CheckboxInfo parentCallback={props.parentCallback} /> : null
             }
           </Typography>
         </AccordionDetails>

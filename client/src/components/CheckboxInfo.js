@@ -6,6 +6,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
+import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,6 +35,18 @@ const CheckboxInfo = props => {
   };
 
   const { pug, samoyed, small, medium, large, male, female } = state;
+
+  const sendData = () => {
+    props.parentCallback({
+      pug: state.pug,
+      samoyed: state.samoyed,
+      small: state.small,
+      medium: state.medium,
+      large: state.large,
+      male: state.male,
+      female: state.female
+    })
+  }
 
   return (
     <div className={classes.root}>
@@ -70,6 +83,9 @@ const CheckboxInfo = props => {
           />
         </FormGroup>
         <FormHelperText>Search using these options</FormHelperText>
+        <Button variant="contained" color="primary" onClick={sendData}>
+          Done
+        </Button>
       </FormControl>
     </div>
   );

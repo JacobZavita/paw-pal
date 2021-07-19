@@ -22,6 +22,19 @@ const Search = () => {
     setValue(event.target.value)
   }
 
+  const [state, setState] = useState({
+    pug: false,
+    samoyed: false,
+    small: false,
+    medium: false,
+    large: false,
+    male: false,
+    female: false
+  })
+  const callbackFunction = childData => {
+    setState(childData)
+  }
+
   const handleOnClick = event => {
     event.preventDefault()
     // query petfinder api via petfinder-js-sdk
@@ -29,18 +42,34 @@ const Search = () => {
     const petfinder = require("@petfinder/petfinder-js")
     const client = new petfinder.Client({ apiKey: "ebM3qj6GjEBSeVtG6E4W9Fi5kEXL5RP9f89j9zGUBBH43AowZf", secret: "4eGx1p1KMjIfoolHJBgqj8Z0bf4LD50XYnxQ0XNZ"})
 
-    client.animal.search({
-      type: `${value}`,
-      location: '92617',
+    let query = `
+      type: \`${value}\`,
+      location: 92617,
       page: 1,
-      limit: 100,
-    })
+      limit: 1,
+    `
+    // if (state.pug) {
+    //   query.concat(`\n breed: pug,`)
+    // }
+
+    // client.animal.search({
+    //   type: `${value}`,
+    //   location: '92617',
+    //   page: 1,
+    //   limit: 1,
+    // })
+    client.animal.search({query})
       .then(function (response) {
         console.log(response.data.animals)
+        console.log(query)
       })
       .catch(function (error) {
         console.log(error)
       })
+  }
+
+  const handleFilterDisplay = () => {
+    console.log(JSON.stringify(state))
   }
 
   return (
@@ -85,8 +114,12 @@ const Search = () => {
                   align='center'
                   style={{ marginTop: '10px' }}
                 >
-                  <AccordionDisplay advancedSearch="Yes" title="Advanced Search" />
+                  <AccordionDisplay advancedSearch="Yes" title="Advanced Search"
+                    parentCallback={callbackFunction} />
                 </Typography>
+                <Button variant="contained" color="primary" onClick={handleFilterDisplay}>
+                  Display Filters
+                </Button>
               </Grid>
             </Grid>
           </form>
