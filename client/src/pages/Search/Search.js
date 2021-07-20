@@ -1,6 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles'
 import { useState } from 'react'
-// import axios from 'axios'
 import { Button, Typography, Card, CardContent, Grid, TextField } from '@material-ui/core'
 import AccordionDisplay from '../../components/AccordionDisplay'
 import { Client } from '@petfinder/petfinder-js'
