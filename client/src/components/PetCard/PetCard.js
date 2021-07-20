@@ -20,6 +20,7 @@ const ImgMediaCard = props => {
 
   const testOnClick = () => {
     console.log(props.petState)
+    console.log(props.petState.pets[0].age)
   }
 
   return (
@@ -38,7 +39,7 @@ const ImgMediaCard = props => {
             Ezra
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Age: {props.petState.pets}
+            Age: {props.petState.pets[0].age}
           </Typography>
         </CardContent>
       </CardActionArea>
