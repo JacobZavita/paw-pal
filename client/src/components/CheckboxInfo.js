@@ -38,7 +38,7 @@ const CheckboxInfo = props => {
 
   const { pug, samoyed, small, medium, large, male, female } = filterState
 
-  // send this data back to the component that the parentCallback function is defined in
+  // send this data back to the parent component, Search.js
   const sendData = () => {
     props.parentCallback({
       pug: filterState.pug,
