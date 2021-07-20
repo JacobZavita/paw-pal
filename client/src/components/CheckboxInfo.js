@@ -82,7 +82,7 @@ const CheckboxInfo = props => {
             label="Female"
           />
         </FormGroup>
-        <FormHelperText>Search using these options</FormHelperText>
+        <FormHelperText>Click the below button to apply these filters</FormHelperText>
         <Button variant="contained" color="primary" onClick={sendData}>
           Done
         </Button>

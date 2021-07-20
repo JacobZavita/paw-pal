@@ -22,6 +22,7 @@ const Search = () => {
     setValue(event.target.value)
   }
 
+  // define filters here, must also define them in checkboxinfo.js
   const [state, setState] = useState({
     pug: false,
     samoyed: false,
@@ -42,26 +43,39 @@ const Search = () => {
     const petfinder = require("@petfinder/petfinder-js")
     const client = new petfinder.Client({ apiKey: "ebM3qj6GjEBSeVtG6E4W9Fi5kEXL5RP9f89j9zGUBBH43AowZf", secret: "4eGx1p1KMjIfoolHJBgqj8Z0bf4LD50XYnxQ0XNZ"})
 
-    let query = `
-      type: \`${value}\`,
-      location: 92617,
+    let query = {
+      type: `${value}`,
+      location: '92617',
       page: 1,
-      limit: 1,
-    `
-    // if (state.pug) {
-    //   query.concat(`\n breed: pug,`)
-    // }
+    }
 
-    // client.animal.search({
-    //   type: `${value}`,
-    //   location: '92617',
-    //   page: 1,
-    //   limit: 1,
-    // })
-    client.animal.search({query})
+    // applies filters to search query, the keys are Petfinder API query parameters
+    if (state.pug) {
+      query['breed'] = 'pug'
+    }
+    if (state.samoyed) {
+      query['breed'] = 'samoyed'
+    }
+    if (state.small) {
+      query['size'] = 'small'
+    }
+    if (state.medium) {
+      query['size'] = 'medium'
+    }
+    if (state.large) {
+      query['size'] = 'large'
+    }
+    if (state.male) {
+      query['gender'] = 'male'
+    }
+    if (state.female) {
+      query['gender'] = 'female'
+    }
+
+    client.animal.search(query)
       .then(function (response) {
         console.log(response.data.animals)
-        console.log(query)
+        console.log(JSON.stringify(query))
       })
       .catch(function (error) {
         console.log(error)
