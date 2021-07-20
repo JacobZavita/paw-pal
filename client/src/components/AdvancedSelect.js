@@ -78,6 +78,7 @@ const AdvancedSelect = props => {
         >
           <MenuItem value={'pug'}>Pug</MenuItem>
           <MenuItem value={'samoyed'}>Samoyed</MenuItem>
+          <MenuItem value={'husky'}>Husky</MenuItem>
         </Select>
       </FormControl>
       <FormControl className={classes.formControl}>
