@@ -3,8 +3,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
-  useHistory
+  // Redirect,
+  // useHistory
 } from 'react-router-dom'
 
 // Page imports
@@ -19,12 +19,20 @@ import Share from './pages/Share'
 
 // component imports
 import NavBar from './components/Drawer'
+import { useState } from 'react'
 
 const App = () => {
+
+  const [petState, setPetState] = useState({
+    pet: {},
+    pets: []
+  })
+
   return (
     <Router>
       <div>
         <NavBar />
+        {/* <Search /> */}
         <Switch>
           <Route exact path='/'>
             <Landing />
@@ -36,10 +44,17 @@ const App = () => {
             <Register />
           </Route>
           <Route path='/search'>
-            <Search />
+            <Search 
+              pets={petState.pets}
+              setPetState={setPetState}
+              petState={petState}
+            />
           </Route>
           <Route path='/pets'>
-            <Pets />
+            <Pets 
+              pet={petState.pet}
+              pets={petState.pets}
+            />
           </Route>
           <Route path='/profile'>
             <Profile />
