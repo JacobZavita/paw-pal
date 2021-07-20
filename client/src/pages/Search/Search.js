@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles'
 import { useState } from 'react'
-import { Button, Typography, Card, CardContent, Grid, Link, TextField } from '@material-ui/core'
+import { Button, Typography, Card, CardContent, Grid, TextField } from '@material-ui/core'
+import AccordionDisplay from '../../components/AccordionDisplay'
 import { Client } from '@petfinder/petfinder-js'
 
 const useStyles = makeStyles(theme => ({
@@ -20,6 +21,21 @@ const Search = (props) => {
     setValue(event.target.value)
   }
 
+  // define filters here, must also define them in CheckboxInfo.js
+  const [filterState, setFilterState] = useState({
+    pug: false,
+    samoyed: false,
+    small: false,
+    medium: false,
+    large: false,
+    male: false,
+    female: false
+  })
+
+  const callbackFunction = childData => {
+    setFilterState(childData)
+  }
+
   const handleOnClick = event => {
     event.preventDefault()
     // query petfinder api via petfinder-js-sdk
@@ -29,13 +45,38 @@ const Search = (props) => {
     // const petfinder = require("@petfinder/petfinder-js")
     const client = new Client({ apiKey: process.env.REACT_APP_API_KEY, secret: process.env.REACT_APP_SECRET})
 
-    client.animal.search({
+    let query = {
       type: `${value}`,
       location: '92617',
       page: 1,
-      limit: 100,
-    })
-      .then(function ({ data }) {
+    }
+
+    // applies filters to search query, the keys are Petfinder API query parameters
+    // update these conditionals every time a query parameter is added
+    if (filterState.pug) {
+      query['breed'] = 'pug'
+    }
+    if (filterState.samoyed) {
+      query['breed'] = 'samoyed'
+    }
+    if (filterState.small) {
+      query['size'] = 'small'
+    }
+    if (filterState.medium) {
+      query['size'] = 'medium'
+    }
+    if (filterState.large) {
+      query['size'] = 'large'
+    }
+    if (filterState.male) {
+      query['gender'] = 'male'
+    }
+    if (filterState.female) {
+      query['gender'] = 'female'
+    }
+
+    client.animal.search(query)
+      .then(({data}) => {
         // search data from petfinder
         let petfinder = data.animals
         console.log(petfinder)
@@ -49,7 +90,7 @@ const Search = (props) => {
 
         console.log(props.petState)
       })
-      .catch(function (error) {
+      .catch(error => {
         console.log(error)
       })
   }
@@ -100,9 +141,8 @@ const Search = (props) => {
                   align='center'
                   style={{ marginTop: '10px' }}
                 >
-                  <Link onClick={testOnClick}>
-                    Advanced Search
-                  </Link>
+                  <AccordionDisplay advancedSearch="Yes" title="Advanced Search"
+                    parentCallback={callbackFunction} />
                 </Typography>
               </Grid>
             </Grid>
