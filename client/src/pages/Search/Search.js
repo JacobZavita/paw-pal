@@ -1,9 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles'
-import TextField from '@material-ui/core/TextField'
 import { useState } from 'react'
 // import axios from 'axios'
-import { Button, Typography, Card, CardContent, Grid } from '@material-ui/core'
+import { Button, Typography, Card, CardContent, Grid, TextField } from '@material-ui/core'
 import AccordionDisplay from '../../components/AccordionDisplay'
+import { Client } from '@petfinder/petfinder-js'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Search = () => {
+const Search = (props) => {
   const classes = useStyles()
 
   const [value, setValue] = useState()
@@ -41,8 +41,10 @@ const Search = () => {
     event.preventDefault()
     // query petfinder api via petfinder-js-sdk
     // NEED TO REPLACE apiKey and secret with values on dotenv
-    const petfinder = require("@petfinder/petfinder-js")
-    const client = new petfinder.Client({ apiKey: process.env.REACT_APP_API_KEY, secret: process.env.REACT_APP_API_SECRET})
+    // apikey: ebM3qj6GjEBSeVtG6E4W9Fi5kEXL5RP9f89j9zGUBBH43AowZf
+    // secret: 4eGx1p1KMjIfoolHJBgqj8Z0bf4LD50XYnxQ0XNZ
+    // const petfinder = require("@petfinder/petfinder-js")
+    const client = new Client({ apiKey: process.env.REACT_APP_API_KEY, secret: process.env.REACT_APP_SECRET})
 
     let query = {
       type: `${value}`,
@@ -75,12 +77,29 @@ const Search = () => {
     }
 
     client.animal.search(query)
-      .then(function (response) {
-        console.log(response.data.animals)
+      .then(({data}) => {
+        console.log(data.animals)
+
+        // search data from petfinder
+        let petfinder = data.animals
+        console.log(petfinder)
+
+        // current petState before adding anything
+        const temp = [...props.petState.pets]
+        console.log(temp)
+
+        // code to add search data to petState.pets
+        props.setPetState({ ...props.petState, pets: petfinder })
+
+        console.log(props.petState)
       })
-      .catch(function (error) {
+      .catch(error => {
         console.log(error)
       })
+  }
+
+  const testOnClick = () => {
+    console.log(props.petState)
   }
 
   return (
