@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import { useState } from 'react'
 // import axios from 'axios'
-import { Button, Typography, Card, CardContent, Grid, Link } from '@material-ui/core'
+import { Button, Typography, Card, CardContent, Grid } from '@material-ui/core'
 import AccordionDisplay from '../../components/AccordionDisplay'
 
 const useStyles = makeStyles(theme => ({
@@ -32,7 +32,7 @@ const Search = () => {
     male: false,
     female: false
   })
-  
+
   const callbackFunction = childData => {
     setState(childData)
   }
