@@ -16,7 +16,7 @@ import ListItem from '@material-ui/core/ListItem';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import SearchIcon from '@material-ui/icons/Search';
-import Link from '@material-ui/core/Link'
+import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 
 const drawerWidth = 240;
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavBar = () => {
+const NavBar = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -134,19 +134,19 @@ const NavBar = () => {
           <ListItem button>
             <AccountCircleIcon/>
               <Link to='/profile'>
-                <Typography> My Profile</Typography>
+                <Typography>My Profile</Typography>
               </Link>
           </ListItem>
           <ListItem button>
             <FavoriteIcon />
               <Link to='/favorites'>
-                <Typography> Favorites</Typography>
+                <Typography>Favorites</Typography>
               </Link>
           </ListItem>
           <ListItem button>
             <SearchIcon />
               <Link to='/search'>
-                <Typography> Search</Typography>
+                <Typography>Search</Typography>
               </Link>
           </ListItem>
         </List>

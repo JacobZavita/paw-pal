@@ -1,7 +1,15 @@
-const Pets = _ => {
+import ImgMediaCard from '../../components/PetCard'
+
+const Pets = props => {
+
   return (
     <>
-      <h1>This is the Pets page</h1>
+      <div style={{ margin: '75px auto 15px auto' }} align='center'>
+        <ImgMediaCard
+          petState={props.petState}
+          setPetState={props.setPetState}
+        />
+      </div>
     </>
   )
 }
