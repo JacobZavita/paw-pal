@@ -22,7 +22,7 @@ const Search = (props) => {
     setValue(event.target.value)
   }
 
-  // define filters here, must also define them in checkboxinfo.js
+  // define filters here, must also define them in CheckboxInfo.js
   const [state, setState] = useState({
     pug: false,
     samoyed: false,

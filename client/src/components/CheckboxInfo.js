@@ -1,11 +1,11 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Checkbox from '@material-ui/core/Checkbox';
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import FormLabel from '@material-ui/core/FormLabel'
+import FormControl from '@material-ui/core/FormControl'
+import FormGroup from '@material-ui/core/FormGroup'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormHelperText from '@material-ui/core/FormHelperText'
+import Checkbox from '@material-ui/core/Checkbox'
 import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles((theme) => ({
@@ -15,11 +15,11 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(3),
   },
-}));
+}))
 
 // want to filter by: 
 const CheckboxInfo = props => {
-  const classes = useStyles();
+  const classes = useStyles()
   const [state, setState] = React.useState({
     pug: false,
     samoyed: false,
@@ -28,13 +28,13 @@ const CheckboxInfo = props => {
     large: false,
     male: false,
     female: false
-  });
+  })
 
   const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+    setState({ ...state, [event.target.name]: event.target.checked })
   };
 
-  const { pug, samoyed, small, medium, large, male, female } = state;
+  const { pug, samoyed, small, medium, large, male, female } = state
 
   const sendData = () => {
     props.parentCallback({
@@ -89,7 +89,7 @@ const CheckboxInfo = props => {
         </Button>
       </FormControl>
     </div>
-  );
+  )
 }
 
 export default CheckboxInfo
