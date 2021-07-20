@@ -78,8 +78,6 @@ const Search = (props) => {
 
     client.animal.search(query)
       .then(({data}) => {
-        console.log(data.animals)
-
         // search data from petfinder
         let petfinder = data.animals
         console.log(petfinder)
