@@ -8,6 +8,8 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 import Checkbox from '@material-ui/core/Checkbox'
 import Button from '@material-ui/core/Button'
 
+// This component is used for the list of filters inside the Accordion on the search page
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -20,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 // want to filter by: 
 const CheckboxInfo = props => {
   const classes = useStyles()
-  const [state, setState] = React.useState({
+  const [filterState, setFilterState] = React.useState({
     pug: false,
     samoyed: false,
     small: false,
@@ -31,20 +33,20 @@ const CheckboxInfo = props => {
   })
 
   const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked })
+    setFilterState({ ...filterState, [event.target.name]: event.target.checked })
   };
 
-  const { pug, samoyed, small, medium, large, male, female } = state
+  const { pug, samoyed, small, medium, large, male, female } = filterState
 
   const sendData = () => {
     props.parentCallback({
-      pug: state.pug,
-      samoyed: state.samoyed,
-      small: state.small,
-      medium: state.medium,
-      large: state.large,
-      male: state.male,
-      female: state.female
+      pug: filterState.pug,
+      samoyed: filterState.samoyed,
+      small: filterState.small,
+      medium: filterState.medium,
+      large: filterState.large,
+      male: filterState.male,
+      female: filterState.female
     })
     console.log('Filters applied!')
   }

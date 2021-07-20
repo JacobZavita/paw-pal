@@ -22,7 +22,7 @@ const Search = (props) => {
   }
 
   // define filters here, must also define them in CheckboxInfo.js
-  const [state, setState] = useState({
+  const [filterState, setFilterState] = useState({
     pug: false,
     samoyed: false,
     small: false,
@@ -33,7 +33,7 @@ const Search = (props) => {
   })
 
   const callbackFunction = childData => {
-    setState(childData)
+    setFilterState(childData)
   }
 
   const handleOnClick = event => {
@@ -53,25 +53,25 @@ const Search = (props) => {
 
     // applies filters to search query, the keys are Petfinder API query parameters
     // update these conditionals every time a query parameter is added
-    if (state.pug) {
+    if (filterState.pug) {
       query['breed'] = 'pug'
     }
-    if (state.samoyed) {
+    if (filterState.samoyed) {
       query['breed'] = 'samoyed'
     }
-    if (state.small) {
+    if (filterState.small) {
       query['size'] = 'small'
     }
-    if (state.medium) {
+    if (filterState.medium) {
       query['size'] = 'medium'
     }
-    if (state.large) {
+    if (filterState.large) {
       query['size'] = 'large'
     }
-    if (state.male) {
+    if (filterState.male) {
       query['gender'] = 'male'
     }
-    if (state.female) {
+    if (filterState.female) {
       query['gender'] = 'female'
     }
 

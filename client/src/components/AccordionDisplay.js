@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import CheckboxInfo from './CheckboxInfo'
 
+// Generic Accordion component used for displaying data
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
