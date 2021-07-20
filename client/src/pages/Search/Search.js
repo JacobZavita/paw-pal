@@ -25,7 +25,11 @@ const Search = (props) => {
   const [filterState, setFilterState] = useState({
     breed: '',
     gender: '',
-    size: ''
+    size: '',
+    age: '',
+    good_with_children: false,
+    good_with_dogs: false,
+    good_with_cats: false
   })
 
   const callbackFunction = childData => {
@@ -51,8 +55,15 @@ const Search = (props) => {
 
     // applies filters to search query, the keys are Petfinder API query parameters
     for (const[key, value] of Object.entries(filterState)) {
-      if(value.length) {
-        query[key] = value
+      if(typeof value === 'string') {
+        if(value.length) {
+          query[key] = value
+        }
+      }
+      else if(typeof value == 'boolean') {
+        if (value) {
+          query[key] = value
+        }
       }
     }
 
@@ -61,6 +72,9 @@ const Search = (props) => {
         // search data from petfinder
         let petfinder = data.animals
         console.log(petfinder)
+        
+        // this is for debugging
+        console.log(query)
 
         // current petState before adding anything
         const temp = [...props.petState.pets]

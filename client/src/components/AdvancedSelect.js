@@ -25,6 +25,10 @@ const AdvancedSelect = props => {
   const [breed, setBreed] = useState('')
   const [gender, setGender] = useState('')
   const [size, setSize] = useState('')
+  const [age, setAge] = useState('')
+  const [goodWithChildren, setGoodWithChildren] = useState(false)
+  const [goodWithDogs, setGoodWithDogs] = useState(false)
+  const [goodWithCats, setGoodWithCats] = useState(false)
 
   const handleBreedChange = (event) => {
     setBreed(event.target.value)
@@ -35,12 +39,29 @@ const AdvancedSelect = props => {
   const handleSizeChange = (event) => {
     setSize(event.target.value)
   }
+  const handleAgeChange = (event) => {
+    setAge(event.target.value)
+  }
+  const handleChildrenChange = (event) => {
+    setGoodWithChildren(event.target.value)
+  }
+  const handleDogChange = (event) => {
+    setGoodWithDogs(event.target.value)
+  }
+  const handleCatChange = (event) => {
+    setGoodWithCats(event.target.value)
+  }
+
 
   const sendData = () => {
     props.parentCallback({
       breed: breed,
       gender: gender,
-      size: size
+      size: size,
+      age: age,
+      good_with_children: goodWithChildren,
+      good_with_dogs: goodWithDogs,
+      good_with_cats: goodWithCats
     })
     console.log('Filters applied!')
   }
@@ -55,8 +76,8 @@ const AdvancedSelect = props => {
           value={breed}
           onChange={handleBreedChange}
         >
-          <MenuItem value={'Pug'}>Pug</MenuItem>
-          <MenuItem value={'Samoyed'}>Samoyed</MenuItem>
+          <MenuItem value={'pug'}>Pug</MenuItem>
+          <MenuItem value={'samoyed'}>Samoyed</MenuItem>
         </Select>
       </FormControl>
       <FormControl className={classes.formControl}>
@@ -67,8 +88,8 @@ const AdvancedSelect = props => {
           value={gender}
           onChange={handleGenderChange}
         >
-          <MenuItem value={'Male'}>Male</MenuItem>
-          <MenuItem value={'Female'}>Female</MenuItem>
+          <MenuItem value={'male'}>Male</MenuItem>
+          <MenuItem value={'female'}>Female</MenuItem>
         </Select>
       </FormControl>
       <FormControl className={classes.formControl}>
@@ -79,9 +100,60 @@ const AdvancedSelect = props => {
           value={size}
           onChange={handleSizeChange}
         >
-          <MenuItem value={'Small'}>Small</MenuItem>
-          <MenuItem value={'Medium'}>Medium</MenuItem>
-          <MenuItem value={'Large'}>Large</MenuItem>
+          <MenuItem value={'small'}>Small</MenuItem>
+          <MenuItem value={'medium'}>Medium</MenuItem>
+          <MenuItem value={'large'}>Large</MenuItem>
+          <MenuItem value={'xlarge'}>Extra Large</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          onChange={handleAgeChange}
+        >
+          <MenuItem value={'baby'}>Baby</MenuItem>
+          <MenuItem value={'young'}>Young</MenuItem>
+          <MenuItem value={'adult'}>Adult</MenuItem>
+          <MenuItem value={'senior'}>Old</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Is good with children?</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={goodWithChildren}
+          onChange={handleChildrenChange}
+        >
+          <MenuItem value={true}>Yes</MenuItem>
+          <MenuItem value={false}>No</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Is good with dogs?</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={goodWithDogs}
+          onChange={handleDogChange}
+        >
+          <MenuItem value={true}>Yes</MenuItem>
+          <MenuItem value={false}>No</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Is good with cats?</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={goodWithCats}
+          onChange={handleCatChange}
+        >
+          <MenuItem value={true}>Yes</MenuItem>
+          <MenuItem value={false}>No</MenuItem>
         </Select>
         <FormHelperText>Click the below button to apply these filters</FormHelperText>
         <Button variant="contained" color="primary" onClick={sendData}>
