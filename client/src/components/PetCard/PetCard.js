@@ -20,7 +20,7 @@ const ImgMediaCard = props => {
 
   const testOnClick = () => {
     console.log(props.petState)
-    console.log(props.petState.pets[0].age)
+    console.log(props.petState.pets[0])
   }
 
   return (
@@ -29,17 +29,17 @@ const ImgMediaCard = props => {
       <CardActionArea>
         <CardMedia
           component="img"
-          alt="Contemplative Reptile"
+            alt={props.petState.pets[1].name}
           height="640"
-          src='https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/52407885/1/?bust=1626741417'
-          title="Contemplative Reptile"
+            src={props.petState.pets[1].primary_photo_cropped.full}
+          title={props.petState.pets[1].name}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Ezra
+            {props.petState.pets[1].name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Age: {props.petState.pets[0].age}
+            Age: {props.petState.pets[1].age}
           </Typography>
         </CardContent>
       </CardActionArea>
