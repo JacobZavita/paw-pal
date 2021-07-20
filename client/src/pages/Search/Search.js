@@ -21,15 +21,11 @@ const Search = (props) => {
     setValue(event.target.value)
   }
 
-  // define filters here, must also define them in CheckboxInfo.js
+  // define filters here, must also define them in AdvancedSelect.js
   const [filterState, setFilterState] = useState({
-    pug: false,
-    samoyed: false,
-    small: false,
-    medium: false,
-    large: false,
-    male: false,
-    female: false
+    breed: '',
+    gender: '',
+    size: ''
   })
 
   const callbackFunction = childData => {
@@ -49,30 +45,15 @@ const Search = (props) => {
       type: `${value}`,
       location: '92617',
       page: 1,
+      limit: 100,
+      // default limit is 20 results
     }
 
     // applies filters to search query, the keys are Petfinder API query parameters
-    // update these conditionals every time a query parameter is added
-    if (filterState.pug) {
-      query['breed'] = 'pug'
-    }
-    if (filterState.samoyed) {
-      query['breed'] = 'samoyed'
-    }
-    if (filterState.small) {
-      query['size'] = 'small'
-    }
-    if (filterState.medium) {
-      query['size'] = 'medium'
-    }
-    if (filterState.large) {
-      query['size'] = 'large'
-    }
-    if (filterState.male) {
-      query['gender'] = 'male'
-    }
-    if (filterState.female) {
-      query['gender'] = 'female'
+    for (const[key, value] of Object.entries(filterState)) {
+      if(value.length) {
+        query[key] = value
+      }
     }
 
     client.animal.search(query)
