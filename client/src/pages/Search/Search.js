@@ -32,6 +32,7 @@ const Search = () => {
     male: false,
     female: false
   })
+  
   const callbackFunction = childData => {
     setState(childData)
   }
@@ -41,7 +42,7 @@ const Search = () => {
     // query petfinder api via petfinder-js-sdk
     // NEED TO REPLACE apiKey and secret with values on dotenv
     const petfinder = require("@petfinder/petfinder-js")
-    const client = new petfinder.Client({ apiKey: "ebM3qj6GjEBSeVtG6E4W9Fi5kEXL5RP9f89j9zGUBBH43AowZf", secret: "4eGx1p1KMjIfoolHJBgqj8Z0bf4LD50XYnxQ0XNZ"})
+    const client = new petfinder.Client({ apiKey: process.env.REACT_APP_API_KEY, secret: process.env.REACT_APP_API_SECRET})
 
     let query = {
       type: `${value}`,
@@ -50,6 +51,7 @@ const Search = () => {
     }
 
     // applies filters to search query, the keys are Petfinder API query parameters
+    // update these conditionals every time a query parameter is added
     if (state.pug) {
       query['breed'] = 'pug'
     }
@@ -75,15 +77,10 @@ const Search = () => {
     client.animal.search(query)
       .then(function (response) {
         console.log(response.data.animals)
-        console.log(JSON.stringify(query))
       })
       .catch(function (error) {
         console.log(error)
       })
-  }
-
-  const handleFilterDisplay = () => {
-    console.log(JSON.stringify(state))
   }
 
   return (
@@ -131,9 +128,6 @@ const Search = () => {
                   <AccordionDisplay advancedSearch="Yes" title="Advanced Search"
                     parentCallback={callbackFunction} />
                 </Typography>
-                <Button variant="contained" color="primary" onClick={handleFilterDisplay}>
-                  Display Filters
-                </Button>
               </Grid>
             </Grid>
           </form>

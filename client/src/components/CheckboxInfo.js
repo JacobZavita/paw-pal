@@ -46,6 +46,7 @@ const CheckboxInfo = props => {
       male: state.male,
       female: state.female
     })
+    console.log('Filters applied!')
   }
 
   return (
