@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles'
 import { useState } from 'react'
 import { Button, Typography, Card, CardContent, Grid, Link, TextField } from '@material-ui/core'
+import { Link as Lnk } from 'react-router-dom'
 import { Client } from '@petfinder/petfinder-js'
 
 const useStyles = makeStyles(theme => ({
@@ -11,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Search = (props) => {
+const Search = props => {
   const classes = useStyles()
 
   const [value, setValue] = useState()
@@ -35,10 +36,6 @@ const Search = (props) => {
         // search data from petfinder
         let petfinder = data.animals
         console.log(petfinder)
-
-        // current petState before adding anything
-        const temp = [...props.petState.pets]
-        console.log(temp)
 
         // code to add search data to petState.pets
         props.setPetState({ ...props.petState, pets: petfinder })
@@ -96,6 +93,16 @@ const Search = (props) => {
                   <Link onClick={testOnClick}>
                     Advanced Search
                   </Link>
+                </Typography>
+                <Typography
+                  variant='body2'
+                  component='p'
+                  align='center'
+                  style={{ marginTop: '10px' }}
+                >
+                  <Lnk to='/pets'>
+                    Pets
+                  </Lnk>
                 </Typography>
               </Grid>
             </Grid>

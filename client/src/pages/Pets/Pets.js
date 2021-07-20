@@ -1,8 +1,23 @@
-const Pets = _ => {
+import ImgMediaCard from '../../components/PetCard'
+import { Button } from '@material-ui/core'
+
+const Pets = props => {
+  
+  const testOnClick = () => {
+    console.log(props.petState.pets)
+  }
+
   return (
-    <>
-      <h1>This is the Pets page</h1>
-    </>
+    <div style={{ margin: '75px auto 15px auto' }} align='center'>
+      <ImgMediaCard
+        petState={props.petState}
+        pet={props.petState.pet}
+        pets={props.petState.pets}
+      />
+      <Button size="small" color="primary" onClick={testOnClick}>
+        Learn More
+        </Button>
+    </div>
   )
 }
 
