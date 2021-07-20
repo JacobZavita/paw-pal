@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import FormLabel from '@material-ui/core/FormLabel'
 import FormControl from '@material-ui/core/FormControl'
@@ -19,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-// want to filter by: 
+// list of filters
 const CheckboxInfo = props => {
   const classes = useStyles()
-  const [filterState, setFilterState] = React.useState({
+  const [filterState, setFilterState] = useState({
     pug: false,
     samoyed: false,
     small: false,
@@ -38,6 +38,7 @@ const CheckboxInfo = props => {
 
   const { pug, samoyed, small, medium, large, male, female } = filterState
 
+  // send this data back to the component that the parentCallback function is defined in
   const sendData = () => {
     props.parentCallback({
       pug: filterState.pug,
