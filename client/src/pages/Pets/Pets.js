@@ -95,7 +95,7 @@ export default function Pets() {
 
   return (
 
-    <div>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
       <Carousel pets={pets}/>
     </div>
     
