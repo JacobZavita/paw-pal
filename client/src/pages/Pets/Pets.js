@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
@@ -103,7 +102,6 @@ export default function Pets({pets, pet, setPetState}) {
     </div>
     
   );
-=======
 import ImgMediaCard from '../../components/PetCard'
 
 const Pets = props => {
@@ -118,7 +116,6 @@ const Pets = props => {
       </div>
     </>
   )
->>>>>>> 7ad59360ac145017aec4113aa6fa4478a72df76b
 }
 
 

@@ -32,7 +32,6 @@ const App = () => {
     <Router>
       <div>
         <NavBar />
-<<<<<<< HEAD
         {/* <Search /> */}
         <Switch>
           <Route exact path='/'>
@@ -69,8 +68,7 @@ const App = () => {
             <Share />
           </Route>
         </Switch>
-=======
-          <Switch>
+        <Switch>
             <Route exact path='/'>
               <Landing />
             </Route>
@@ -103,7 +101,6 @@ const App = () => {
               <Share />
             </Route>
           </Switch>
->>>>>>> 7ad59360ac145017aec4113aa6fa4478a72df76b
       </div>
     </Router>
   )
