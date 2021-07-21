@@ -18,7 +18,7 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 400,
+    maxWidth: 600,
     flexGrow: 1,
   },
   header: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
   },
   img: {
-    height: 255,
+    height: 400,
     display: 'block',
     maxWidth: 400,
     overflow: 'hidden',
@@ -60,7 +60,7 @@ function Carousel({pets}) {
       <Paper square elevation={0} className={classes.header}>
         <Typography>{pets[activeStep]?.label}</Typography>
       </Paper>
-      <AutoPlaySwipeableViews
+      <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
         onChangeIndex={handleStepChange}
@@ -69,12 +69,12 @@ function Carousel({pets}) {
         {pets.map((step, index) => (
           <div key={step.label}>
             {Math.abs(activeStep - index) <= 2 ? (
-              <img className={classes.img} src={step.imgPath} alt={step.label} />
+              <img className={classes.img} src={step.photos?step.photos[0]?.full:null} alt={step.label} />
             ) : null}
             <Card pet = {step}/>
           </div>
         ))}
-      </AutoPlaySwipeableViews>
+      </SwipeableViews>
       <MobileStepper
         steps={maxSteps}
         position="static"

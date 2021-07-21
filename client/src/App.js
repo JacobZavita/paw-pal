@@ -54,6 +54,8 @@ const App = () => {
             <Pets 
               pet={petState.pet}
               pets={petState.pets}
+              setPetState={setPetState}
+              
             />
           </Route>
           <Route path='/profile'>

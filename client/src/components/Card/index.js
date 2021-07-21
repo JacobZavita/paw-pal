@@ -5,6 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Background from './pawprints.jpg'
 
 const useStyles = makeStyles({
   root: {
@@ -21,26 +22,33 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+  background: {
+ backgroundImage: `url(${Background})`},
 });
 
-export default function SimpleCard() {
+export default function SimpleCard({pet}) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root}
+      style={{ backgroundImage: `url(${Background})` }}
+    >
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Word of the Day
+          This is: 
         </Typography>
         <Typography variant="h5" component="h2">
-          be{bull}nev{bull}o{bull}lent
+          {pet.name}
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
-          adjective
+          Sex:
+        </Typography>
+        <Typography className={classes.pos} color="textSecondary">
+          Age:
         </Typography>
         <Typography variant="body2" component="p">
-          well meaning and kindly.
+          About:
           <br />
           {'"a benevolent smile"'}
         </Typography>

@@ -21,7 +21,7 @@ passport.deserializeUser(User.deserializeUser())
 
 passport.use(new JwtStrategy({
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.SECRET
+  secretOrKey: process.env.SECRET ||'secret'
 }, ({ id }, cb) => User.findById(id)
   .populate('favorites')
   .then(user => cb(null, user))

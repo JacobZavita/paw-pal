@@ -18,6 +18,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Carousel from '../../components/Carousel'
+
 // function Pets(){
 // const getPets=()=>{
 //   axios.get(`https://api.petfinder.com/v2/animals`, { headers: { Authorization: `Bearer ${'FLnqEoWDuj92X9rjiYmc2u0jYWwglFXJs0XL4R8neHOEYcZRwQ'}` } })
@@ -66,9 +67,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Pets() {
+export default function Pets({pets, pet, setPetState}) {
+  
   const classes = useStyles();
-  const [pets, setPets] = useState([])
+  // const [pets, setPets] = useState([])
   const [expanded, setExpanded] = React.useState(false);
   useState( () => {
     const petfinder = require("@petfinder/petfinder-js")
@@ -81,7 +83,7 @@ export default function Pets() {
     client.animal.search(`${'dog'}`)
       .then(function (res) {
         console.log(res)
-        setPets(res.data.animals)
+        setPetState({pets:res.data.animals, pet})
       })
       .catch(function (error) {
         console.log(error)
@@ -101,6 +103,7 @@ export default function Pets() {
     
   );
 }
+
 
 
 
