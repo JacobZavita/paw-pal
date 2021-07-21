@@ -76,6 +76,7 @@ const AdvancedSelect = props => {
           value={breed}
           onChange={handleBreedChange}
         >
+          <MenuItem value={''}>&nbsp;&nbsp;</MenuItem>
           <MenuItem value={'pug'}>Pug</MenuItem>
           <MenuItem value={'samoyed'}>Samoyed</MenuItem>
           <MenuItem value={'husky'}>Husky</MenuItem>
@@ -89,6 +90,7 @@ const AdvancedSelect = props => {
           value={gender}
           onChange={handleGenderChange}
         >
+          <MenuItem value={''}>&nbsp;&nbsp;</MenuItem>
           <MenuItem value={'male'}>Male</MenuItem>
           <MenuItem value={'female'}>Female</MenuItem>
         </Select>
@@ -101,6 +103,7 @@ const AdvancedSelect = props => {
           value={size}
           onChange={handleSizeChange}
         >
+          <MenuItem value={''}>&nbsp;&nbsp;</MenuItem>
           <MenuItem value={'small'}>Small</MenuItem>
           <MenuItem value={'medium'}>Medium</MenuItem>
           <MenuItem value={'large'}>Large</MenuItem>
@@ -115,6 +118,7 @@ const AdvancedSelect = props => {
           value={age}
           onChange={handleAgeChange}
         >
+          <MenuItem value={''}>&nbsp;&nbsp;</MenuItem>
           <MenuItem value={'baby'}>Baby</MenuItem>
           <MenuItem value={'young'}>Young</MenuItem>
           <MenuItem value={'adult'}>Adult</MenuItem>

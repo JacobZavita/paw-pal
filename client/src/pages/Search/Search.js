@@ -125,6 +125,7 @@ const Search = (props) => {
                     value={value}
                     onChange={handleChange}
                   >
+                    <MenuItem value={''}>&nbsp;&nbsp;</MenuItem>
                     <MenuItem value={'dog'}>Dog</MenuItem>
                     <MenuItem value={'cat'}>Cat</MenuItem>
                     <MenuItem value={'rabbit'}>Rabbit</MenuItem>
