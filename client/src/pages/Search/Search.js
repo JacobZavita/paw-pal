@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Button, Typography, Card, CardContent, Grid, TextField } from '@material-ui/core'
 import AccordionDisplay from '../../components/AccordionDisplay'
 import { Client } from '@petfinder/petfinder-js'
+import { Link as Lnk } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -12,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Search = (props) => {
+const Search = props => {
   const classes = useStyles()
 
   const [value, setValue] = useState()
@@ -39,10 +40,6 @@ const Search = (props) => {
   const handleOnClick = event => {
     event.preventDefault()
     // query petfinder api via petfinder-js-sdk
-    // NEED TO REPLACE apiKey and secret with values on dotenv
-    // apikey: ebM3qj6GjEBSeVtG6E4W9Fi5kEXL5RP9f89j9zGUBBH43AowZf
-    // secret: 4eGx1p1KMjIfoolHJBgqj8Z0bf4LD50XYnxQ0XNZ
-    // const petfinder = require("@petfinder/petfinder-js")
     const client = new Client({ apiKey: process.env.REACT_APP_API_KEY, secret: process.env.REACT_APP_SECRET})
 
     let query = {
@@ -81,10 +78,6 @@ const Search = (props) => {
         let petfinder = data.animals
         console.log(petfinder)
 
-        // current petState before adding anything
-        const temp = [...props.petState.pets]
-        console.log(temp)
-
         // code to add search data to petState.pets
         props.setPetState({ ...props.petState, pets: petfinder })
 
@@ -101,14 +94,11 @@ const Search = (props) => {
 
   return (
     <>
-    <br></br>
-    <br></br>
-    <br></br>
       <Typography
         gutterBottom
         variant='h4'
         align='center'
-        style={{ margin: '15px auto' }}
+        style={{ margin: '75px auto 15px auto' }}
       >
         Find Your New Friend
       </Typography>
@@ -143,6 +133,16 @@ const Search = (props) => {
                 >
                   <AccordionDisplay advancedSearch="Yes" title="Advanced Search"
                     parentCallback={callbackFunction} />
+                </Typography>
+                <Typography
+                  variant='body2'
+                  component='p'
+                  align='center'
+                  style={{ marginTop: '10px' }}
+                >
+                  <Lnk to='/pets'>
+                    Pets
+                  </Lnk>
                 </Typography>
               </Grid>
             </Grid>
