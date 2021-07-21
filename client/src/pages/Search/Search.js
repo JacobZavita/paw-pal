@@ -1,21 +1,26 @@
 import { makeStyles } from '@material-ui/core/styles'
 import { useState } from 'react'
-import { Button, Typography, Card, CardContent, Grid, TextField } from '@material-ui/core'
+import { Button, Typography, Card, CardContent, Grid } from '@material-ui/core'
 import AccordionDisplay from '../../components/AccordionDisplay'
 import { Client } from '@petfinder/petfinder-js'
+import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
   root: {
     '& .MuiTextField-root': {
       // margin: theme.spacing(1)
     }
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
   }
 }))
 
 const Search = (props) => {
   const classes = useStyles()
 
-  const [value, setValue] = useState()
+  const [value, setValue] = useState('')
 
   const handleChange = (event) => {
     setValue(event.target.value)
@@ -112,14 +117,21 @@ const Search = (props) => {
           <form className={classes.root} noValidate autoComplete="off">
             <Grid container spacing={1}>
               <Grid xs={12} item>
-                <TextField
-                  id="standard-multiline-flexible"
-                  label="Dog, Cat, Bird, etc... "
-                  variant='outlined'
-                  value={value}
-                  fullWidth
-                  onChange={handleChange}
-                />
+                <FormControl className={classes.formControl}>
+                  <InputLabel id="demo-simple-select-label">Select Animal Type</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={value}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={'dog'}>Dog</MenuItem>
+                    <MenuItem value={'cat'}>Cat</MenuItem>
+                    <MenuItem value={'rabbit'}>Rabbit</MenuItem>
+                    <MenuItem value={'horse'}>Horse</MenuItem>
+                    <MenuItem value={'bird'}>Bird</MenuItem>
+                  </Select>
+                </FormControl>
                 <br></br>
                 <br></br>
                 <Button
