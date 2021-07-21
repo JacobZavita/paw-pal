@@ -32,7 +32,6 @@ const App = () => {
     <Router>
       <div>
         <NavBar />
-        {/* <Search /> */}
         <Switch>
           <Route exact path='/'>
             <Landing />
@@ -55,7 +54,7 @@ const App = () => {
               pet={petState.pet}
               pets={petState.pets}
               setPetState={setPetState}
-              
+              petState={petState}
             />
           </Route>
           <Route path='/profile'>
@@ -68,39 +67,6 @@ const App = () => {
             <Share />
           </Route>
         </Switch>
-        <Switch>
-            <Route exact path='/'>
-              <Landing />
-            </Route>
-            <Route path='/login'>
-              <Login />
-            </Route>
-            <Route path='/register'>
-              <Register />
-            </Route>
-            <Route path='/search'>
-              <Search 
-                pets={petState.pets}
-                setPetState={setPetState}
-                petState={petState}
-              />
-            </Route>
-            <Route path='/pets'>
-              <Pets 
-                petState={petState}
-                setPetState={setPetState}
-              />
-            </Route>
-            <Route path='/profile'>
-              <Profile />
-            </Route>
-            <Route path='/favorites'>
-              <Favorites />
-            </Route>
-            <Route path='/share'>
-              <Share />
-            </Route>
-          </Switch>
       </div>
     </Router>
   )

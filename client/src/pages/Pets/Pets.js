@@ -1,20 +1,15 @@
-import { useState } from 'react'
-import ImgMediaCard from '../../components/PetCard'
+// import { useState } from 'react'
+// import ImgMediaCard from '../../components/PetCard'
+import Carousel from '../../components/Carousel'
 
 const Pets = props => {
 
-  const [currentState, setCurrentState] = useState({
-    current: 0
-  })
-
-  let current = 4
-
+  // This was to track which card is being displayed. Use these functions to handle favorite button and pass button (pass for swiping)
+  let current = 0
   const handleClickFavorite = () => {
-    
-    // current++
+    current++
     console.log(current)
   }
-
   const handleClickPass = () => {
     current++
     console.log(current)
@@ -23,7 +18,7 @@ const Pets = props => {
   return (
     <>
       <div style={{ margin: '75px auto 15px auto' }} align='center'>
-        <ImgMediaCard
+        <Carousel
           petState={props.petState}
           setPetState={props.setPetState}
           handleClickFavorite={handleClickFavorite}
@@ -35,6 +30,7 @@ const Pets = props => {
   )
 }
 
+export default Pets
 
 
 
