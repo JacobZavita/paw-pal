@@ -5,7 +5,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import Typography from '@material-ui/core/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import CheckboxInfo from './CheckboxInfo'
+import AdvancedSearch from './AdvancedSearch'
 
 // Generic Accordion component used for displaying data
 
@@ -36,7 +36,7 @@ const AccordionDisplay = props => {
           <Typography>
             {/* conditionally renders certain components based on what props are passed in */}
             {
-              (props.advancedSearch) ? <CheckboxInfo parentCallback={props.parentCallback} /> : null
+              (props.advancedSearch) ? <AdvancedSearch parentCallback={props.parentCallback}/> : null
             }
           </Typography>
         </AccordionDetails>

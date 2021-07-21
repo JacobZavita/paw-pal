@@ -1,8 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles'
 import { useState } from 'react'
-import { Button, Typography, Card, CardContent, Grid, TextField } from '@material-ui/core'
+import { Button, Typography, Card, CardContent, Grid } from '@material-ui/core'
 import AccordionDisplay from '../../components/AccordionDisplay'
 import { Client } from '@petfinder/petfinder-js'
+import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core'
 import { Link as Lnk } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
@@ -10,27 +11,31 @@ const useStyles = makeStyles(theme => ({
     '& .MuiTextField-root': {
       // margin: theme.spacing(1)
     }
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
   }
 }))
 
 const Search = props => {
   const classes = useStyles()
 
-  const [value, setValue] = useState()
+  const [value, setValue] = useState('')
 
   const handleChange = (event) => {
     setValue(event.target.value)
   }
 
-  // define filters here, must also define them in CheckboxInfo.js
+  // define filters here, must also define them in AdvancedSelect.js
   const [filterState, setFilterState] = useState({
-    pug: false,
-    samoyed: false,
-    small: false,
-    medium: false,
-    large: false,
-    male: false,
-    female: false
+    breed: '',
+    gender: '',
+    size: '',
+    age: '',
+    good_with_children: false,
+    good_with_dogs: false,
+    good_with_cats: false
   })
 
   const callbackFunction = childData => {
@@ -46,30 +51,22 @@ const Search = props => {
       type: `${value}`,
       location: '92617',
       page: 1,
+      limit: 100,
+      // default limit is 20 results
     }
 
     // applies filters to search query, the keys are Petfinder API query parameters
-    // update these conditionals every time a query parameter is added
-    if (filterState.pug) {
-      query['breed'] = 'pug'
-    }
-    if (filterState.samoyed) {
-      query['breed'] = 'samoyed'
-    }
-    if (filterState.small) {
-      query['size'] = 'small'
-    }
-    if (filterState.medium) {
-      query['size'] = 'medium'
-    }
-    if (filterState.large) {
-      query['size'] = 'large'
-    }
-    if (filterState.male) {
-      query['gender'] = 'male'
-    }
-    if (filterState.female) {
-      query['gender'] = 'female'
+    for (const[key, value] of Object.entries(filterState)) {
+      if(typeof value === 'string') {
+        if(value.length) {
+          query[key] = value
+        }
+      }
+      else if(typeof value == 'boolean') {
+        if (value) {
+          query[key] = value
+        }
+      }
     }
 
     client.animal.search(query)
@@ -77,6 +74,9 @@ const Search = props => {
         // search data from petfinder
         let petfinder = data.animals
         console.log(petfinder)
+        
+        // this is for debugging
+        console.log(query)
 
         // code to add search data to petState.pets
         props.setPetState({ ...props.petState, pets: petfinder })
@@ -107,14 +107,22 @@ const Search = props => {
           <form className={classes.root} noValidate autoComplete="off">
             <Grid container spacing={1}>
               <Grid xs={12} item>
-                <TextField
-                  id="standard-multiline-flexible"
-                  label="Dog, Cat, Bird, etc... "
-                  variant='outlined'
-                  value={value}
-                  fullWidth
-                  onChange={handleChange}
-                />
+                <FormControl className={classes.formControl}>
+                  <InputLabel id="demo-simple-select-label">Select Animal Type</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={value}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={''}>&nbsp;&nbsp;</MenuItem>
+                    <MenuItem value={'dog'}>Dog</MenuItem>
+                    <MenuItem value={'cat'}>Cat</MenuItem>
+                    <MenuItem value={'rabbit'}>Rabbit</MenuItem>
+                    <MenuItem value={'horse'}>Horse</MenuItem>
+                    <MenuItem value={'bird'}>Bird</MenuItem>
+                  </Select>
+                </FormControl>
                 <br></br>
                 <br></br>
                 <Button
