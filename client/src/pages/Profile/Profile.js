@@ -46,11 +46,18 @@ const Profile = _ => {
   const [openAvatar, setOpenAvatar] = useState(false)
 
   // handlers
+  const handleSaveMe = _ => {
+    User.update(userState)
+      .then(_ => {
+        console.log('updated!')
+      })
+      .catch(err => console.log('error in handleSaveMe ', err))
+  }
+
   const handleOpenName = () => {
-    // if (!openName) {
-    //   setOpenName(!openName)
-    // }
-    setOpenName(!openName)
+    if (!openName) {
+      setOpenName(!openName)
+    }
   }
   const handleOpenEmail = () => {
     if (!openEmail) {
@@ -180,7 +187,7 @@ const Profile = _ => {
         <Button
           fullWidth
           type='submit'
-          onClick={seeMe}
+          onClick={handleSaveMe}
           color='primary'
           variant='contained'
         >

@@ -10,18 +10,18 @@ const Note = {
   }),
 
   // create note (title, body, pet_id)
-  create: note => axios.post('/api/notes', {
+  create: note => axios.post('/api/notes', note, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     }
   }),
 
   // update note
-  update: (_id, note) => axios.put(`/api/notes/${_id}`, {
+  update: (_id, note) => axios.put(`/api/notes/${_id}`, note, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     }
-  }, note),
+  }),
 
   // delete note
   delete: _id => axios.delete(`/api/notes${_id}`, {
