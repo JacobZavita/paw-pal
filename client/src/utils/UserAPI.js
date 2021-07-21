@@ -16,11 +16,11 @@ const User = {
   }),
 
   // update
-  update: user => axios.put('/api/users/', {
+  update: user => axios.put('/api/users/', user, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     }
-  }, user),
+  }),
 
   // delete
   delete: user => axios.delete('/api/users/', {

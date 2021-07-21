@@ -9,18 +9,18 @@ const Pet = {
     }
   }),
   // add Pet to favorites
-  add: pet => axios.post('/api/users/login', {
+  add: pet => axios.post('/api/users/login', pet, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     }
-  }, pet),
+  }),
 
   // update info on Pet in favorites
-  update: (_id, pet) => axios.put(`/api/pets/${_id}`, {
+  update: (_id, pet) => axios.put(`/api/pets/${_id}`, pet, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     }
-  }, pet),
+  }),
 
   // delete Pet from favorites
   delete: _id => axios.delete(`/api/pets/${_id}`, {
