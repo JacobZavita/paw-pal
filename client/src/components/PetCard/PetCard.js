@@ -1,23 +1,23 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 // import { useState } from 'react'
-import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core'
+import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography, Accordion, AccordionSummary, AccordionDetails, Fab, Grid } from '@material-ui/core'
+import FavoriteIcon from '@material-ui/icons/Favorite'
+import ClearIcon from '@material-ui/icons/Clear'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: '62%',
+    '& > *': {
+    margin: theme.spacing(1)
+    },
   },
-});
+}));
 
 const ImgMediaCard = props => {
   const classes = useStyles();
-
-  const testOnClick = () => {
-    console.log(props.petState)
-    console.log(props.petState.pets[7])
-  }
-
+  
   return (
     <>
     <Card className={classes.root}>
@@ -26,44 +26,69 @@ const ImgMediaCard = props => {
           component="img"
             alt={props.petState.pets[7].name}
           // height="640"
-            src={props.petState.pets[7].primary_photo_cropped.full}
-          title={props.petState.pets[7].name}
+            src={props.petState.pets[6].primary_photo_cropped.full}
+          title={props.petState.pets[6].name}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {props.petState.pets[7].name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Age: {props.petState.pets[7].age}
-          </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Sex: {props.petState.pets[7].gender}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Breed: {props.petState.pets[7].breeds.primary}
-            </Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={2}>
+              <Fab color='secondary' aria-label='add' align='left'>
+                <ClearIcon />
+              </Fab>
+            </Grid>
+            <Grid item xs={8}>
+              <Typography gutterBottom variant="h3" component="h3">
+                {props.petState.pets[6].name}
+              </Typography>
+            </Grid>
+            <Grid item xs={2}>
+              <Fab color='primary' aria-label='add'>
+                <FavoriteIcon />
+              </Fab>
+            </Grid>
+          </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs={5}>
+              <Typography variant="h5" color="textSecondary" component="h5">
+                Breed: {props.petState.pets[6].breeds.primary}
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant="h5" color="textSecondary" component="p">
+                Age: {props.petState.pets[6].age}
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography variant="h5" color="textSecondary" component="p">
+                Sex: {props.petState.pets[6].gender}
+              </Typography>
+            </Grid>
+          </Grid>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary" onClick={testOnClick}>
-          Test: see data
-        </Button>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
+      <CardActions align='center'>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
           >
-          Learn More About Me
-        </AccordionSummary>
+            Learn More About {props.petState.pets[6].name}
+          </AccordionSummary>
           <AccordionDetails>
-            <Typography>
-              Email: {props.petState.pets[7].contact.email}
-            </Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <Typography>
+                  Email: {props.petState.pets[7].contact.email}
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography>
+                  Phone: {props.petState.pets[7].contact.phone}
+                </Typography>
+              </Grid>
+            </Grid>
             <br></br>
-            <Typography>
-              Phone: {props.petState.pets[7].contact.phone}
-            </Typography>
           </AccordionDetails>
         </Accordion>
       </CardActions>
