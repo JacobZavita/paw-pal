@@ -7,26 +7,31 @@ import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid'
 import AccountBoxIcon from '@material-ui/icons/AccountBox'
 import User from '../../utils/UserAPI'
 import ProfileModal from '../../components/ProfileModal'
+import Avatar from '@material-ui/core/Avatar'
 
 const useStyles = makeStyles(_ => ({
   avatarLinkWidth: {
-    width: '225px'
+    width: '175px'
+  },
+
+  avatarStyle: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block',
+    width: '200px',
+    height: '200px',
+    borderRadius: '50%',
+    objectFit: 'cover'
+  },
+
+  cropping: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block',
+    height: '200px',
+    width: '200px'
   }
 }))
-
-let me = {}
-
-// get user's data
-User.me()
-  .then(res => {
-    me = res.data
-  })
-  . catch(err => console.log('error in user.me ', err))
-
-const seeMe = _ => {
-  console.log('hitting this')
-  console.log(me)
-}
 
 const Profile = _ => {
   // styles
@@ -112,7 +117,21 @@ const Profile = _ => {
   return (
     <>
       <Container maxWidth='sm'>
-        <br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br />
+        {/* <CardHeader
+          avatar={
+            <Avatar alt={userState.name} src={userState.avatar} className={classes.large} />
+          }
+          title={
+            <Typography variant='h4' align='left'>
+              {userState.name}'s Profile
+            </Typography>
+          }
+        /> */}
+        <div className={classes.cropping}>
+          <img src={userState.avatar} className={classes.avatarStyle} />
+        </div>
+        <br /><br />
         <Typography variant='h4' align='center'>
           {userState.name}'s Profile
         </Typography>
@@ -125,7 +144,7 @@ const Profile = _ => {
           <ListItem button onClick={handleOpenName}>
             <ListItemIcon><PersonOutlineIcon color='primary' /></ListItemIcon>
             <ListItemText primary='Name:' />
-            <Typography>
+            <Typography color='textSecondary'>
               {userState.name}
             </Typography>
             <ProfileModal
@@ -140,7 +159,7 @@ const Profile = _ => {
           <ListItem button onClick={handleOpenEmail}>
             <ListItemIcon><MailOutlineIcon color='primary' /></ListItemIcon>
             <ListItemText primary='Email:' />
-            <Typography>
+            <Typography color='textSecondary'>
               {userState.email}
             </Typography>
             <ProfileModal
@@ -155,7 +174,7 @@ const Profile = _ => {
           <ListItem button onClick={handleOpenPhone}>
             <ListItemIcon><PhoneAndroidIcon color='primary' /></ListItemIcon>
             <ListItemText primary='Phone:' />
-            <Typography>
+            <Typography color='textSecondary'>
               {userState.phone}
             </Typography>
             <ProfileModal
@@ -170,7 +189,7 @@ const Profile = _ => {
           <ListItem button onClick={handleOpenAvatar}>
             <ListItemIcon><AccountBoxIcon color='primary' /></ListItemIcon>
             <ListItemText primary='Avatar:' />
-            <Typography noWrap className={classes.avatarLinkWidth}>
+            <Typography noWrap className={classes.avatarLinkWidth} color='textSecondary'>
               {userState.avatar}
             </Typography>
             <ProfileModal

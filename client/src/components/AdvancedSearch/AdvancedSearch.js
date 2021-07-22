@@ -4,7 +4,7 @@ import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
-import { FormHelperText, Button } from '@material-ui/core'
+import { FormHelperText, Button, Popover, Typography } from '@material-ui/core'
 
 // This component is used to render the filters under the search page
 
@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  typography: {
+    padding: theme.spacing(2),
+  }
 }))
 
 const AdvancedSearch = props => {
@@ -52,7 +55,7 @@ const AdvancedSearch = props => {
     setGoodWithCats(event.target.value)
   }
 
-
+// sends the filter data to the Search.js component
   const sendData = () => {
     props.parentCallback({
       breed: breed,
@@ -64,6 +67,27 @@ const AdvancedSearch = props => {
       good_with_cats: goodWithCats
     })
     console.log('Filters applied!')
+  }
+
+  // this is for the popup element
+  const [anchorEl, setAnchorEl] = useState(null)
+
+  const handlePopupClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handlePopupClose = () => {
+    setAnchorEl(null)
+  }
+
+  // opens and closes the popup
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
+  // this function handles the popup while also sending the filter data
+  const twoFunctions = event => {
+    handlePopupClick(event)
+    sendData()
   }
 
   return (
@@ -161,9 +185,25 @@ const AdvancedSearch = props => {
           <MenuItem value={false}>No</MenuItem>
         </Select>
         <FormHelperText>Click the below button to apply these filters</FormHelperText>
-        <Button variant="contained" color="primary" onClick={sendData}>
-          Done
+        <Button variant="contained" color="primary" onClick={twoFunctions}>
+          Apply Filters
         </Button>
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handlePopupClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+        >
+          <Typography className={classes.typography}>Filters Applied!</Typography>
+        </Popover>
       </FormControl>
     </div>
   )

@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 import CheckIcon from '@material-ui/icons/Check';
-import { Card, CardContent, Button, Box, Typography, Grid, Paper, CardMedia } from '@material-ui/core'
-import { BackgroundColor } from 'chalk';
+import { Card, CardContent, Button, Box, Typography, Grid } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
