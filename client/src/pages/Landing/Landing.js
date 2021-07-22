@@ -1,146 +1,173 @@
+import { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import CheckIcon from '@material-ui/icons/Check';
-import { Card, CardContent, Button, Box, Typography, Grid, Paper } from '@material-ui/core'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import { Card, CardContent, Button, Box, IconButton, Typography, Paper, Collapse, CardMedia } from '@material-ui/core'
 import { Link } from 'react-router-dom'
+import { Link as Scroll } from 'react-scroll'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles1 = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-  bullet: {
-    direction: 'ltr',
-    // paddingLeft: '50px',
-    textShadow: '1px 1px 2px black',
-    color: 'white'
-  },
-  headline: {
-    marginTop: '25%',
-    color: 'white',
-    textShadow: '1px 1px 2px black'
-  },
-  button: {
-    direction:'ltr',
-    marginLeft: '35%'
-  },
-  box: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: '100vh',
     backgroundImage: `url(https://i.ibb.co/806K2Z7/pexels-zen-chung-5749795.jpg)`,
-    margin: '80px auto 15px auto',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    height: '800px',
-    maxWidth: '1325px'
   },
-  paperGridStyle: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    maxWidth: '1325px',
-    '& > *': {
-      margin: theme.spacing(1),
-      width: theme.spacing(16),
-      height: theme.spacing(16),
-    }
+  container: {
+    textAlign: 'center'
   },
-  paperStyle: {
-    height: '250px',
+  title: {
+    color: '#fff',
+    fontSize: '4rem',
+    textShadow: '2px 2px #000000'
+  },
+  goDown: {
+    color: '#5AFF3D',
+    fontSize: '4rem'
+  },
+  divider: {
+    minHeight: '10vh',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#5AFF3D'
+  },
+  dividerText: {
+    paddingTop: '15px'
+  },
+  button: {
+    marginBottom: '15px'
+  },
+  root1: {
+    minHeight: '100vh',
+    backgroundImage: `url(https://i.ibb.co/6D3NC3q/pexels-francesco-ungaro-281260.jpg)`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
     display: 'flex',
-    flexWrap: 'wrap'
+    justifyContent: 'center',
+    alignItems: 'center',
+    [theme.breakpoints.down('md')]: {
+      flexDirection: 'column',
+    },
+  },
+  root2: {
+    maxWidth: 645,
+    background: 'rgba(0,0,0,0.5)',
+    margin: '20px'
+  },
+  media: {
+    height: 440
+  },
+  cardTitle: {
+    fontWeight: 'bold',
+    fontSize: '2rem',
+    color: '#fff'
+  },
+  cardDescription: {
+    fontSize: '1.1rem',
+    color: '#ddd'
   }
-}));
+}))
 
 const Landing = _ => {
-  const classes = useStyles();
+  const classes1 = useStyles1()
+  const [checked, setChecked] = useState(false)
+  useEffect(() => {
+    setChecked(true)
+  }, [])
+
+
 
   return (
     <>
-      <Box>
-        <Card className={classes.box}>
+      <div className={classes1.root}>
+        <Collapse in={checked}
+          {...(checked ? { timeout: 1000 } : {})}
+          collapsedHeight={50}>
+          <div className={classes1.container}>
+            <h1 className={classes1.title}>
+              Welcome to PawPal <br />Find Your Next Pet
+            </h1>
+            <Scroll to='about-pawpal' smooth={true}>
+              <IconButton>
+                <ExpandMoreIcon className={classes1.goDown} />
+              </IconButton>
+            </Scroll>
+          </div>
+        </Collapse>
+      </div>
+      <Paper
+        className={classes1.divider}
+        elevation={3}
+        align='center'
+      >
+        <Typography
+          className={classes1.dividerText}
+          gutterBottom
+          variant='h4'
+          component='h4'
+        >
+          Find Local Animals Up For Adoption In Your Area
+        </Typography>
+        <Button className={classes1.button} variant='contained'>
+          <Link to='/register'>
+            Get Started
+          </Link>
+        </Button>
+      </Paper>
+      <div className={classes1.root1}>
+          <Card className={classes1.root2}>
+              <CardMedia
+                className={classes1.media}
+                component='img'
+                src={'https://i.ibb.co/jvrtfpC/pexels-helena-lopes-1904105.jpg'}
+                title="Card Image"
+              />
+            <CardContent>
+              <Typography
+                gutterBottom
+                variant='h5'
+                component='h1'
+                className={classes1.cardTitle}
+              >
+                Search animals up for adoption among local agencies
+              </Typography>
+              <Typography
+                variant='body2'
+                component='p'
+                className={classes1.cardDescription}
+              >
+                Find Dogs, Cats, Birds, Horses, and Rabbits up for adoption by animal rescue groups in your area.
+              </Typography>
+            </CardContent>
+          </Card>
+        <Card className={classes1.root2}>
+          <CardMedia
+            className={classes1.media}
+            component='img'
+            src={'https://i.ibb.co/F4F9kWC/pexels-anastasia-shuraeva-5124967.jpg'}
+            title="Card Image"
+          />
           <CardContent>
-            <Grid container>
-              <Grid
-                item
-                xs={12}
-              >
-                <Typography
-                  variant='h3'
-                  align='center'
-                  className={classes.headline}
-                >
-                  Find Your Next Pet
-                </Typography>
-              </Grid>
-            </Grid>
-            <br></br>
-            <Grid container>
-              <Grid
-                item
-                xs={0}
-                sm={2}
-                md={4}
-              >
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                sm={10}
-                md={8}
-                align='left'
-              >
-                <Typography className={classes.bullet} variant='h6'>
-                  <CheckIcon color='primary' />
-                    Search among local pets up for adoption
-                </Typography>
-                <Typography className={classes.bullet} variant='h6'>
-                  <CheckIcon color='primary' />
-                    Swipe to find your favorites
-                </Typography>
-                <Typography
-                  className={classes.bullet}
-                  variant='h6'
-                  gutterBottom
-                >
-                  <CheckIcon color='primary' />
-                    Share with friends and family
-                </Typography>
-              </Grid>
-                <Button className={classes.button} variant='contained'>
-                  <Link to='/register'>
-                    Get Started
-                  </Link>
-                </Button>
-            </Grid>
+            <Typography
+              gutterBottom
+              variant='h5'
+              component='h1'
+              className={classes1.cardTitle}
+            >
+              Find your favorites and share with your friends/family
+              </Typography>
+            <Typography
+              variant='body2'
+              component='p'
+              className={classes1.cardDescription}
+            >
+              Save your top picks. Add notes and comments. Share with your family and friends to see which ones they like.
+              </Typography>
           </CardContent>
         </Card>
-      </Box>
-      <Box align='center'>
-        <Grid container className={classes.paperGridStyle} align='center'>
-          <Grid item xs={12} sm={4} md={3}>
-            <Paper elevation={3} className={classes.paperStyle}>
-              <Typography>
-                ADOPT!
-              </Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={4} md={3}>
-            <Paper elevation={3} className={classes.paperStyle}>
-              <Typography>
-                ADOPT!
-              </Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={4} md={3} >
-            <Paper elevation={3} className={classes.paperStyle}>
-              <Typography>
-                ADOPT!
-              </Typography>
-            </Paper>
-          </Grid>
-        </Grid>
-      </Box>
+      </div>
     </>
   )
 }
