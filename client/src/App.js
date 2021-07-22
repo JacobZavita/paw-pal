@@ -16,6 +16,7 @@ import Profile from './pages/Profile'
 import Register from './pages/Register'
 import Search from './pages/Search'
 import Share from './pages/Share'
+import Chat from './pages/Chat'
 
 // component imports
 import NavBar from './components/Drawer'
@@ -63,6 +64,9 @@ const App = () => {
             </Route>
             <Route path='/share'>
               <Share />
+            </Route>
+            <Route path='/chat'>
+              <Chat />
             </Route>
           </Switch>
       </div>
