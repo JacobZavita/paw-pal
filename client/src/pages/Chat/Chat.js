@@ -69,10 +69,6 @@ const Chat = _ => {
       })
   }
 
-  const randomNoise = noises => {
-    return (noises[Math.floor(Math.random() * noises.length)])
-  }
-
   const GridItem = props => {
     // console.log(props)
     return (
