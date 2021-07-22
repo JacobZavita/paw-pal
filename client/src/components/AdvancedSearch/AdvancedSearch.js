@@ -1,10 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
-import { FormHelperText, Button, Popover, Typography } from '@material-ui/core'
 
 // This component is used to render the filters under the search page
 
@@ -69,26 +68,9 @@ const AdvancedSearch = props => {
     console.log('Filters applied!')
   }
 
-  // this is for the popup element
-  const [anchorEl, setAnchorEl] = useState(null)
-
-  const handlePopupClick = (event) => {
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handlePopupClose = () => {
-    setAnchorEl(null)
-  }
-
-  // opens and closes the popup
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
-
-  // this function handles the popup while also sending the filter data
-  const twoFunctions = event => {
-    handlePopupClick(event)
+  useEffect(() => {
     sendData()
-  }
+  }, [breed, gender, size, age, goodWithChildren, goodWithDogs, goodWithCats])
 
   return (
     <div>
@@ -184,26 +166,6 @@ const AdvancedSearch = props => {
           <MenuItem value={true}>Yes</MenuItem>
           <MenuItem value={false}>No</MenuItem>
         </Select>
-        <FormHelperText>Click the below button to apply these filters</FormHelperText>
-        <Button variant="contained" color="primary" onClick={twoFunctions}>
-          Apply Filters
-        </Button>
-        <Popover
-          id={id}
-          open={open}
-          anchorEl={anchorEl}
-          onClose={handlePopupClose}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-          }}
-        >
-          <Typography className={classes.typography}>Filters Applied!</Typography>
-        </Popover>
       </FormControl>
     </div>
   )
