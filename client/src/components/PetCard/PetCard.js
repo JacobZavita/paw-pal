@@ -1,75 +1,135 @@
-import React from 'react';
+import { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-// import { useState } from 'react'
-import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core'
+import { Card, CardActionArea, CardActions, CardContent, CardMedia, Typography, Grid, Collapse, IconButton } from '@material-ui/core'
+import FavoriteIcon from '@material-ui/icons/Favorite'
+import ClearIcon from '@material-ui/icons/Clear'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import clsx from 'clsx'
+import Background from './pawprints.jpg'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: '62%',
+    minWidth: 275,
   },
-});
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+  transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+  background: {
+    backgroundImage: `url(${Background})`
+  },
+    image: {
+      height: '600px',
+      objectFit: 'cover',
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    })
+    },
+    expandOpen: {
+      transform: 'rotate(180deg)'
+    }
+}));
 
 const ImgMediaCard = props => {
-  const classes = useStyles();
-
-  const testOnClick = () => {
-    console.log(props.petState)
-    console.log(props.petState.pets[7])
+  const classes = useStyles()
+  const [expanded, setExpanded] = useState(false)
+  
+  const handleExpandClick = () => {
+    setExpanded(!expanded)
   }
+  
+  let petData = props.petState.pets[props.activeStep]
 
   return (
     <>
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-            alt={props.petState.pets[7].name}
-          // height="640"
-            src={props.petState.pets[7].primary_photo_cropped.full}
-          title={props.petState.pets[7].name}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {props.petState.pets[7].name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Age: {props.petState.pets[7].age}
-          </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Sex: {props.petState.pets[7].gender}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Breed: {props.petState.pets[7].breeds.primary}
-            </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary" onClick={testOnClick}>
-          Test: see data
-        </Button>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
+      <Card
+        className={classes.root}
+        style={{ backgroundImage: `url(${Background})` }}
+      >
+        <CardActionArea>
+          <CardMedia
+            className={classes.image}
+            component="img"
+            alt={petData.name}
+            src={(petData.primary_photo_cropped == null) ? 'https://pbs.twimg.com/profile_images/446279626831044608/aCs3t5qe_400x400.png' : petData.primary_photo_cropped.full}
+            title={petData.name}
+          />
+          <CardContent>
+            <Grid container spacing={2}>
+              <Grid item xs={5}>
+                <Typography gutterBottom variant="h4" component="h4">
+                    {petData.name}
+                </Typography>
+              </Grid>
+              <Grid item xs={3}>
+                <Typography variant="h6" color="textSecondary" component="h6">
+                  Primary Breed: {petData.breeds.primary}
+                </Typography>
+              </Grid>
+              {(petData.breeds.secondary) ?
+                <Grid item xs={3}>
+                  <Typography variant="h6" color="textSecondary" component="h6">
+                    Secondary Breed: {petData.breeds.secondary}
+                  </Typography>
+                </Grid> : null}
+              <Grid item xs={4}>
+                <Typography variant="h6" color="textSecondary" component="h6">
+                  Age: {petData.age}
+                </Typography>
+                <Typography variant="h6" color="textSecondary" component="h6">
+                  Sex: {petData.gender}
+                </Typography>
+              </Grid>
+            </Grid>
+          </CardContent>
+        </CardActionArea>
+
+        <CardActions align='center'>
+          <IconButton color='secondary' onClick={props.handleClickPass}>
+            <ClearIcon />
+          </IconButton>
+          <IconButton color='primary' onClick={props.handleClickFavorite}>
+            <FavoriteIcon />
+          </IconButton>
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded,
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
           >
-          Learn More About Me
-        </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Email: {props.petState.pets[7].contact.email}
-            </Typography>
-            <br></br>
-            <Typography>
-              Phone: {props.petState.pets[7].contact.phone}
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-      </CardActions>
-    </Card>
+            <ExpandMoreIcon />
+          </IconButton>
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <CardContent>
+              <Typography paragraph>
+                More About {petData.name}
+              </Typography>
+              <Typography paragraph>
+                Email: {petData.contact.email}
+              </Typography>
+              <Typography paragraph>
+                Phone: {petData.contact.phone}
+              </Typography>
+            </CardContent>
+          </Collapse>
+        </CardActions>
+      </Card>
     </>
   );
 }
 
 export default ImgMediaCard
+        
