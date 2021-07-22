@@ -88,10 +88,6 @@ const Search = props => {
       })
   }
 
-  const testOnClick = () => {
-    console.log(props.petState)
-  }
-
   return (
     <>
       <Typography
@@ -138,7 +134,7 @@ const Search = props => {
                   component='p'
                   align='center'
                   style={{ marginTop: '10px' }}
-                >
+                  >
                   <AccordionDisplay advancedSearch="Yes" title="Advanced Search"
                     parentCallback={callbackFunction} />
                 </Typography>
@@ -147,10 +143,10 @@ const Search = props => {
                   component='p'
                   align='center'
                   style={{ marginTop: '10px' }}
-                >
-                  <Lnk to='/pets'>
-                    Pets
-                  </Lnk>
+                  >
+                <Lnk to='/pets'>
+                  Pets
+                </Lnk>
                 </Typography>
               </Grid>
             </Grid>
