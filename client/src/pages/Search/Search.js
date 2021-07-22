@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    minWidth: '97%'
   }
 }))
 
@@ -48,7 +48,7 @@ const Search = props => {
     const client = new Client({ apiKey: process.env.REACT_APP_API_KEY, secret: process.env.REACT_APP_SECRET})
 
     let query = {
-      type: `${value}`,
+      type: value,
       location: '92617',
       page: 1,
       limit: 100,
