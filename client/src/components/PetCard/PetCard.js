@@ -74,9 +74,15 @@ const ImgMediaCard = props => {
               </Grid>
               <Grid item xs={3}>
                 <Typography variant="h6" color="textSecondary" component="h6">
-                  Breed: {petData.breeds.primary}
+                  Primary Breed: {petData.breeds.primary}
                 </Typography>
               </Grid>
+              {(petData.breeds.secondary) ?
+                <Grid item xs={3}>
+                  <Typography variant="h6" color="textSecondary" component="h6">
+                    Secondary Breed: {petData.breeds.secondary}
+                  </Typography>
+                </Grid> : null}
               <Grid item xs={4}>
                 <Typography variant="h6" color="textSecondary" component="h6">
                   Age: {petData.age}
