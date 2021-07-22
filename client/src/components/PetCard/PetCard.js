@@ -89,7 +89,9 @@ const ImgMediaCard = props => {
           </CardContent>
         </CardActionArea>
 
-        <CardActions align='center'>
+        <CardActions
+          // align='center'
+        >
           <IconButton color='secondary' onClick={props.handleClickPass}>
             <ClearIcon />
           </IconButton>
@@ -116,6 +118,9 @@ const ImgMediaCard = props => {
               </Typography>
               <Typography paragraph>
                 Phone: {petData.contact.phone}
+              </Typography>
+              <Typography paragraph>
+                Current Location: {petData.contact.address.city}, {petData.contact.address.state}
               </Typography>
             </CardContent>
           </Collapse>

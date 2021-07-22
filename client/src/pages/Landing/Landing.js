@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import CheckIcon from '@material-ui/icons/Check';
-import { Card, CardContent, Button, Box, Typography, Grid } from '@material-ui/core'
+import { Card, CardContent, Button, Box, Typography, Grid, Paper } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,6 +34,21 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     height: '800px',
     maxWidth: '1325px'
+  },
+  paperGridStyle: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    maxWidth: '1325px',
+    '& > *': {
+      margin: theme.spacing(1),
+      width: theme.spacing(16),
+      height: theme.spacing(16),
+    }
+  },
+  paperStyle: {
+    height: '250px',
+    display: 'flex',
+    flexWrap: 'wrap'
   }
 }));
 
@@ -92,11 +108,38 @@ const Landing = _ => {
                 </Typography>
               </Grid>
                 <Button className={classes.button} variant='contained'>
-                  Get Started
+                  <Link to='/register'>
+                    Get Started
+                  </Link>
                 </Button>
             </Grid>
           </CardContent>
         </Card>
+      </Box>
+      <Box align='center'>
+        <Grid container className={classes.paperGridStyle} align='center'>
+          <Grid item xs={12} sm={4} md={3}>
+            <Paper elevation={3} className={classes.paperStyle}>
+              <Typography>
+                ADOPT!
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={4} md={3}>
+            <Paper elevation={3} className={classes.paperStyle}>
+              <Typography>
+                ADOPT!
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={4} md={3} >
+            <Paper elevation={3} className={classes.paperStyle}>
+              <Typography>
+                ADOPT!
+              </Typography>
+            </Paper>
+          </Grid>
+        </Grid>
       </Box>
     </>
   )
