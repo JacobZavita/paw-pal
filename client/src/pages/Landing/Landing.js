@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import { Card, CardContent, Button, Box, IconButton, Typography, Paper, Collapse, CardMedia } from '@material-ui/core'
+import { Card, CardContent, Button, IconButton, Typography, Paper, Collapse, CardMedia } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { Link as Scroll } from 'react-scroll'
 
-const useStyles1 = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
@@ -71,55 +71,53 @@ const useStyles1 = makeStyles((theme) => ({
 }))
 
 const Landing = _ => {
-  const classes1 = useStyles1()
+  const classes = useStyles()
   const [checked, setChecked] = useState(false)
   useEffect(() => {
     setChecked(true)
   }, [])
 
-
-
   return (
     <>
-      <div className={classes1.root}>
+      <div className={classes.root}>
         <Collapse in={checked}
           {...(checked ? { timeout: 1000 } : {})}
           collapsedHeight={50}>
-          <div className={classes1.container}>
-            <h1 className={classes1.title}>
+          <div className={classes.container}>
+            <h1 className={classes.title}>
               Welcome to PawPal <br />Find Your Next Pet
             </h1>
             <Scroll to='about-pawpal' smooth={true}>
               <IconButton>
-                <ExpandMoreIcon className={classes1.goDown} />
+                <ExpandMoreIcon className={classes.goDown} />
               </IconButton>
             </Scroll>
           </div>
         </Collapse>
       </div>
       <Paper
-        className={classes1.divider}
+        className={classes.divider}
         elevation={3}
         align='center'
       >
         <Typography
-          className={classes1.dividerText}
+          className={classes.dividerText}
           gutterBottom
           variant='h4'
           component='h4'
         >
           Find Local Animals Up For Adoption In Your Area
         </Typography>
-        <Button className={classes1.button} variant='contained'>
+        <Button className={classes.button} variant='contained'>
           <Link to='/register'>
             Get Started
           </Link>
         </Button>
       </Paper>
-      <div className={classes1.root1}>
-          <Card className={classes1.root2}>
+      <div className={classes.root1}>
+          <Card className={classes.root2}>
               <CardMedia
-                className={classes1.media}
+                className={classes.media}
                 component='img'
                 src={'https://i.ibb.co/jvrtfpC/pexels-helena-lopes-1904105.jpg'}
                 title="Card Image"
@@ -129,22 +127,22 @@ const Landing = _ => {
                 gutterBottom
                 variant='h5'
                 component='h1'
-                className={classes1.cardTitle}
+                className={classes.cardTitle}
               >
                 Search animals up for adoption among local agencies
               </Typography>
               <Typography
                 variant='body2'
                 component='p'
-                className={classes1.cardDescription}
+                className={classes.cardDescription}
               >
                 Find Dogs, Cats, Birds, Horses, and Rabbits up for adoption by animal rescue groups in your area.
               </Typography>
             </CardContent>
           </Card>
-        <Card className={classes1.root2}>
+        <Card className={classes.root2}>
           <CardMedia
-            className={classes1.media}
+            className={classes.media}
             component='img'
             src={'https://i.ibb.co/F4F9kWC/pexels-anastasia-shuraeva-5124967.jpg'}
             title="Card Image"
@@ -154,14 +152,14 @@ const Landing = _ => {
               gutterBottom
               variant='h5'
               component='h1'
-              className={classes1.cardTitle}
+              className={classes.cardTitle}
             >
               Find your favorites and share with your friends/family
               </Typography>
             <Typography
               variant='body2'
               component='p'
-              className={classes1.cardDescription}
+              className={classes.cardDescription}
             >
               Save your top picks. Add notes and comments. Share with your family and friends to see which ones they like.
               </Typography>
