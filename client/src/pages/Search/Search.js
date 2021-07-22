@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import { useState } from 'react'
 import { Button, Typography, Card, CardContent, Grid } from '@material-ui/core'
 import AccordionDisplay from '../../components/AccordionDisplay'
-import { Client } from '@petfinder/petfinder-js'
 import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core'
 import { Link as Lnk } from 'react-router-dom'
 
@@ -44,8 +43,6 @@ const Search = props => {
 
   const handleOnClick = event => {
     event.preventDefault()
-    // query petfinder api via petfinder-js-sdk
-    const client = new Client({ apiKey: process.env.REACT_APP_API_KEY, secret: process.env.REACT_APP_SECRET})
 
     let query = {
       type: value,
@@ -69,27 +66,8 @@ const Search = props => {
       }
     }
 
-    client.animal.search(query)
-      .then(({data}) => {
-        // search data from petfinder
-        let petfinder = data.animals
-        console.log(petfinder)
-        
-        // this is for debugging
-        console.log(query)
-
-        // code to add search data to petState.pets
-        props.setPetState({ ...props.petState, pets: petfinder })
-
-        console.log(props.petState)
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
-
-  const testOnClick = () => {
-    console.log(props.petState)
+    // stores query object into local storage for use in other components
+    localStorage.setItem('searchQuery', JSON.stringify(query))
   }
 
   return (
@@ -120,13 +98,13 @@ const Search = props => {
                     <MenuItem value={'cat'}>Cat</MenuItem>
                     <MenuItem value={'rabbit'}>Rabbit</MenuItem>
                     <MenuItem value={'horse'}>Horse</MenuItem>
-                    <MenuItem value={'bird'}>Bird</MenuItem>
+                    <MenuItem value={'bird'}>Birds</MenuItem>
                   </Select>
                 </FormControl>
                 <br></br>
                 <br></br>
                 <Button
-                  onClick={handleOnClick}
+                  onClick={(event) => {handleOnClick(event); window.location = '/pets'}}
                   variant="contained"
                   color="primary"
                   fullWidth
