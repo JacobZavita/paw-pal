@@ -66,23 +66,23 @@ const ImgMediaCard = props => {
             title={petData.name}
           />
           <CardContent>
-            <Grid container spacing={2}>
-              <Grid item xs={5}>
                 <Typography gutterBottom variant="h4" component="h4">
                     {petData.name}
                 </Typography>
-              </Grid>
-              <Grid item xs={3}>
+            <Grid container spacing={2}>
+              <Grid item xs={4}>
                 <Typography variant="h6" color="textSecondary" component="h6">
                   Primary Breed: {petData.breeds.primary}
                 </Typography>
               </Grid>
+              <Grid item xs={4}>
               {(petData.breeds.secondary) ?
-                <Grid item xs={3}>
+                <Grid item>
                   <Typography variant="h6" color="textSecondary" component="h6">
                     Secondary Breed: {petData.breeds.secondary}
                   </Typography>
                 </Grid> : null}
+              </Grid>
               <Grid item xs={4}>
                 <Typography variant="h6" color="textSecondary" component="h6">
                   Age: {petData.age}
@@ -117,7 +117,7 @@ const ImgMediaCard = props => {
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
               <Typography paragraph>
-                More About {petData.name}
+                More About {petData.name}<br />{petData.description}
               </Typography>
               <Typography paragraph>
                 Email: {petData.contact.email}
@@ -126,7 +126,7 @@ const ImgMediaCard = props => {
                 Phone: {petData.contact.phone}
               </Typography>
               <Typography paragraph>
-                Current Location: {petData.contact.address.city}, {petData.contact.address.state}
+                Address: {petData.contact.address.address1}<br />{petData.contact.address.city}, {petData.contact.address.state}
               </Typography>
             </CardContent>
           </Collapse>
