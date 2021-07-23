@@ -98,6 +98,7 @@ const Landing = _ => {
         className={classes.divider}
         elevation={3}
         align='center'
+        name={'about-pawpal'}
       >
         <Typography
           className={classes.dividerText}
