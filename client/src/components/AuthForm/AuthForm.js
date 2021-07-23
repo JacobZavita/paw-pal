@@ -95,6 +95,7 @@ const AuthForm = props => {
           : null
       }
       <Button
+        fullWidth
         type='submit'
         color='primary'
         variant='contained'
