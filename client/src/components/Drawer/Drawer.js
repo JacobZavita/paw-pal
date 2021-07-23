@@ -76,7 +76,10 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginRight: 0,
   },
-}));
+  linkColor: {
+    color: '#f2f2f2'
+  }
+}))
 
 const NavBar = (props) => {
   const classes = useStyles();
@@ -132,26 +135,26 @@ const NavBar = (props) => {
         <Divider />
         <List>
           <ListItem button>
-            <AccountCircleIcon/>
-              <Link to='/profile'>
-                <Typography>My Profile</Typography>
-              </Link>
+            <AccountCircleIcon />
+            <Link to='/profile' className={classes.linkColor}>
+              <Typography>My Profile</Typography>
+            </Link>
           </ListItem>
           <ListItem button>
             <FavoriteIcon />
-              <Link to='/favorites'>
-                <Typography>Favorites</Typography>
-              </Link>
+            <Link to='/favorites' className={classes.linkColor}>
+              <Typography>Favorites</Typography>
+            </Link>
           </ListItem>
           <ListItem button>
             <SearchIcon />
-              <Link to='/search'>
-                <Typography>Search</Typography>
-              </Link>
+            <Link to='/search' className={classes.linkColor}>
+              <Typography>Search</Typography>
+            </Link>
           </ListItem>
         </List>
         <Divider />
-        <Link className={classes.link} to='/login'>
+        <Link className={ classes.linkColor } to='/login'>
           <Button color='inherit'>Login/Logout</Button>
         </Link>
       </Drawer>
