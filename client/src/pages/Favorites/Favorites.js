@@ -77,18 +77,18 @@ const Favorites = props => {
       transform: `translate(-${top}%, -${left}%)`
     }
   }
-  const [selected, setSelected] = React.useState(false)
+  const [selected, setSelected] = useState(false)
 
-  const [modalStyle] = React.useState(getModalStyle)
-  const [open, setOpen] = React.useState(false)
-  const [modalState, setModalState] = React.useState({
+  const [modalStyle] = useState(getModalStyle)
+  const [open, setOpen] = useState(false)
+  const [modalState, setModalState] = useState({
     index: 0
   })
   const classes = useStyles()
 
   const [favState, setFavState] = useState({
-    pets: [],
-    name: []
+    pets: []
+    // name: []
   })
 
   useEffect(() => {
@@ -98,6 +98,7 @@ const Favorites = props => {
         setFavState({ ...favState, pets })
       })
   }, [])
+
   const handleOpen = (event) => {
     console.log(event.target.id)
     setModalState({ index: event.target.id })
@@ -107,6 +108,28 @@ const Favorites = props => {
   const handleClose = () => {
     setOpen(false)
   }
+
+  // deletes a pet from the user's favorites list
+  const handleDelete = animalID => {
+    console.log(favState)
+    if (favState.pets.length) {
+      favState.pets.forEach(pet => {
+        if (animalID === pet.id) {
+          Pet.delete(pet._id)
+            .then(() => {
+              const newFaveList = favState.pets.filter(pet => pet.id !== animalID)
+              console.log('Animal deleted successfully!')
+              console.log(newFaveList)
+              // sets the fave state to the new array that doesn't have the deleted animal
+              setFavState({ pets: newFaveList })
+            })
+            .catch(err => console.log(err))
+        }
+      })
+    }
+    
+  }
+
   const ModalBody = props => {
     return (
       <div style={modalStyle} className={classes.paper2}>
@@ -128,7 +151,7 @@ const Favorites = props => {
         >
           close
         </Button>
-        <IconButton aria-label='delete'>
+        <IconButton aria-label='delete' onClick={() => {handleDelete(props.pet.id); handleClose()}}>
           <DeleteIcon fontSize='large' />
         </IconButton>
       </div>
