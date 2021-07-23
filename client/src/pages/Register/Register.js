@@ -10,6 +10,9 @@ import AuthForm from '../../components/AuthForm'
 const useStyles = makeStyles(_ => ({
   myCenter: {
     textAlign: 'center'
+  },
+  linkColor: {
+    color: '#f2f2f2'
   }
 }))
 
@@ -58,7 +61,7 @@ const Register = _ => {
             handleSubmit={handleRegisterUser}
           />
           <br />
-          <Link to='/login'> Already signed up? Log in! </Link>
+          <Link to='/login' className={classes.linkColor}> Already signed up? Log in! </Link>
         </Container>
       </Container>
     </>
