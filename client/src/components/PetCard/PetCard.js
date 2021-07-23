@@ -6,6 +6,7 @@ import ClearIcon from '@material-ui/icons/Clear'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import clsx from 'clsx'
 import Background from './pawprints.jpg'
+import Pet from '../../utils/PetAPI'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,6 +51,22 @@ const ImgMediaCard = props => {
   }
   
   let petData = props.petState.pets[props.activeStep]
+
+  const handleOnClick = () => {
+    const newPet = {
+      id: petData.id,
+      name: petData.name,
+      image: petData.primary_photo_cropped.full,
+      phone: petData.contact.phone,
+      email: petData.contact.email,
+      address: petData.contact.address.address1,
+      city: petData.contact.address.city,
+      state: petData.contact.address.state
+    }
+    Pet.add(newPet)
+      .then(console.log('added new pet'))
+      .catch(err => console.log(err))
+  }
 
   return (
     <>
@@ -99,7 +116,7 @@ const ImgMediaCard = props => {
           <IconButton color='secondary' onClick={props.handleClickPass}>
             <ClearIcon />
           </IconButton>
-          <IconButton color='primary' onClick={props.handleClickFavorite}>
+          <IconButton color='primary' onClick={handleOnClick}>
             <FavoriteIcon />
           </IconButton>
           <IconButton
