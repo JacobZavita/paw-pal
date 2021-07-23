@@ -24,14 +24,14 @@ const useStyles = makeStyles((theme) => ({
     textShadow: '2px 2px #000000'
   },
   goDown: {
-    color: '#5AFF3D',
+    color: '#624CAB',
     fontSize: '4rem'
   },
   divider: {
     minHeight: '10vh',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#5AFF3D'
+    backgroundColor: '#7189FF'
   },
   dividerText: {
     paddingTop: '15px'
@@ -41,8 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
   root1: {
     minHeight: '100vh',
-    backgroundImage: `url(https://i.ibb.co/6D3NC3q/pexels-francesco-ungaro-281260.jpg)`,
-    backgroundRepeat: 'no-repeat',
+    // backgroundColor: '#C1CEFE',
     backgroundSize: 'cover',
     display: 'flex',
     justifyContent: 'center',
@@ -99,6 +98,7 @@ const Landing = _ => {
         className={classes.divider}
         elevation={3}
         align='center'
+        name={'about-pawpal'}
       >
         <Typography
           className={classes.dividerText}
