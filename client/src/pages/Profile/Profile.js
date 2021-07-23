@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Container, Typography, Button, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
+import { Container, Paper,Typography, Button, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline'
 import MailOutlineIcon from '@material-ui/icons/MailOutline'
 import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid'
@@ -30,6 +30,10 @@ const useStyles = makeStyles(_ => ({
     display: 'block',
     height: '200px',
     width: '200px'
+  },
+
+  paperStyle: {
+    padding: '5%'
   }
 }))
 
@@ -118,100 +122,92 @@ const Profile = _ => {
     <>
       <Container maxWidth='sm'>
         <br /><br /><br /><br /><br />
-        {/* <CardHeader
-          avatar={
-            <Avatar alt={userState.name} src={userState.avatar} className={classes.large} />
-          }
-          title={
-            <Typography variant='h4' align='left'>
-              {userState.name}'s Profile
-            </Typography>
-          }
-        /> */}
-        <div className={classes.cropping}>
-          <img src={userState.avatar} className={classes.avatarStyle} />
-        </div>
-        <br /><br />
-        <Typography variant='h4' align='center'>
-          {userState.name}'s Profile
-        </Typography>
-        <hr
-          width='60%'
-        />
-        <br />
-        {/* <p>List goes here</p> */}
-        <List>
-          <ListItem button onClick={handleOpenName}>
-            <ListItemIcon><PersonOutlineIcon color='primary' /></ListItemIcon>
-            <ListItemText primary='Name:' />
-            <Typography color='textSecondary'>
-              {userState.name}
-            </Typography>
-            <ProfileModal
-              type='name'
-              state={openName}
-              nameState={userState.name}
-              handleInputChange={handleNameInput}
-              handleOpen={handleOpenName}
-              handleClose={handleCloseName}
-            />
-          </ListItem>
-          <ListItem button onClick={handleOpenEmail}>
-            <ListItemIcon><MailOutlineIcon color='primary' /></ListItemIcon>
-            <ListItemText primary='Email:' />
-            <Typography color='textSecondary'>
-              {userState.email}
-            </Typography>
-            <ProfileModal
-              type='email'
-              state={openEmail}
-              nameState={userState.email}
-              handleInputChange={handleEmailInput}
-              handleOpen={handleOpenEmail}
-              handleClose={handleCloseEmail}
-            />
-          </ListItem>
-          <ListItem button onClick={handleOpenPhone}>
-            <ListItemIcon><PhoneAndroidIcon color='primary' /></ListItemIcon>
-            <ListItemText primary='Phone:' />
-            <Typography color='textSecondary'>
-              {userState.phone}
-            </Typography>
-            <ProfileModal
-              type='phone'
-              state={openPhone}
-              nameState={userState.phone}
-              handleInputChange={handlePhoneInput}
-              handleOpen={handleOpenPhone}
-              handleClose={handleClosePhone}
-            />
-          </ListItem>
-          <ListItem button onClick={handleOpenAvatar}>
-            <ListItemIcon><AccountBoxIcon color='primary' /></ListItemIcon>
-            <ListItemText primary='Avatar:' />
-            <Typography noWrap className={classes.avatarLinkWidth} color='textSecondary'>
-              {userState.avatar}
-            </Typography>
-            <ProfileModal
-              type='avatar'
-              state={openAvatar}
-              nameState={userState.avatar}
-              handleInputChange={handleAvatarInput}
-              handleOpen={handleOpenAvatar}
-              handleClose={handleCloseAvatar}
-            />
-          </ListItem>
-        </List>
-        <br />
-        <Button
-          fullWidth
-          type='submit'
-          onClick={handleSaveMe}
-          color='primary'
-          variant='contained'
-        >
-          Save
-        </Button>
+        <Paper className={classes.paperStyle}>
+          <div className={classes.cropping}>
+            <img src={userState.avatar} className={classes.avatarStyle} />
+          </div>
+          <br /><br />
+          <Typography variant='h4' align='center'>
+            {userState.name}'s Profile
+          </Typography>
+          <hr
+            width='60%'
+          />
+          <br />
+          {/* <p>List goes here</p> */}
+          <List>
+            <ListItem button onClick={handleOpenName}>
+              <ListItemIcon><PersonOutlineIcon color='primary' /></ListItemIcon>
+              <ListItemText primary='Name:' />
+              <Typography color='textSecondary'>
+                {userState.name}
+              </Typography>
+              <ProfileModal
+                type='name'
+                state={openName}
+                nameState={userState.name}
+                handleInputChange={handleNameInput}
+                handleOpen={handleOpenName}
+                handleClose={handleCloseName}
+              />
+            </ListItem>
+            <ListItem button onClick={handleOpenEmail}>
+              <ListItemIcon><MailOutlineIcon color='primary' /></ListItemIcon>
+              <ListItemText primary='Email:' />
+              <Typography color='textSecondary'>
+                {userState.email}
+              </Typography>
+              <ProfileModal
+                type='email'
+                state={openEmail}
+                nameState={userState.email}
+                handleInputChange={handleEmailInput}
+                handleOpen={handleOpenEmail}
+                handleClose={handleCloseEmail}
+              />
+            </ListItem>
+            <ListItem button onClick={handleOpenPhone}>
+              <ListItemIcon><PhoneAndroidIcon color='primary' /></ListItemIcon>
+              <ListItemText primary='Phone:' />
+              <Typography color='textSecondary'>
+                {userState.phone}
+              </Typography>
+              <ProfileModal
+                type='phone'
+                state={openPhone}
+                nameState={userState.phone}
+                handleInputChange={handlePhoneInput}
+                handleOpen={handleOpenPhone}
+                handleClose={handleClosePhone}
+              />
+            </ListItem>
+            <ListItem button onClick={handleOpenAvatar}>
+              <ListItemIcon><AccountBoxIcon color='primary' /></ListItemIcon>
+              <ListItemText primary='Avatar:' />
+              <Typography noWrap className={classes.avatarLinkWidth} color='textSecondary'>
+                {userState.avatar}
+              </Typography>
+              <ProfileModal
+                type='avatar'
+                state={openAvatar}
+                nameState={userState.avatar}
+                handleInputChange={handleAvatarInput}
+                handleOpen={handleOpenAvatar}
+                handleClose={handleCloseAvatar}
+              />
+            </ListItem>
+          </List>
+          <br />
+          <Button
+            fullWidth
+            type='submit'
+            onClick={handleSaveMe}
+            color='primary'
+            variant='contained'
+          >
+            Save
+          </Button>
+        </Paper>
       </Container>
     </>
   )

@@ -55,6 +55,7 @@ const Chat = _ => {
 
   const petMessage = async (userMessage) => {
     setSpinnerState(true)
+    // variable based on props-
     await Noise.noise()
       .then(({ data }) => {
         const petMessage = {

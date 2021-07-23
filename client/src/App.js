@@ -25,19 +25,20 @@ import Chat from './pages/Chat'
 // component imports
 import NavBar from './components/Drawer'
 import { useState } from 'react'
+import { grey } from '@material-ui/core/colors'
 
 // theme
 const theme = createTheme({
   palette: {
-    // type: 'dark',
+    type: 'dark',
     primary: {
       main: '#7189FF'
     },
     secondary: {
-      main: '#624CAB'
+      main: '#C1CEFE'
     },
     text: {
-      secondary: '#7189FF'
+      secondary: grey[400]
     }
   },
   typography: {

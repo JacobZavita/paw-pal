@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Container, Typography } from '@material-ui/core'
+import { Container, Typography, Paper } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import User from '../../utils/UserAPI'
@@ -10,6 +10,12 @@ import AuthForm from '../../components/AuthForm'
 const useStyles = makeStyles(_ => ({
   myCenter: {
     textAlign: 'center'
+  },
+  linkColor: {
+    color: '#f2f2f2'
+  },
+  paperStyle: {
+    padding: '5%'
   }
 }))
 
@@ -41,24 +47,26 @@ const Login = _ => {
 
   return (
     <>
-      <Container maxWidth='xs'>
+      <Container maxWidth='sm'>
         <br /><br /><br /><br /><br /><br />
-        <Typography variant='h4' align='center'>
-          This is the Login page
-        </Typography>
-        <hr
-          width='60%'
-        />
-        <br /><br />
-        <Container className={classes.myCenter}>
-          <AuthForm
-            formState={formState}
-            handleInputChange={handleInputChange}
-            handleSubmit={handleLoginUser}
-          />
-          <br />
-          <Link to='/register'> Don't have an account? Register! </Link>
-        </Container>
+        <Paper className={classes.paperStyle}>
+          <Typography variant='h4' align='center'>
+            Welcome to PawPal!
+          </Typography>
+          <Typography align='center' color='textSecondary'>
+            Find your future pal with paws
+          </Typography>
+          <br /><br />
+          <Container className={classes.myCenter}>
+            <AuthForm
+              formState={formState}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleLoginUser}
+            />
+            <br />
+            <Link to='/register' className={classes.linkColor}> Need an account? Register! </Link>
+          </Container>
+        </Paper>
       </Container>
     </>
   )
