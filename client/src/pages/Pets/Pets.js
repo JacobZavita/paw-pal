@@ -6,17 +6,6 @@ import { useEffect } from 'react'
 
 const Pets = props => {
 
-  // This was to track which card is being displayed. Use these functions to handle favorite button and pass button (pass for swiping)
-  let current = 0
-  const handleClickFavorite = () => {
-    current++
-    console.log(current)
-  }
-  const handleClickPass = () => {
-    current++
-    console.log(current)
-  }
-
   const client = new Client({ apiKey: process.env.REACT_APP_API_KEY, secret: process.env.REACT_APP_SECRET})
 
   // call the API inside useEffect in order to prevent it from continuously running
@@ -49,9 +38,6 @@ const Pets = props => {
         <Carousel
           petState={props.petState}
           setPetState={props.setPetState}
-          handleClickFavorite={handleClickFavorite}
-          handleClickPass={handleClickPass}
-          current={current}
         />
       </div>
     </>
