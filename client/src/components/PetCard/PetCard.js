@@ -49,7 +49,7 @@ const ImgMediaCard = props => {
   const handleExpandClick = () => {
     setExpanded(!expanded)
   }
-  
+
   let petData = props.petState.pets[props.activeStep]
 
   const handleOnClick = () => {
@@ -83,23 +83,23 @@ const ImgMediaCard = props => {
             title={petData.name}
           />
           <CardContent>
-            <Grid container spacing={2}>
-              <Grid item xs={5}>
                 <Typography gutterBottom variant="h4" component="h4">
                     {petData.name}
                 </Typography>
-              </Grid>
-              <Grid item xs={3}>
+            <Grid container spacing={2}>
+              <Grid item xs={4}>
                 <Typography variant="h6" color="textSecondary" component="h6">
                   Primary Breed: {petData.breeds.primary}
                 </Typography>
               </Grid>
+              <Grid item xs={4}>
               {(petData.breeds.secondary) ?
-                <Grid item xs={3}>
+                <Grid item>
                   <Typography variant="h6" color="textSecondary" component="h6">
                     Secondary Breed: {petData.breeds.secondary}
                   </Typography>
                 </Grid> : null}
+              </Grid>
               <Grid item xs={4}>
                 <Typography variant="h6" color="textSecondary" component="h6">
                   Age: {petData.age}
@@ -112,10 +112,10 @@ const ImgMediaCard = props => {
           </CardContent>
         </CardActionArea>
 
-        <CardActions align='center'>
-          <IconButton color='secondary' onClick={props.handleClickPass}>
+        <CardActions>
+          {/* <IconButton color='secondary' onClick={props.handleClickPass}>
             <ClearIcon />
-          </IconButton>
+          </IconButton> */}
           <IconButton color='primary' onClick={handleOnClick}>
             <FavoriteIcon />
           </IconButton>
@@ -132,13 +132,16 @@ const ImgMediaCard = props => {
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
               <Typography paragraph>
-                More About {petData.name}
+                More About {petData.name}<br />{petData.description}
               </Typography>
               <Typography paragraph>
                 Email: {petData.contact.email}
               </Typography>
               <Typography paragraph>
                 Phone: {petData.contact.phone}
+              </Typography>
+              <Typography paragraph>
+                Address: {petData.contact.address.address1}<br />{petData.contact.address.city}, {petData.contact.address.state}
               </Typography>
             </CardContent>
           </Collapse>
