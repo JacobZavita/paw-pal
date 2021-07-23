@@ -112,9 +112,7 @@ const ImgMediaCard = props => {
           </CardContent>
         </CardActionArea>
 
-        <CardActions
-          // align='center'
-        >
+        <CardActions>
           {/* <IconButton color='secondary' onClick={props.handleClickPass}>
             <ClearIcon />
           </IconButton> */}
