@@ -83,9 +83,25 @@ const AdvancedSearch = props => {
           onChange={handleBreedChange}
         >
           <MenuItem value={''}>&nbsp;&nbsp;</MenuItem>
-          <MenuItem value={'pug'}>Pug</MenuItem>
-          <MenuItem value={'samoyed'}>Samoyed</MenuItem>
+          <MenuItem value={'beagle'}>Beagle</MenuItem>
+          <MenuItem value={'border-collie'}>Border Collie</MenuItem>
+          <MenuItem value={'boxer'}>Boxer</MenuItem>
+          <MenuItem value={'chihuahua'}>Chihuahua</MenuItem>
+          <MenuItem value={'corgi'}>Corgi</MenuItem>
+          <MenuItem value={'doberman'}>Doberman</MenuItem>
+          <MenuItem value={'greyhound'}>Greyhound</MenuItem>
           <MenuItem value={'husky'}>Husky</MenuItem>
+          <MenuItem value={'labrador'}>Labrador</MenuItem>
+          <MenuItem value={'maltese'}>Maltese</MenuItem>
+          <MenuItem value={'mixed'}>Mixed</MenuItem>
+          <MenuItem value={'pit-bull'}>Pit Bull</MenuItem>
+          <MenuItem value={'poodle'}>Poodle</MenuItem>
+          <MenuItem value={'pug'}>Pug</MenuItem>
+          <MenuItem value={'retriever'}>Retriever</MenuItem>
+          <MenuItem value={'samoyed'}>Samoyed</MenuItem>
+          <MenuItem value={'shepherd'}>Shepherd</MenuItem>
+          <MenuItem value={'spaniel'}>Spaniel</MenuItem>
+          <MenuItem value={'terrier'}>Terrier</MenuItem>
         </Select>
       </FormControl>
       <FormControl className={classes.formControl}>
@@ -132,7 +148,7 @@ const AdvancedSearch = props => {
         </Select>
       </FormControl>
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Is good with children?</InputLabel>
+        <InputLabel id="demo-simple-select-label">Good w/ kids?</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -144,7 +160,7 @@ const AdvancedSearch = props => {
         </Select>
       </FormControl>
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Is good with dogs?</InputLabel>
+        <InputLabel id="demo-simple-select-label">Good w/ dogs?</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"

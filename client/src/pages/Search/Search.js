@@ -125,10 +125,7 @@ const Search = props => {
                   component='p'
                   align='center'
                   style={{ marginTop: '10px' }}
-                  >
-                <Lnk to='/pets'>
-                  Pets
-                </Lnk>
+                >
                 </Typography>
               </Grid>
             </Grid>

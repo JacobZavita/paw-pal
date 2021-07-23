@@ -29,7 +29,7 @@ import { useState } from 'react'
 // theme
 const theme = createTheme({
   palette: {
-    // type: 'dark',
+    type: 'dark',
     primary: {
       main: '#7189FF'
     },
