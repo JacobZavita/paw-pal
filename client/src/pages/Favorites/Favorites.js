@@ -66,83 +66,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-// const itemData = [
-//   {
-//     id: 52426558,
-//     organization_id: 'VA117',
-//     url: 'https://www.petfinder.com//dog//b-litter-benson-52426558//va//arlington//lost-dog-and-cat-rescue-foundation-va117//?referrer_id=4c555aad-4878-4e89-9db8-4e724a0d3d8b',
-//     type: 'Dog',
-//     species: 'Dog',
-//     breeds: {
-//       primary: 'Mixed Breed',
-//       secondary: null,
-//       mixed: false,
-//       unknown: false
-//     },
-//     colors: {
-//       primary: 'Red \/ Chestnut \/ Orange',
-//       secondary: null,
-//       tertiary: null
-//     },
-//     age: 'Baby',
-//     gender: 'Male',
-//     size: 'Small',
-//     coat: null,
-//     attributes: {
-//       spayed_neutered: true,
-//       house_trained: false,
-//       declawed: null,
-//       special_needs: false,
-//       shots_current: true
-//     },
-//     environment: {
-//       children: null,
-//       dogs: null,
-//       cats: null
-//     },
-//     tags: [
-
-//     ],
-//     name: 'B Litter: Benson',
-//     description: 'If you are interested in adopting Benson, please email dogs@lostdogrescue.org\n \nBenson is new to Lost Dog and Cat Rescue Foundation....',
-//     organization_animal_id: 'LDAC-A-32924',
-//     photos: [
-
-//     ],
-//     primary_photo_cropped: 'https://i.imgur.com/CN9tAbK.png',
-//     videos: [
-
-//     ],
-//     status: 'adoptable',
-//     status_changed_at: '2021-07-21T17:00:25+0000',
-//     published_at: '2021-07-21T17:00:25+0000',
-//     distance: null,
-//     contact: {
-//       email: 'dogs@lostdogrescue.org',
-//       phone: '(703) 295-DOGS (3647)',
-//       address: {
-//         address1: 'P.O. Box 223953',
-//         address2: null,
-//         city: 'Arlington',
-//         state: 'VA',
-//         postcode: '22205',
-//         country: 'US'
-//       }
-//     },
-//     _links: {
-//       self: {
-//         href: '\/v2\/animals\/52426558'
-//       },
-//       type: {
-//         href: '\/v2\/types\/dog'
-//       },
-//       organization: {
-//         href: '\/v2\/organizations\/va117'
-//       }
-//     }
-//   }
-// ]
-
 const Favorites = props => {
   function getModalStyle() {
     const top = 50 + rand()
@@ -168,34 +91,6 @@ const Favorites = props => {
     name: []
   })
 
-  // const handleInputChange = ({ target }) => {
-  //   setFavState({ ...favState, [target.name]: target.value })
-  // }
-
-  // const handleCreateFavorite = event => {
-  //   event.preventDefault()
-  //   Pet.create({
-  //     name: favState.name,
-  //     image: favState.image
-  //   })
-  //     .then(({ data: post }) => {
-  //       const pets = [...favState.pets]
-  //       pets.push(pets)
-  //       setFavState({ ...favState, pets, name: '', image: '' })
-  //     })
-  // }
-  // const handleNameInput = event => {
-  //   setFavState({ ...favState, name: event.target.value })
-  // }
-  // const handleImageInput = event => {
-  //   setFavState({ ...favState, image: event.target.value })
-  // }
-  // const handlePhoneInput = event => {
-  //   setFavState({ ...favState, phone: event.target.value })
-  // }
-  // const handleEmailInput = event => {
-  //   setFavState({ ...favState, email: event.target.value })
-  // }
   useEffect(() => {
     Pet.favorites()
       .then(({ data: pets }) => {
