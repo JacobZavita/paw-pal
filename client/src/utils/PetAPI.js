@@ -9,7 +9,7 @@ const Pet = {
     }
   }),
   // add Pet to favorites
-  add: pet => axios.post('/api/users/login', pet, {
+  add: pet => axios.post('/api/pets', pet, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     }
