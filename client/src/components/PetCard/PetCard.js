@@ -1,16 +1,19 @@
 import { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardActionArea, CardActions, CardContent, CardMedia, Typography, Grid, Collapse, IconButton } from '@material-ui/core'
+import { Card, CardActionArea, CardActions, CardContent, CardMedia, Typography, Grid, Collapse, IconButton, Paper } from '@material-ui/core'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import ClearIcon from '@material-ui/icons/Clear'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import clsx from 'clsx'
 import Background from './pawprints.jpg'
 import Pet from '../../utils/PetAPI'
+import PetsIcon from '@material-ui/icons/Pets';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    minWidth: 275,
+    minWidth: 275, 
+    
   },
   bullet: {
     display: 'inline-block',
@@ -39,7 +42,8 @@ const useStyles = makeStyles((theme) => ({
     },
     expandOpen: {
       transform: 'rotate(180deg)'
-    }
+    },
+  
 }));
 
 const ImgMediaCard = props => {
@@ -70,9 +74,12 @@ const ImgMediaCard = props => {
 
   return (
     <>
+    
       <Card
         className={classes.root}
-        style={{ backgroundImage: `url(${Background})` }}
+        style={{
+          backgroundImage: `url(${Background})`, borderRadius: "20px", color: "#8c9eff" }}
+  
       >
         <CardActionArea>
           <CardMedia
@@ -83,32 +90,34 @@ const ImgMediaCard = props => {
             title={petData.name}
           />
           <CardContent>
-                <Typography gutterBottom variant="h4" component="h4">
-                    {petData.name}
+            <Typography gutterBottom variant="h4" component="h4">
+              <PetsIcon /> Hi, I'm {petData.name} <PetsIcon />
                 </Typography>
+            
             <Grid container spacing={2}>
-              <Grid item xs={4}>
-                <Typography variant="h6" color="textSecondary" component="h6">
-                  Primary Breed: {petData.breeds.primary}
+              <Grid item xs={8}>
+                <Typography variant="h6" color="#9fa8da" component="h6" align="left">
+                 <b> Primary Breed:</b> {petData.breeds.primary}
                 </Typography>
               </Grid>
-              <Grid item xs={4}>
+              
+              <Grid item xs={8}>
               {(petData.breeds.secondary) ?
                 <Grid item>
-                  <Typography variant="h6" color="textSecondary" component="h6">
-                    Secondary Breed: {petData.breeds.secondary}
+                    <Typography variant="h6" color="#9fa8da" component="h6" align="left">
+                      <b> Secondary Breed:</b> {petData.breeds.secondary}
                   </Typography>
                 </Grid> : null}
               </Grid>
-              <Grid item xs={4}>
-                <Typography variant="h6" color="textSecondary" component="h6">
-                  Age: {petData.age}
+              <Grid item xs={8} align="left">
+                <Typography variant="h6" color="#9fa8da" component="h6" align="left">
+                  <b> Age Range:</b> {petData.age}
                 </Typography>
-                <Typography variant="h6" color="textSecondary" component="h6">
-                  Sex: {petData.gender}
+                <Typography variant="h6" color="#9fa8da" component="h6" align="left">
+                <b>  Gender:</b> {petData.gender} 
                 </Typography>
               </Grid>
-            </Grid>
+            </Grid> 
           </CardContent>
         </CardActionArea>
 
@@ -131,22 +140,26 @@ const ImgMediaCard = props => {
           </IconButton>
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
-              <Typography paragraph>
-                More About {petData.name}<br />{petData.description}
+              <Typography paragraph align="center">
+                More About {petData.name}:<br />
               </Typography>
-              <Typography paragraph>
-                Email: {petData.contact.email}
+              <Typography paragraph align="left">
+                {petData.description}
               </Typography>
-              <Typography paragraph>
-                Phone: {petData.contact.phone}
+              <Typography paragraph align="left">
+                Email: {(petData.contact.email == null) ? 'N/A' : petData.contact.email}
               </Typography>
-              <Typography paragraph>
-                Address: {petData.contact.address.address1}<br />{petData.contact.address.city}, {petData.contact.address.state}
+              <Typography paragraph align="left">
+                Phone: {(petData.contact.phone == null) ? 'N/A' : petData.contact.phone}
+              </Typography>
+              <Typography paragraph align="left">
+                Location: {petData.contact.address.address1}<br />{petData.contact.address.city}, {petData.contact.address.state}
               </Typography>
             </CardContent>
           </Collapse>
         </CardActions>
       </Card>
+      
     </>
   );
 }
