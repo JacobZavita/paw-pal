@@ -7,6 +7,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import clsx from 'clsx'
 import Background from './pawprints.jpg'
 import Pet from '../../utils/PetAPI'
+import { Popover  } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,21 +37,37 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.shortest,
     })
-    },
-    expandOpen: {
-      transform: 'rotate(180deg)'
-    }
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)'
+  },
+  typography: {
+    padding: theme.spacing(2),
+  }
 }));
 
 const ImgMediaCard = props => {
   const classes = useStyles()
   const [expanded, setExpanded] = useState(false)
+  const [anchorEl, setAnchorEl] = useState(null)  // this is for popover component
   
   const handleExpandClick = () => {
     setExpanded(!expanded)
   }
 
+  const handlePopoverClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null)
+  }
+
   let petData = props.petState.pets[props.activeStep]
+
+  // for popover component
+  const open = Boolean(anchorEl)
+  const id = open ? 'simple-popover' : undefined
 
   const handleOnClick = animalID => {
     // checks if there are duplicate pet in favorites list
@@ -131,9 +148,25 @@ const ImgMediaCard = props => {
           {/* <IconButton color='secondary' onClick={props.handleClickPass}>
             <ClearIcon />
           </IconButton> */}
-          <IconButton color='primary' onClick={() => {handleOnClick(petData.id)}}>
+          <IconButton color='primary' aria-describedby={id} onClick={(event) => {handleOnClick(petData.id); handlePopoverClick(event)}}>
             <FavoriteIcon />
           </IconButton>
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handlePopoverClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }}
+          >
+            <Typography className={classes.typography}>Added to favorites!</Typography>
+          </Popover>
           <IconButton
             className={clsx(classes.expand, {
               [classes.expandOpen]: expanded,
