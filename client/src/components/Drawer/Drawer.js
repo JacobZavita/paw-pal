@@ -13,9 +13,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import SearchIcon from '@material-ui/icons/Search';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import { Link, NavLink } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 
@@ -149,33 +153,59 @@ const NavBar = (props) => {
         </div>
         <Divider />
         <List>
-          <ListItem button>
-            <AccountCircleIcon />
-            <NavLink to='/profile' className={classes.linkColor} activeClassName={classes.activeLink}>
-              <Typography>My Profile</Typography>
-            </NavLink>
-          </ListItem>
-          <ListItem button>
-            <FavoriteIcon />
-            <NavLink to='/favorites' className={classes.linkColor} activeClassName={classes.activeLink}>
-              <Typography>Favorites</Typography>
-            </NavLink>
-          </ListItem>
-          <ListItem button>
-            <SearchIcon />
-            <NavLink to='/search' className={classes.linkColor} activeClassName={classes.activeLink}>
-              <Typography>Search</Typography>
-            </NavLink>
-          </ListItem>
+          <NavLink to='/profile' className={classes.linkColor} activeClassName={classes.activeLink}>
+            <ListItem button>
+              <ListItemIcon>
+                <AccountCircleIcon className={classes.linkColor}/>
+              </ListItemIcon>
+              <ListItemText>
+                MyProfile
+              </ListItemText>
+            </ListItem>
+          </NavLink>
+          <NavLink to='/favorites' className={classes.linkColor} activeClassName={classes.activeLink}>
+            <ListItem button>
+              <ListItemIcon>
+                <FavoriteIcon className={classes.linkColor} />
+              </ListItemIcon>
+              <ListItemText>
+                Favorites
+              </ListItemText>
+            </ListItem>
+          </NavLink>
+          <NavLink to='/search' className={classes.linkColor} activeClassName={classes.activeLink}>
+            <ListItem button>
+              <ListItemIcon>
+                <SearchIcon className={classes.linkColor} />
+              </ListItemIcon>
+              <ListItemText>
+                Search
+              </ListItemText>
+            </ListItem>
+          </NavLink>
         </List>
         <Divider />
           {(localStorage.getItem('token')) ? 
           (<Link className={classes.linkColor}>
-            <Button color='inherit' onClick={handleLogOut}>Logout</Button>
-            </Link>) :
+            <ListItem button color='inherit' onClick={handleLogOut}>
+              <ListItemIcon>
+                <ExitToAppIcon className={classes.linkColor} />
+              </ListItemIcon>
+              <ListItemText>
+                Logout
+              </ListItemText>
+            </ListItem>
+          </Link>) :
           (<Link className={classes.linkColor} to='/login'>
-            <Button color='inherit'>Login</Button>
-            </Link>)}
+            <ListItem button color='inherit'>
+              <ListItemIcon>
+                <VpnKeyIcon className={classes.linkColor} />
+              </ListItemIcon>
+              <ListItemText>
+                Login
+              </ListItemText>
+            </ListItem>
+          </Link>)}
       </Drawer>
     </div>
   );
