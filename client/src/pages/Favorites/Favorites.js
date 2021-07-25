@@ -20,6 +20,7 @@ import { black } from '@material-ui/core/colors'
 
 import DeleteIcon from '@material-ui/icons/Delete'
 
+import ShareIcon from '@material-ui/icons/Share';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10
@@ -136,7 +137,23 @@ const Favorites = props => {
     
   }
 
+  const [copySuccess, setCopySuccess] = useState('')
+
+  useEffect(() => {
+    setTimeout(() =>setCopySuccess(''), 2000)
+  }, [copySuccess])
+
+  
   const ModalBody = props => {
+    const copyToClipboard = () => {
+      const tempInput = document.createElement('input')
+      tempInput.value = `https://pawpal.com/share/${props.pet._id}`
+      document.body.appendChild(tempInput)
+      tempInput.select()
+      document.execCommand('copy')
+      document.body.removeChild(tempInput)
+      setCopySuccess('Copied')
+    }
     return (
       <div style={modalStyle} className={classes.paper2}>
         <img className={classes.img} src={props.pet.image} alt={props.pet.name} />
@@ -159,6 +176,9 @@ const Favorites = props => {
         </Button>
         <IconButton aria-label='delete' onClick={() => {handleDelete(props.pet.id); handleClose()}}>
           <DeleteIcon fontSize='large' />
+        </IconButton>
+        <IconButton>
+          <ShareIcon aria-label='delete' onClick={() => copyToClipboard(props.pet._id)}/>
         </IconButton>
       </div>
     )
