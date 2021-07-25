@@ -8,6 +8,13 @@ const Pet = {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     }
   }),
+
+  share: _id => axios.get(`api/pets/${_id}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  }),
+
   // add Pet to favorites
   add: pet => axios.post('/api/pets', pet, {
     headers: {
