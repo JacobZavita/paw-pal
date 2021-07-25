@@ -37,10 +37,10 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1
   },
   imageList: {
-    width: 750,
-    height: 900,
+    width: 1000,
+    height: 950,
     position: 'fixed',
-    bottom: 80
+    bottom: 25
   },
   icon: {
     color: 'rgba(255, 255, 255, 0.54)'
@@ -63,6 +63,9 @@ const useStyles = makeStyles((theme) => ({
   },
   img: {
     width: '100%'
+  },
+  borderedbox: {
+    border: '80px solid #484444'
   }
 }))
 
@@ -160,21 +163,21 @@ const Favorites = props => {
   return (
     <>
       <div className={classes.root}>
-        <ImageList rowHeight={360} className={classes.imageList}>
-          <ImageListItem key='Subheader' cols={2} style={{ height: 'auto' }}>
-            <ListSubheader color='primary' component='div'>Favorites</ListSubheader>
-          </ImageListItem>
+        <ImageListItem key='Subheader' cols={2} style={{ height: 'auto' }}>
+          <ListSubheader color='primary' component='div' style={{ textTransform: 'uppercase', textAlign: 'center', fontSize: '50px' }}></ListSubheader>
+        </ImageListItem>
+        <ImageList rowHeight={360} className={[classes.imageList, classes.borderedbox]}>
           {favState.pets.map((pet, i) => (
             <ImageListItem key={pet.img}>
               <img id={i} src={(pet.image == null) ? 'https://pbs.twimg.com/profile_images/446279626831044608/aCs3t5qe_400x400.png' : pet.image} onClick={(event) => handleOpen(event)} alt={pet.name} />
               <ImageListItemBar
                 title={pet.name}
                 subtitle={<span>{pet.city}, {pet.state}</span>}
-              // actionIcon={
-              //   <IconButton aria-label={`info about ${pet.city}`} href={pet.url} className={classes.icon}>
-              //     <InfoIcon />
-              //   </IconButton>
-              // }
+                actionIcon={
+                  <FavoriteIcon fontSize='large' style={{ paddingRight: '5px' }} className={classes.icon}>
+                    <FavoriteIcon />
+                  </FavoriteIcon>
+                }
               />
             </ImageListItem>
           ))}
