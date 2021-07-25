@@ -159,6 +159,7 @@ const NavBar = (props) => {
         </Link>
       </Drawer>
     </div>
+    
   );
 }
 

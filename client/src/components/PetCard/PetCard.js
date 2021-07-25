@@ -9,6 +9,7 @@ import Background from './pawprints.jpg'
 import Pet from '../../utils/PetAPI'
 import PetsIcon from '@material-ui/icons/Pets';
 import Divider from '@material-ui/core/Divider';
+import Image from '../../components/Images/footer.png'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,12 +74,12 @@ const ImgMediaCard = props => {
   }
 
   return (
-    <>
+    
     
       <Card
-        className={classes.root}
+        className={classes.root.theme}
         style={{
-          backgroundImage: `url(${Background})`, borderRadius: "20px", color: "#8c9eff" }}
+          backgroundImage: `url(${Background})`, borderRadius: "20px", color:"#212121" }}
   
       >
         <CardActionArea>
@@ -89,9 +90,9 @@ const ImgMediaCard = props => {
             src={(petData.primary_photo_cropped == null) ? 'https://pbs.twimg.com/profile_images/446279626831044608/aCs3t5qe_400x400.png' : petData.primary_photo_cropped.full}
             title={petData.name}
           />
-          <CardContent>
-            <Typography gutterBottom variant="h4" component="h4">
-              <PetsIcon /> Hi, I'm {petData.name} <PetsIcon />
+        <CardContent>
+          <Typography gutterBottom variant="h4" component="h4">
+            <b> Hi, I'm {petData.name}</b> <PetsIcon />
                 </Typography>
             
             <Grid container spacing={2}>
@@ -104,16 +105,16 @@ const ImgMediaCard = props => {
               <Grid item xs={8}>
               {(petData.breeds.secondary) ?
                 <Grid item>
-                    <Typography variant="h6" color="#9fa8da" component="h6" align="left">
+                  <Typography variant="h6" component="h6" align="left">
                       <b> Secondary Breed:</b> {petData.breeds.secondary}
                   </Typography>
                 </Grid> : null}
               </Grid>
               <Grid item xs={8} align="left">
-                <Typography variant="h6" color="#9fa8da" component="h6" align="left">
+                <Typography variant="h6" component="h6" align="left">
                   <b> Age Range:</b> {petData.age}
                 </Typography>
-                <Typography variant="h6" color="#9fa8da" component="h6" align="left">
+                <Typography variant="h6" component="h6" align="left">
                 <b>  Gender:</b> {petData.gender} 
                 </Typography>
               </Grid>
@@ -140,27 +141,30 @@ const ImgMediaCard = props => {
           </IconButton>
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
-              <Typography paragraph align="center">
-                More About {petData.name}:<br />
+            <Typography variant="h6" align="center">
+                <b> More About {petData.name}:</b><br />
+              </Typography>
+            <Typography paragraph align="left">
+              <b> {petData.description}</b>
               </Typography>
               <Typography paragraph align="left">
-                {petData.description}
+              <b> Email: {(petData.contact.email == null) ? 'N/A' : petData.contact.email}</b>
               </Typography>
               <Typography paragraph align="left">
-                Email: {(petData.contact.email == null) ? 'N/A' : petData.contact.email}
+              <b>Phone: {(petData.contact.phone == null) ? 'N/A' : petData.contact.phone} </b>
               </Typography>
               <Typography paragraph align="left">
-                Phone: {(petData.contact.phone == null) ? 'N/A' : petData.contact.phone}
-              </Typography>
-              <Typography paragraph align="left">
-                Location: {petData.contact.address.address1}<br />{petData.contact.address.city}, {petData.contact.address.state}
+              <b> Location: {petData.contact.address.address1}<br />{petData.contact.address.city}, {petData.contact.address.state}</b>
               </Typography>
             </CardContent>
           </Collapse>
         </CardActions>
       </Card>
       
-    </>
+      
+      
+    
+    
   );
 }
 

@@ -8,6 +8,11 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft'
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
 import SwipeableViews from 'react-swipeable-views'
 import ImgMediaCard from '../PetCard'
+import Image from '../../components/Images/footer.png'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import Slide from '@material-ui/core/Slide';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +32,16 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 400,
     overflow: 'hidden',
     width: '100%',
+    
+  },
+  footerStyle: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block',
+    width: '100%',
+    height: '550px',
+    objectFit: 'cover',
+    overflow: 'visible'
   },
 }))
 
@@ -52,6 +67,7 @@ const Carousel = props => {
   };
 
   return (
+    <>
     <div className={classes.root}>
       <Paper square elevation={0} className={classes.header}>
         <Typography>{props.petState.pets[activeStep]?.label}</Typography>
@@ -77,24 +93,28 @@ const Carousel = props => {
         ))}
       </SwipeableViews>
       <MobileStepper
-        steps={maxSteps}
+        // steps={maxSteps}
         position="static"
-        variant="text"
-        activeStep={activeStep}
+        variant="progress"
+        // activeStep={activeStep}
         nextButton={
-          <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
-            Next
+          <Button  onClick={handleNext} >
+            <ChevronRightIcon />
             {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
           </Button>
         }
         backButton={
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+          <Button size="small" onClick={handleBack} >
             {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-            Back
+            <ChevronLeftIcon />
           </Button>
         }
       />
     </div>
+    <div className={classes.cropping}>
+        <img src={Image} className={classes.footerStyle} />
+      </div>
+      </>
   )
 }
 
