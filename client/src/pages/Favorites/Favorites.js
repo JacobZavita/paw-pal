@@ -42,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     bottom: 25
   },
+  imageListItem: {
+    cursor: 'pointer'
+  },
   icon: {
     color: 'rgba(255, 255, 255, 0.54)'
   },
@@ -168,7 +171,7 @@ const Favorites = props => {
         </ImageListItem>
         <ImageList rowHeight={360} className={[classes.imageList, classes.borderedbox]}>
           {favState.pets.map((pet, i) => (
-            <ImageListItem key={pet.img}>
+            <ImageListItem key={pet.img} className={classes.imageListItem}>
               <img id={i} src={(pet.image == null) ? 'https://pbs.twimg.com/profile_images/446279626831044608/aCs3t5qe_400x400.png' : pet.image} onClick={(event) => handleOpen(event)} alt={pet.name} />
               <ImageListItemBar
                 title={pet.name}
