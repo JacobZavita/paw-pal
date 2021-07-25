@@ -172,7 +172,7 @@ const AdvancedSearch = props => {
         </Select>
       </FormControl>
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Is good with cats?</InputLabel>
+        <InputLabel id="demo-simple-select-label">Good w/ cats?</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
