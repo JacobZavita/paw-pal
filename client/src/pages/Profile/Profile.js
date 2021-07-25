@@ -5,9 +5,11 @@ import PersonOutlineIcon from '@material-ui/icons/PersonOutline'
 import MailOutlineIcon from '@material-ui/icons/MailOutline'
 import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid'
 import AccountBoxIcon from '@material-ui/icons/AccountBox'
+import Hidden from '@material-ui/core/Hidden'
 import User from '../../utils/UserAPI'
 import ProfileModal from '../../components/ProfileModal'
 import Image from '../../components/Images/footer.png'
+import Dog from '../../components/Images/profileLongText.png'
 
 const useStyles = makeStyles(_ => ({
   avatarLinkWidth: {
@@ -21,7 +23,8 @@ const useStyles = makeStyles(_ => ({
     width: '200px',
     height: '200px',
     borderRadius: '50%',
-    objectFit: 'cover'
+    objectFit: 'cover',
+    cursor: 'pointer'
   },
 
   cropping: {
@@ -49,6 +52,23 @@ const useStyles = makeStyles(_ => ({
     marginRight: 'auto',
     display: 'block',
     height: '650px',
+    width: '100%'
+  },
+  dogStyle: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block',
+    width: '500x',
+    height: '125px',
+    objectFit: 'cover',
+    overflow: 'visible',
+    zIndex: '2'
+  },
+  croppingDog: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block',
+    height: '116px',
     width: '100%'
   }
 }))
@@ -138,14 +158,21 @@ const Profile = _ => {
     <>
       <Container maxWidth='sm'>
         <br /><br /><br /><br /><br />
+        <Hidden xsDown>
+          <div className={classes.croppingDog}>
+            <img src={Dog} className={classes.dogStyle} />
+          </div>
+        </Hidden>
         <Paper>
           <Paper elevation={0} className={classes.paperStyle}>
             <div className={classes.cropping}>
-              <img src={userState.avatar} className={classes.avatarStyle} />
+              <img src={userState.avatar} className={classes.avatarStyle} onClick={handleOpenAvatar} />
             </div>
             <br /><br />
             <Typography variant='h4' align='center'>
-              {userState.name}'s Profile
+              <div button onClick={handleOpenName}>
+                {userState.name}'s Profile
+              </div>
             </Typography>
             <hr
               width='60%'

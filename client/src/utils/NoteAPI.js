@@ -3,7 +3,7 @@ const localStorage = window.localStorage
 
 const Note = {
   // get notes associated with pet ID
-  notes: petId => axios.get(`/api/notes${petId}`, {
+  notes: petId => axios.get(`/api/notes/${petId}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     }
