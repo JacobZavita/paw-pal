@@ -12,6 +12,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import { Link, NavLink } from 'react-router-dom'
+import Button from '@material-ui/core/Button'
+// active icon link stuff
+import { useLocation } from 'react-router-dom'
 
 const drawerWidth = 240;
 
@@ -75,15 +78,22 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none'
   },
   linkColor: {
-    color: '#A0DDFF',
+    color: '#758ecd',
     textDecoration: 'none'
   },
   activeLink: {
-    color: '#7189FF'
+    color: '#A0DDFF'
+  },
+  activeBG: {
+    backgroundColor: '#343433'
   }
 }))
 
+
 const NavBar = (props) => {
+  // active link stuff
+  const location = useLocation()
+
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -143,30 +153,30 @@ const NavBar = (props) => {
         </div>
         <Divider />
         <List>
-          <NavLink to='/profile' className={classes.linkColor} activeClassName={classes.activeLink} onClick={handleDrawerClose}>
-            <ListItem button>
+          <NavLink to='/profile' className={classes.linkColor} activeClassName={classes.activeLink}>
+            <ListItem button className={location.pathname === '/profile' && classes.activeBG}>
               <ListItemIcon>
-                <AccountCircleIcon className={classes.linkColor} />
+                <AccountCircleIcon className={location.pathname === '/profile' ? classes.activeLink : classes.linkColor} />
               </ListItemIcon>
               <ListItemText>
                 MyProfile
               </ListItemText>
             </ListItem>
           </NavLink>
-          <NavLink to='/favorites' className={classes.linkColor} activeClassName={classes.activeLink} onClick={handleDrawerClose}>
-            <ListItem button>
+          <NavLink to='/favorites' className={classes.linkColor} activeClassName={classes.activeLink}>
+            <ListItem button className={location.pathname === '/favorites' && classes.activeBG}>
               <ListItemIcon>
-                <FavoriteIcon className={classes.linkColor} />
+                <FavoriteIcon className={location.pathname === '/favorites' ? classes.activeLink : classes.linkColor} />
               </ListItemIcon>
               <ListItemText>
                 Favorites
               </ListItemText>
             </ListItem>
           </NavLink>
-          <NavLink to='/search' className={classes.linkColor} activeClassName={classes.activeLink} onClick={handleDrawerClose}>
-            <ListItem button>
+          <NavLink to='/search' className={classes.linkColor} activeClassName={classes.activeLink}>
+            <ListItem button className={location.pathname === '/search' && classes.activeBG}>
               <ListItemIcon>
-                <SearchIcon className={classes.linkColor} />
+                <SearchIcon className={location.pathname === '/search' ? classes.activeLink : classes.linkColor} />
               </ListItemIcon>
               <ListItemText>
                 Search

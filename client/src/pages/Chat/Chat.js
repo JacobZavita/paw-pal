@@ -6,6 +6,9 @@
 import { makeStyles, Container, Paper, Grid, TextField, Button } from '@material-ui/core'
 import SimpleCard from '../../components/SimpleCard'
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight'
+import Cat from '../../components/Images/chatLongText.png'
+import Hidden from '@material-ui/core/Hidden'
+import Image from '../../components/Images/footer.png'
 import { useState } from 'react'
 
 import Noise from '../../utils/NoiseAPI'
@@ -16,6 +19,34 @@ const useStyles = makeStyles({
     marginTop: 10,
     marginBottom: 10,
     display: 'block'
+  },
+  catStyle: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block',
+    width: '500x',
+    height: '125px',
+    objectFit: 'cover',
+    overflow: 'visible',
+    zIndex: '2'
+  },
+  croppingCat: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block',
+    height: '116px',
+    width: '100%'
+  },
+  paperStyle: {
+    padding: '5%'
+  },
+  footerStyle: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block',
+    width: '100%',
+    height: '650px',
+    objectFit: 'cover'
   }
 })
 
@@ -56,7 +87,7 @@ const Chat = _ => {
   const petMessage = async (userMessage) => {
     setSpinnerState(true)
     // variable based on props-
-    await Noise.noise()
+    await Noise.cat()
       .then(({ data }) => {
         const petMessage = {
           message: data,
@@ -88,20 +119,14 @@ const Chat = _ => {
   return (
     <>
       <Container maxWidth='sm'>
-        <h1>This is the Chat page</h1>
+        <br /><br /><br /><br />
+        <Hidden xsDown>
+          <div className={classes.croppingCat}>
+            <img src={Cat} className={classes.catStyle} />
+          </div>
+        </Hidden>
         <Paper style={{ minHeight: 400, maxHeight: 400, overflow: 'auto' }}>
           <Grid container>
-            <Grid item xs={5} />
-            <Grid item xs={2} />
-            <Grid item xs={5}>
-              <SimpleCard body='Test Message Here!' />
-            </Grid>
-
-            <Grid item xs={5}>
-              <SimpleCard body='Woof Woof!' />
-            </Grid>
-            <Grid item xs={5} />
-            <Grid item xs={2} />
             {
               messageState.map((element, i) => (<GridItem message={element} key={i} />))
             }
@@ -133,6 +158,9 @@ const Chat = _ => {
           </Button>
         </form>
       </Container>
+      <div className={classes.cropping2}>
+        <img src={Image} className={classes.footerStyle} />
+      </div>
 
     </>
   )
