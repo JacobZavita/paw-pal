@@ -16,7 +16,7 @@ router.get('/pets/my', passport.authenticate('jwt'), (req, res) => {
 })
 
 // GET Pet by ID
-router.get('/pets/:id', passport.authenticate('jwt'), (req, res) => {
+router.get('/pets/:id', (req, res) => {
   Pet.findById(req.params.id)
     .populate({
       path: 'notes',
