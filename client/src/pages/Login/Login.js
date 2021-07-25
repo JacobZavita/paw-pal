@@ -3,9 +3,13 @@ import { Container, Typography, Paper } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import User from '../../utils/UserAPI'
+import Image from '../../components/Images/footer.png'
+import Dogs from '../../components/Images/profile.png'
 
 // components
 import AuthForm from '../../components/AuthForm'
+
+const localStorage = window.localStorage
 
 const useStyles = makeStyles(_ => ({
   myCenter: {
@@ -16,6 +20,40 @@ const useStyles = makeStyles(_ => ({
   },
   paperStyle: {
     padding: '5%'
+  },
+  footerStyle: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block',
+    width: '100%',
+    height: '700px',
+    objectFit: 'cover',
+    overflow: 'visible'
+  },
+  cropping: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block',
+    height: '650px',
+    width: '100%'
+  },
+  dogsStyle: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block',
+    objectFit: 'cover',
+    height: '300px',
+    width: '100%',
+    overflow: 'visible',
+    position: 'relative',
+    zIndex: 2
+  },
+  croppingDog: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block',
+    height: '130px',
+    width: '100%'
   }
 }))
 
@@ -41,7 +79,9 @@ const Login = _ => {
     User.login(formState)
       .then(({ data: token }) => {
         localStorage.setItem('token', token)
-        window.location = '/'
+        if (localStorage.getItem('token')) {
+          window.location = '/'
+        }
       })
   }
 
@@ -49,25 +89,33 @@ const Login = _ => {
     <>
       <Container maxWidth='sm'>
         <br /><br /><br /><br /><br /><br />
-        <Paper className={classes.paperStyle}>
-          <Typography variant='h4' align='center'>
-            Welcome to PawPal!
-          </Typography>
-          <Typography align='center' color='textSecondary'>
-            Find your future pal with paws
-          </Typography>
-          <br /><br />
-          <Container className={classes.myCenter}>
-            <AuthForm
-              formState={formState}
-              handleInputChange={handleInputChange}
-              handleSubmit={handleLoginUser}
-            />
-            <br />
-            <Link to='/register' className={classes.linkColor}> Need an account? Register! </Link>
-          </Container>
+        <Paper>
+          <Paper elevation={0} className={classes.paperStyle}>
+            <Typography variant='h4' align='center'>
+              Welcome to PawPal!
+            </Typography>
+            <Typography align='center' color='textSecondary'>
+              Find your future pal with paws
+            </Typography>
+            <br /><br />
+            <Container className={classes.myCenter}>
+              <AuthForm
+                formState={formState}
+                handleInputChange={handleInputChange}
+                handleSubmit={handleLoginUser}
+              />
+              <br />
+              <Link to='/register' className={classes.linkColor}> Need an account? Register! </Link>
+            </Container>
+          </Paper>
+          <div className={classes.croppingDog}>
+            <img src={Dogs} className={classes.dogsStyle} />
+          </div>
         </Paper>
       </Container>
+      <div className={classes.cropping}>
+        <img src={Image} className={classes.footerStyle} />
+      </div>
     </>
   )
 }
