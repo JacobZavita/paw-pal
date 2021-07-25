@@ -153,7 +153,12 @@ const NavBar = (props) => {
         </div>
         <Divider />
         <List>
-          <NavLink to='/profile' className={classes.linkColor} activeClassName={classes.activeLink}>
+          <NavLink
+            to='/profile'
+            className={classes.linkColor}
+            activeClassName={classes.activeLink}
+            onClick={handleDrawerClose}
+          >
             <ListItem button className={location.pathname === '/profile' && classes.activeBG}>
               <ListItemIcon>
                 <AccountCircleIcon className={location.pathname === '/profile' ? classes.activeLink : classes.linkColor} />
@@ -163,7 +168,12 @@ const NavBar = (props) => {
               </ListItemText>
             </ListItem>
           </NavLink>
-          <NavLink to='/favorites' className={classes.linkColor} activeClassName={classes.activeLink}>
+          <NavLink
+            to='/favorites'
+            className={classes.linkColor}
+            activeClassName={classes.activeLink}
+            onClick={handleDrawerClose}
+          >
             <ListItem button className={location.pathname === '/favorites' && classes.activeBG}>
               <ListItemIcon>
                 <FavoriteIcon className={location.pathname === '/favorites' ? classes.activeLink : classes.linkColor} />
@@ -173,7 +183,12 @@ const NavBar = (props) => {
               </ListItemText>
             </ListItem>
           </NavLink>
-          <NavLink to='/search' className={classes.linkColor} activeClassName={classes.activeLink}>
+          <NavLink
+            to='/search'
+            className={classes.linkColor}
+            activeClassName={classes.activeLink}
+            onClick={handleDrawerClose}
+          >
             <ListItem button className={location.pathname === '/search' && classes.activeBG}>
               <ListItemIcon>
                 <SearchIcon className={location.pathname === '/search' ? classes.activeLink : classes.linkColor} />
@@ -187,7 +202,11 @@ const NavBar = (props) => {
         <Divider />
           {(localStorage.getItem('token')) ? 
           (<Link className={classes.linkColor}>
-            <ListItem button color='inherit' onClick={handleLogOut}>
+            <ListItem
+              button
+              color='inherit'
+              onClick={handleLogOut}
+            >
               <ListItemIcon>
                 <ExitToAppIcon className={classes.linkColor} />
               </ListItemIcon>

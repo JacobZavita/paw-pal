@@ -137,6 +137,7 @@ const Favorites = props => {
     
   }
 
+  // For copy-to-clipboard
   const [copySuccess, setCopySuccess] = useState('')
 
   useEffect(() => {
@@ -215,15 +216,6 @@ const Favorites = props => {
           <ModalBody pet={favState.pets[modalState.index]} />
         </Modal>
       </div>
-      {/* module here */}
-      {/* <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby='simple-modal-title'
-        aria-describedby='simple-modal-description'
-      >
-        <body name={pet.name}/>
-      </Modal> */}
     </>
   )
 }
