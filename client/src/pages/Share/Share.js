@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import Hidden from '@material-ui/core/Hidden'
 import { Container, Paper, Typography } from '@material-ui/core'
 import Pet from '../../utils/PetAPI.js'
 
@@ -11,14 +12,16 @@ const useStyles = makeStyles(_ => ({
     width: '200px',
     height: '200px',
     borderRadius: '50%',
-    objectFit: 'cover',
-    cursor: 'pointer'
+    objectFit: 'cover'
   },
   padding: {
     padding: '5%'
   },
   padding2: {
     padding: '2%'
+  },
+  wordMargin: {
+    marginLeft: '20%'
   }
 }))
 
@@ -49,17 +52,32 @@ const Share = ({ match }) => {
     <>
       <br /><br /><br /><br /><br /><br />
       <Typography variant='h4' align='center'>
-        This is the Share page
+        Welcome to da motha forkn share z0ne
       </Typography>
       <hr style={{ width: '60%' }} />
       <br />
       <Container maxWidth='sm'>
         <Paper className={classes.padding}>
           <img src={pet.image} className={classes.image} />
-          <Typography>Name: {pet.name}</Typography>
-          <Typography>Email: {pet.email}</Typography>
-          <Typography>Phone: {pet.phone}</Typography>
-          <Typography>address: {pet.address}, {pet.city} {pet.state}</Typography>
+          <br /><br />
+          <Typography variant='h4' align='center'>
+            <div button>
+              {pet.name}
+            </div>
+          </Typography>
+          <hr
+            width='60%'
+          />
+          <Hidden xsDown>
+            <Typography className={classes.wordMargin}>Email: {pet.email}</Typography>
+            <Typography className={classes.wordMargin}>Phone: {pet.phone}</Typography>
+            <Typography className={classes.wordMargin}>Address: {pet.address}, {pet.city} {pet.state}</Typography>
+          </Hidden>
+          <Hidden smUp>
+            <Typography align='center'>{pet.email}</Typography>
+            <Typography align='center'>{pet.phone}</Typography>
+            <Typography align='center'>{pet.address}, {pet.city} {pet.state}</Typography>
+          </Hidden>
         </Paper>
         <br />
         <Typography>Notes:</Typography>
