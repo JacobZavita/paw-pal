@@ -20,7 +20,7 @@ const NoteForm = props => {
   //   console.log(props.state)
   // }
   return (
-    <form className={classes.root} noValidate autoComplete='off'>
+    <form className={classes.root}>
       <FormControl fullWidth variant='outlined'>
         <InputLabel htmlFor='body'>Note</InputLabel>
         <OutlinedInput
@@ -31,6 +31,7 @@ const NoteForm = props => {
           name='body'
           value={props.body}
           onChange={props.handleInputChange}
+          autoFocus='false'
         />
       </FormControl>
       <br />
