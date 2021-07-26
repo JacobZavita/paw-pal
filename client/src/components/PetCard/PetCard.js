@@ -50,6 +50,7 @@ const ImgMediaCard = props => {
   const classes = useStyles()
   const [expanded, setExpanded] = useState(false)
   const [anchorEl, setAnchorEl] = useState(null)  // this is for popover component
+  const [popoverText, setPopoverText] = useState(false)  // this is for the popover when the user adds a pet to their favorites
   
   const handleExpandClick = () => {
     setExpanded(!expanded)
@@ -61,6 +62,10 @@ const ImgMediaCard = props => {
 
   const handlePopoverClose = () => {
     setAnchorEl(null)
+  }
+
+  const handlePopoverText = myText => {
+    setPopoverText(myText)
   }
 
   let petData = props.petState.pets[props.activeStep]
@@ -78,10 +83,12 @@ const ImgMediaCard = props => {
         data.forEach(pet => {
           if (animalID === pet.id) {
             isDuplicate = true
+            handlePopoverText(isDuplicate)
           }
         })
         console.log(`Duplicate?: ${isDuplicate}`)
         if (!isDuplicate) {
+          handlePopoverText(isDuplicate)
           const newPet = {
             id: petData.id,
             name: petData.name,
@@ -165,7 +172,7 @@ const ImgMediaCard = props => {
               horizontal: 'center',
             }}
           >
-            <Typography className={classes.typography}>Added to favorites!</Typography>
+            <Typography className={classes.typography}>{popoverText ? 'Already in favorites' : 'Added to favorites!'}</Typography>
           </Popover>
           <IconButton
             className={clsx(classes.expand, {
