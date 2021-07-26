@@ -180,6 +180,8 @@ const Favorites = props => {
       })
     }
   }
+  // delete a note from a pet
+  // const noteHandleDelete = 
 
   // For copy-to-clipboard
   const [copySuccess, setCopySuccess] = useState('')
@@ -238,6 +240,9 @@ const Favorites = props => {
                 <Typography variant='h6'>
                   {note.body}
                 </Typography>
+                {/* <IconButton aria-label='delete'>
+                  <DeleteIcon fontSize='md' />
+                </IconButton> */}
               </Paper>
             ))
           }

@@ -3,13 +3,18 @@ import FormControl from '@material-ui/core/FormControl'
 import OutlinedInput from '@material-ui/core/OutlinedInput'
 import InputLabel from '@material-ui/core/InputLabel'
 import Button from '@material-ui/core/Button'
+import DeleteIcon from '@material-ui/icons/Delete'
+import IconButton from '@material-ui/core/IconButton'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       display: 'flex'
     }
-  }
+  },
+//   input[type = text] {
+//     textAlign: left;
+// }
 }))
 
 const NoteForm = props => {
@@ -26,12 +31,13 @@ const NoteForm = props => {
         <OutlinedInput
           id='body'
           labelWidth={75}
-          multiline
+          // multiline
           rows={3}
           name='body'
           value={props.body}
           onChange={props.handleInputChange}
-          autoFocus='false'
+          autoFocus
+          // textAlign='left'
         />
       </FormControl>
       <br />
