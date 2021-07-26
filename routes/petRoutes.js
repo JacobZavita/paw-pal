@@ -22,6 +22,10 @@ router.get('/pets/:id', (req, res) => {
       path: 'notes',
       model: 'Note'
     })
+    .populate({
+      path: 'user',
+      model: 'User'
+    })
     .then(pets => res.json(pets))
     .catch(err => console.log(err))
 })

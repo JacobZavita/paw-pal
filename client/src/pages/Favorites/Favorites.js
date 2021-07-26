@@ -17,6 +17,9 @@ import Note from '../../utils/NoteAPI'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import ShareIcon from '@material-ui/icons/Share'
+import ForumOutlinedIcon from '@material-ui/icons/ForumOutlined'
+
+const localStorage = window.localStorage
 
 function rand () {
   return Math.round(Math.random() * 20) - 10
@@ -194,7 +197,7 @@ const Favorites = props => {
   const ModalBody = props => {
     const copyToClipboard = () => {
       const tempInput = document.createElement('input')
-      tempInput.value = `https://pawpal.com/share/${props.pet._id}`
+      tempInput.value = `https://paw-pal-bootcamp.herokuapp.com/share/${props.pet._id}`
       document.body.appendChild(tempInput)
       tempInput.select()
       document.execCommand('copy')
@@ -224,6 +227,12 @@ const Favorites = props => {
         <IconButton aria-label='delete' onClick={() => { handleDelete(props.pet.id); handleClose() }}>
           <DeleteIcon fontSize='large' />
         </IconButton>
+        <IconButton>
+          <ShareIcon aria-label='delete' onClick={() => copyToClipboard(props.pet._id)} />
+        </IconButton>
+        <IconButton href='/chat'>
+          <ForumOutlinedIcon button onClick={() => localStorage.setItem('chatID', props.pet._id)} />
+        </IconButton>
         <Paper component='div' style={{ backgroundColor: 'black', padding: '20px' }}>
           <NoteForm
             body={bodyState.body}
@@ -248,9 +257,6 @@ const Favorites = props => {
             ))
           }
         </Paper>
-        <IconButton>
-          <ShareIcon aria-label='delete' onClick={() => copyToClipboard(props.pet._id)} />
-        </IconButton>
       </div>
     )
   }
