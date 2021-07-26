@@ -37,6 +37,7 @@ router.post('/pets', passport.authenticate('jwt'), (req, res) => {
     address: req.body.address,
     city: req.body.city,
     state: req.body.state,
+    type: req.body.type,
     user: req.user._id,
     notes: []
   })

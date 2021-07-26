@@ -8,7 +8,7 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox'
 import Hidden from '@material-ui/core/Hidden'
 import User from '../../utils/UserAPI'
 import ProfileModal from '../../components/ProfileModal'
-import Image from '../../components/Images/footer.png'
+import Image from '../../components/Images/footerLong.png'
 import Dog from '../../components/Images/profileLongText.png'
 
 const useStyles = makeStyles(_ => ({
@@ -70,6 +70,14 @@ const useStyles = makeStyles(_ => ({
     display: 'block',
     height: '116px',
     width: '100%'
+  },
+  gradientStyle: {
+    background: 'linear-gradient(45deg, #595959 30%, #1c1c1c 90%)',
+    backgroundImage: `url(${Image})`,
+    backgroundSize: 'auto 55%',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'bottom',
+    height: '100vh'
   }
 }))
 
@@ -155,7 +163,7 @@ const Profile = _ => {
   }, [])
 
   return (
-    <>
+    <div className={classes.gradientStyle}>
       <Container maxWidth='sm'>
         <br /><br /><br /><br /><br />
         <Hidden xsDown>
@@ -254,10 +262,10 @@ const Profile = _ => {
           </Paper>
         </Paper>
       </Container>
-      <div className={classes.cropping2}>
+      {/* <div className={classes.cropping2}>
         <img src={Image} className={classes.footerStyle} />
-      </div>
-    </>
+      </div> */}
+    </div>
   )
 }
 

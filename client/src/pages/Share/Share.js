@@ -1,24 +1,57 @@
 import { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Container, Paper, Typography } from '@material-ui/core'
+import Hidden from '@material-ui/core/Hidden'
+import { Container, Paper, Typography, List, ListItem, ListItemIcon } from '@material-ui/core'
 import Pet from '../../utils/PetAPI.js'
+import Image from '../../components/Images/footerLong.png'
+
+import MailOutlineIcon from '@material-ui/icons/MailOutline'
+import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid'
+import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
+import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined'
+import KeyboardArrowRightOutlinedIcon from '@material-ui/icons/KeyboardArrowRightOutlined'
 
 const useStyles = makeStyles(_ => ({
   image: {
     marginLeft: 'auto',
     marginRight: 'auto',
     display: 'block',
-    width: '200px',
-    height: '200px',
+    width: '250px',
+    height: '250px',
     borderRadius: '50%',
-    objectFit: 'cover',
-    cursor: 'pointer'
+    objectFit: 'cover'
   },
   padding: {
     padding: '5%'
   },
   padding2: {
-    padding: '2%'
+
+  },
+  wordMargin: {
+    marginLeft: '16%'
+  },
+  footerStyle: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block',
+    width: '100%',
+    height: '650px',
+    objectFit: 'cover'
+  },
+  cropping: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block',
+    height: '650px',
+    width: '100%'
+  },
+  gradientStyle: {
+    background: 'linear-gradient(45deg, #595959 30%, #1c1c1c 90%)',
+    backgroundImage: `url(${Image})`,
+    backgroundSize: 'auto 55%',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'bottom',
+    height: '100vh'
   }
 }))
 
@@ -46,30 +79,74 @@ const Share = ({ match }) => {
   }, [])
 
   return (
-    <>
+    <div className={classes.gradientStyle}>
       <br /><br /><br /><br /><br /><br />
-      <Typography variant='h4' align='center'>
-        This is the Share page
-      </Typography>
-      <hr style={{ width: '60%' }} />
-      <br />
       <Container maxWidth='sm'>
         <Paper className={classes.padding}>
           <img src={pet.image} className={classes.image} />
-          <Typography>Name: {pet.name}</Typography>
-          <Typography>Email: {pet.email}</Typography>
-          <Typography>Phone: {pet.phone}</Typography>
-          <Typography>address: {pet.address}, {pet.city} {pet.state}</Typography>
+          <br /><br />
+          <Typography variant='h4' align='center'>
+            <div button>
+              {pet.name}
+            </div>
+          </Typography>
+          <hr
+            width='60%'
+          />
+          <List>
+            <Hidden xsDown>
+              <ListItem className={classes.wordMargin}>
+                <ListItemIcon><MailOutlineIcon color='primary' /></ListItemIcon>
+                <Typography color='textSecondary'>
+                  {pet.email}
+                </Typography>
+              </ListItem>
+              <ListItem className={classes.wordMargin}>
+                <ListItemIcon><PhoneAndroidIcon color='primary' /></ListItemIcon>
+                <Typography color='textSecondary'>
+                  {pet.phone}
+                </Typography>
+              </ListItem>
+              <ListItem className={classes.wordMargin}>
+                <ListItemIcon><HomeOutlinedIcon color='primary' /></ListItemIcon>
+                <Typography color='textSecondary'>
+                  {pet.address}, {pet.city} {pet.state}
+                </Typography>
+              </ListItem>
+            </Hidden>
+            <Hidden smUp>
+              <ListItem>
+                <ListItemIcon><MailOutlineIcon color='primary' /></ListItemIcon>
+                <Typography align='center' color='textSecondary'>{pet.email}</Typography>
+              </ListItem>
+              <ListItem>
+                <ListItemIcon><PhoneAndroidIcon color='primary' /></ListItemIcon>
+                <Typography align='center' color='textSecondary'>{pet.phone}</Typography>
+              </ListItem>
+              <ListItem>
+                <ListItemIcon><HomeOutlinedIcon color='primary' /></ListItemIcon>
+                <Typography align='center' color='textSecondary'>{pet.address}</Typography>
+              </ListItem>
+              <ListItem>
+                <ListItemIcon><LocationOnOutlinedIcon color='primary' /></ListItemIcon>
+                <Typography align='center' color='textSecondary'>{pet.city}, {pet.state}</Typography>
+              </ListItem>
+            </Hidden>
+          </List>
         </Paper>
         <br />
-        <Typography>Notes:</Typography>
+        <Typography variant='h6' style={{ backgroundColor: '#303030', width: '50px' }}>Notes:</Typography>
         {
           pet.notes && pet.notes.map((element, i) => {
             return (
               <div key={i}>
                 <Paper className={classes.padding2}>
-                  <Typography>Title: {element.title}</Typography>
-                  <Typography>Body: {element.body}</Typography>
+                  <List>
+                    <ListItem>
+                      <ListItemIcon><KeyboardArrowRightOutlinedIcon color='primary' /></ListItemIcon>
+                      <Typography color='textSecondary'>{element.body}</Typography>
+                    </ListItem>
+                  </List>
                 </Paper>
                 <br />
               </div>
@@ -77,7 +154,7 @@ const Share = ({ match }) => {
           })
         }
       </Container>
-    </>
+    </div>
   )
 }
 
