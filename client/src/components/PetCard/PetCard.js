@@ -137,7 +137,7 @@ const ImgMediaCard = props => {
         className={classes.root.theme}
         style={{
           
-          
+          width: "70vh",
           borderRadius: "20px", 
         // backgroundImage: `url(${Background})` 
       }}
