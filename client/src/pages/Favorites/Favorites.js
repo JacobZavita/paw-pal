@@ -145,6 +145,7 @@ const Favorites = props => {
               return pet
             })
             setFavState({ pets })
+            setBodyState({ body: '' })
           })
       })
   }
