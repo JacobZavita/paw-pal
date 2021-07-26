@@ -114,18 +114,20 @@ const Favorites = props => {
 
   // MAKING A NOTE
   const [noteState, setNoteState] = useState({
-    body: '',
     notes: []
   })
   const handleInputChange = ({ target }) => {
-    setNoteState({ ...noteState, [target.name]: target.value })
+    setBodyState({ [target.name]: target.value })
   }
+  const [bodyState, setBodyState] = useState({
+    body: ''
+  })
 
   const handleCreateNote = pet_id => {
     console.log(noteState)
     console.log()
     Note.create({
-      body: noteState.body,
+      body: bodyState.body,
       pet_id
     })
       .then(({ data: note }) => {
@@ -134,6 +136,15 @@ const Favorites = props => {
             // const notes = [...noteState.notes, note]
             console.log(note)
             setNoteState({ notes: note, body: '', pet: '' })
+            // window.location.reload()
+            let pets = JSON.parse(JSON.stringify(favState.pets))
+            pets = pets.map(pet => {
+              if (pet._id === pet_id) {
+                pet.notes = note
+              }
+              return pet
+            })
+            setFavState({ pets })
           })
       })
   }
@@ -141,7 +152,7 @@ const Favorites = props => {
   const handleOpen = (event) => {
     setNoteState({ notes: favState.pets[event.target.id].notes })
     console.log(event.target.id)
-    console.log(favState.pets[event.target.id])
+    console.log(favState.pets[event.target.id].notes)
     setModalState({ index: event.target.id })
     setOpen(true)
   }
@@ -212,7 +223,7 @@ const Favorites = props => {
         </IconButton>
         <Paper component='div' style={{ backgroundColor: 'black', padding: '20px' }}>
           <NoteForm
-            body={noteState.body}
+            body={bodyState.body}
             pet_id={props.pet._id}
             handleInputChange={handleInputChange}
             handleCreateNote={handleCreateNote}
