@@ -15,6 +15,7 @@ import { Link, NavLink } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 // active icon link stuff
 import { useLocation } from 'react-router-dom'
+import Logo from '../Images/logo.png'
 
 const drawerWidth = 240;
 
@@ -123,8 +124,10 @@ const NavBar = (props) => {
         <Toolbar>
           <Typography variant="h6" noWrap className={classes.title}>
           <NavLink exact to='/' className={classes.logoLink}>
-            PawPal
+              PawPal<img src={Logo} alt="Logo" style={{ "height": "65px", "padding": 5 }} align="center" />
           </NavLink>
+          
+            
           </Typography>
           <IconButton
             color="inherit"
