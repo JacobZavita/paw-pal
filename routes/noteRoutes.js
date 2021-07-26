@@ -15,7 +15,6 @@ router.get('/notes/:petid', passport.authenticate('jwt'), (req, res) => {
 // POST one Note
 router.post('/notes', passport.authenticate('jwt'), (req, res) => {
   Note.create({
-    title: req.body.title,
     body: req.body.body,
     pet: req.body.pet_id,
     user: req.user._id
@@ -26,7 +25,6 @@ router.post('/notes', passport.authenticate('jwt'), (req, res) => {
           User.findByIdAndUpdate(req.user._id, { $push: { notes: note._id } })
             .then(_ => {
               res.json({
-                title: note.title,
                 body: note.body,
                 user: req.user,
                 post_id: req.body.post_id

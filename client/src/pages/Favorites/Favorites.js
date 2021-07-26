@@ -6,22 +6,18 @@ import ImageListItem from '@material-ui/core/ImageListItem'
 import ImageListItemBar from '@material-ui/core/ImageListItemBar'
 import ListSubheader from '@material-ui/core/ListSubheader'
 import IconButton from '@material-ui/core/IconButton'
-import InfoIcon from '@material-ui/icons/Info'
 import Pet from '../../utils/PetAPI'
-import Note from '../../utils/NoteAPI'
-
 import Modal from '@material-ui/core/Modal'
 import Button from '@material-ui/core/Button'
-
-import CheckIcon from '@material-ui/icons/Check'
-
 import FavoriteIcon from '@material-ui/icons/Favorite'
-import { black } from '@material-ui/core/colors'
-
 import DeleteIcon from '@material-ui/icons/Delete'
+import NoteForm from '../../components/NoteForm'
+import Note from '../../utils/NoteAPI'
 
+import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
 
-function rand() {
+function rand () {
   return Math.round(Math.random() * 20) - 10
 }
 
@@ -31,10 +27,15 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper
   },
   root1: {
     flexGrow: 1
+  },
+  root3: {
+    '& > *': {
+      display: 'flex'
+    }
   },
   imageList: {
     width: 1000,
@@ -70,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Favorites = props => {
-  function getModalStyle() {
+  function getModalStyle () {
     const top = 50 + rand()
     const left = 50 + rand()
 
@@ -80,8 +81,6 @@ const Favorites = props => {
       transform: `translate(-${top}%, -${left}%)`
     }
   }
-  const [selected, setSelected] = useState(false)
-
   const [modalStyle] = useState(getModalStyle)
   const [open, setOpen] = useState(false)
   const [modalState, setModalState] = useState({
@@ -93,15 +92,42 @@ const Favorites = props => {
     pets: []
     // name: []
   })
-
   useEffect(() => {
     Pet.favorites()
       .then(({ data: pets }) => {
         console.log(pets)
         setFavState({ ...favState, pets })
       })
+    // Note.notes()
+    //   .then(({ data: notes }) => {
+    //     console.log(notes)
+    //     setNoteState({ ...noteState, notes })
+    //   })
   }, [])
 
+  // MAKING A NOTE
+  const [noteState, setNoteState] = useState({
+    body: '',
+    pet: '',
+    notes: []
+  })
+  const handleInputChange = ({ target }) => {
+    setNoteState({ ...noteState, [target.name]: target.value })
+  }
+  const handleCreateNote = event => {
+    console.log(noteState)
+    Note.create({
+      body: noteState.body,
+      pet: noteState.pet
+    })
+      .then(({ data: note }) => {
+        const notes = [...noteState.notes]
+        console.log(event.target.id)
+        notes.push(note)
+        setNoteState({ ...noteState, notes, body: '', pet: '' })
+      })
+  }
+  // END MAKING NOTE
   const handleOpen = (event) => {
     console.log(event.target.id)
     setModalState({ index: event.target.id })
@@ -130,21 +156,21 @@ const Favorites = props => {
         }
       })
     }
-    
   }
-
   const ModalBody = props => {
+    console.log(props.pet._id)
+    // setNoteState({ ...noteState, pet: props.pet._id })
     return (
       <div style={modalStyle} className={classes.paper2}>
         <img className={classes.img} src={props.pet.image} alt={props.pet.name} />
         <h2 id='simple-modal-title'>{props.pet.name}</h2>
         <p id='simple-modal-description'>
           {props.pet.city}, {props.pet.state}
-          <br></br>
+          <br />
           Phone: {props.pet.phone}
-          <br></br>
+          <br />
           E-mail: {props.pet.email}
-          <br></br>
+          <br />
         </p>
         <Button
           variant='contained'
@@ -154,9 +180,31 @@ const Favorites = props => {
         >
           close
         </Button>
-        <IconButton aria-label='delete' onClick={() => {handleDelete(props.pet.id); handleClose()}}>
+        <IconButton aria-label='delete' onClick={() => { handleDelete(props.pet.id); handleClose() }}>
           <DeleteIcon fontSize='large' />
         </IconButton>
+        <Paper component='div' style={{ backgroundColor: 'black', padding: '20px' }}>
+          <NoteForm
+            body={noteState.body}
+            pet={props.pet._id}
+            handleInputChange={handleInputChange}
+            handleCreateNote={handleCreateNote}
+            state={noteState}
+          />
+          {
+            noteState.notes.map((note) => (
+              <Paper
+                key={note._id}
+                elevation={3}
+                style={{ padding: '20px', marginBottom: '20px' }}
+              >
+                <Typography variant='h6'>
+                  {note.body}
+                </Typography>
+              </Paper>
+            ))
+          }
+        </Paper>
       </div>
     )
   }
@@ -164,11 +212,11 @@ const Favorites = props => {
     <>
       <div className={classes.root}>
         <ImageListItem key='Subheader' cols={2} style={{ height: 'auto' }}>
-          <ListSubheader color='primary' component='div' style={{ textTransform: 'uppercase', textAlign: 'center', fontSize: '50px' }}></ListSubheader>
+          <ListSubheader color='primary' component='div' style={{ textTransform: 'uppercase', textAlign: 'center', fontSize: '50px' }} />
         </ImageListItem>
         <ImageList rowHeight={360} className={[classes.imageList, classes.borderedbox]}>
           {favState.pets.map((pet, i) => (
-            <ImageListItem key={pet.img}>
+            <ImageListItem id={pet._id} key={pet.img}>
               <img id={i} src={(pet.image == null) ? 'https://pbs.twimg.com/profile_images/446279626831044608/aCs3t5qe_400x400.png' : pet.image} onClick={(event) => handleOpen(event)} alt={pet.name} />
               <ImageListItemBar
                 title={pet.name}
@@ -192,15 +240,6 @@ const Favorites = props => {
           <ModalBody pet={favState.pets[modalState.index]} />
         </Modal>
       </div>
-      {/* module here */}
-      {/* <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby='simple-modal-title'
-        aria-describedby='simple-modal-description'
-      >
-        <body name={pet.name}/>
-      </Modal> */}
     </>
   )
 }
