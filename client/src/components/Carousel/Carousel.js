@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import MobileStepper from '@material-ui/core/MobileStepper'
 import Paper from '@material-ui/core/Paper'
@@ -8,7 +8,7 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft'
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
 import SwipeableViews from 'react-swipeable-views'
 import ImgMediaCard from '../PetCard'
-import Image from '../../components/Images/footer.png'
+import Image from '../../components/Images/footerLong.png'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Slide from '@material-ui/core/Slide';
@@ -16,8 +16,11 @@ import Slide from '@material-ui/core/Slide';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 600,
+    
+    maxWidth: '70vh',
     flexGrow: 1,
+    
+    
   },
   header: {
     display: 'flex',
@@ -43,6 +46,15 @@ const useStyles = makeStyles((theme) => ({
     objectFit: 'cover',
     overflow: 'visible'
   },
+  gradientStyle: {
+    background: 'linear-gradient(45deg, #595959 30%, #1c1c1c 90%)',
+    backgroundImage: `url(${Image})`,
+    backgroundSize: 'auto 55%',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'bottom',
+    height: '100vh'
+  },
+  
 }))
 
 const Carousel = props => {
@@ -65,10 +77,12 @@ const Carousel = props => {
   const handleStepChange = (step) => {
     setActiveStep(step);
   };
-
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [activeStep])
   return (
-    <>
-    <div className={classes.root}>
+    <main className={classes.gradientStyle}>
+      <div className={classes.root}>
       <Paper square elevation={0} className={classes.header}>
         <Typography>{props.petState.pets[activeStep]?.label}</Typography>
       </Paper>
@@ -93,6 +107,7 @@ const Carousel = props => {
         ))}
       </SwipeableViews>
       <MobileStepper
+      
         // steps={maxSteps}
         position="static"
         variant="progress"
@@ -111,10 +126,8 @@ const Carousel = props => {
         }
       />
     </div>
-    <div className={classes.cropping}>
-        <img src={Image} className={classes.footerStyle} />
-      </div>
-      </>
+    
+      </main>
   )
 }
 
