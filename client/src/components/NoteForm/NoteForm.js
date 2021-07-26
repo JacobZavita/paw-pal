@@ -34,7 +34,14 @@ const NoteForm = props => {
         />
       </FormControl>
       <br />
-      <Button onClick={props.handleCreateNote} variant='outlined' color='primary'>
+      <Button
+        onClick={event => {
+          event.preventDefault()
+          props.handleCreateNote(props.pet_id)
+        }}
+        variant='outlined'
+        color='primary'
+      >
         Create Note
       </Button>
       <br />

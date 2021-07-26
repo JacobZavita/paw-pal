@@ -108,27 +108,33 @@ const Favorites = props => {
     //     setNoteState({ ...noteState, notes })
     //   })
   }, [])
+  // useEffect(() => {
+  //   setNoteState(props.pet._id);
+  // }, [props.pet._id])
 
   // MAKING A NOTE
   const [noteState, setNoteState] = useState({
     body: '',
-    pet: '',
     notes: []
   })
   const handleInputChange = ({ target }) => {
     setNoteState({ ...noteState, [target.name]: target.value })
   }
-  const handleCreateNote = event => {
+
+  const handleCreateNote = animalID => {
     console.log(noteState)
+    console.log(animalID)
     Note.create({
       body: noteState.body,
-      pet: noteState.pet
+      pet_id: animalID
     })
       .then(({ data: note }) => {
-        const notes = [...noteState.notes]
-        console.log(event.target.id)
-        notes.push(note)
-        setNoteState({ ...noteState, notes, body: '', pet: '' })
+        Note.notes({ animalID })
+          .then(({ data: note }) => {
+            const notes = [...noteState.notes]
+            console.log(note)
+            setNoteState({ ...noteState, notes, body: '', pet: '' })
+          })
       })
   }
   // END MAKING NOTE
@@ -206,10 +212,9 @@ const Favorites = props => {
         <Paper component='div' style={{ backgroundColor: 'black', padding: '20px' }}>
           <NoteForm
             body={noteState.body}
-            pet={props.pet._id}
+            pet_id={props.pet._id}
             handleInputChange={handleInputChange}
             handleCreateNote={handleCreateNote}
-            state={noteState}
           />
           {
             noteState.notes.map((note) => (
