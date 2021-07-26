@@ -1,20 +1,11 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
+import { Drawer, AppBar, Toolbar, CssBaseline, List, Typography, Divider, IconButton, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import SearchIcon from '@material-ui/icons/Search';
@@ -162,7 +153,12 @@ const NavBar = (props) => {
         </div>
         <Divider />
         <List>
-          <NavLink to='/profile' className={classes.linkColor} activeClassName={classes.activeLink}>
+          <NavLink
+            to='/profile'
+            className={classes.linkColor}
+            activeClassName={classes.activeLink}
+            onClick={handleDrawerClose}
+          >
             <ListItem button className={location.pathname === '/profile' && classes.activeBG}>
               <ListItemIcon>
                 <AccountCircleIcon className={location.pathname === '/profile' ? classes.activeLink : classes.linkColor} />
@@ -172,7 +168,12 @@ const NavBar = (props) => {
               </ListItemText>
             </ListItem>
           </NavLink>
-          <NavLink to='/favorites' className={classes.linkColor} activeClassName={classes.activeLink}>
+          <NavLink
+            to='/favorites'
+            className={classes.linkColor}
+            activeClassName={classes.activeLink}
+            onClick={handleDrawerClose}
+          >
             <ListItem button className={location.pathname === '/favorites' && classes.activeBG}>
               <ListItemIcon>
                 <FavoriteIcon className={location.pathname === '/favorites' ? classes.activeLink : classes.linkColor} />
@@ -182,7 +183,12 @@ const NavBar = (props) => {
               </ListItemText>
             </ListItem>
           </NavLink>
-          <NavLink to='/search' className={classes.linkColor} activeClassName={classes.activeLink}>
+          <NavLink
+            to='/search'
+            className={classes.linkColor}
+            activeClassName={classes.activeLink}
+            onClick={handleDrawerClose}
+          >
             <ListItem button className={location.pathname === '/search' && classes.activeBG}>
               <ListItemIcon>
                 <SearchIcon className={location.pathname === '/search' ? classes.activeLink : classes.linkColor} />
@@ -196,7 +202,11 @@ const NavBar = (props) => {
         <Divider />
           {(localStorage.getItem('token')) ? 
           (<Link className={classes.linkColor}>
-            <ListItem button color='inherit' onClick={handleLogOut}>
+            <ListItem
+              button
+              color='inherit'
+              onClick={handleLogOut}
+            >
               <ListItemIcon>
                 <ExitToAppIcon className={classes.linkColor} />
               </ListItemIcon>
