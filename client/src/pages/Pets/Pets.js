@@ -1,10 +1,21 @@
-// import { useState } from 'react'
-// import ImgMediaCard from '../../components/PetCard'
-import Carousel from '../../components/Carousel'
+import { useEffect, useState } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
 import { Client } from '@petfinder/petfinder-js'
-import { useEffect } from 'react'
+import Carousel from '../../components/Carousel'
+import { LinearProgress } from '@material-ui/core'
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
 
 const Pets = props => {
+  const classes = useStyles();
+  const [loading, setLoading] = useState(false)
 
   const client = new Client({ apiKey: process.env.REACT_APP_API_KEY, secret: process.env.REACT_APP_SECRET})
 
@@ -26,6 +37,8 @@ const Pets = props => {
       props.setPetState({ ...props.petState, pets: petfinder })
 
       console.log(props.petState)
+
+      setLoading(true)
     })
     .catch(error => {
       console.log(error)
@@ -34,12 +47,9 @@ const Pets = props => {
 
   return (
     <>
-      <div style={{ margin: '75px auto 15px auto' }} align='center'>
-        <Carousel
-          petState={props.petState}
-          setPetState={props.setPetState}
-        />
-      </div>
+      {loading ? (<div style={{ margin: '75px auto 15px auto' }} align='center'>
+        <Carousel petState={props.petState} setPetState={props.setPetState} />
+      </div>) : (<LinearProgress style={{ margin: '75px auto 15px auto' }} />)}
     </>
   )
 }

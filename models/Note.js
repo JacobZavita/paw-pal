@@ -1,7 +1,6 @@
 const { model, Schema } = require('mongoose')
 
 const Note = new Schema({
-  title: String,
   body: String,
   pet: {
     type: Schema.Types.ObjectId,
