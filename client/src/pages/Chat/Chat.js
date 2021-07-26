@@ -2,14 +2,13 @@
 // its a list. scrollable list xd.
 
 // chatbox component can be a paper with text -- no it can be a card??? maybe?
-
 import { makeStyles, Container, Paper, Grid, TextField, Button } from '@material-ui/core'
 import SimpleCard from '../../components/SimpleCard'
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight'
 import Cat from '../../components/Images/chatLongText.png'
 import Hidden from '@material-ui/core/Hidden'
-import Image from '../../components/Images/footer.png'
-import { useState } from 'react'
+import Image from '../../components/Images/footerLong.png'
+import { useState, useEffect, useRef } from 'react'
 
 import Noise from '../../utils/NoiseAPI'
 
@@ -40,18 +39,27 @@ const useStyles = makeStyles({
   paperStyle: {
     padding: '5%'
   },
-  footerStyle: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    display: 'block',
-    width: '100%',
-    height: '650px',
-    objectFit: 'cover'
+  gradientStyle: {
+    background: 'linear-gradient(45deg, #595959 30%, #1c1c1c 90%)',
+    backgroundImage: `url(${Image})`,
+    backgroundSize: 'auto 55%',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'bottom',
+    height: '100vh'
   }
+  // footerStyle: {
+  //   marginLeft: 'auto',
+  //   marginRight: 'auto',
+  //   display: 'block',
+  //   width: '100%',
+  //   height: '150px',
+  //   objectFit: 'cover'
+  // }
 })
 
 // needs avatar prop
-const Chat = _ => {
+const Chat = props => {
+  const scrollRef = useRef(null)
   // styles
   const classes = useStyles()
   // state
@@ -78,6 +86,7 @@ const Chat = _ => {
         message: formState.message,
         user: 'user'
       }
+      setFormState({ ...formState, message: '' })
       setMessageState([...messageState, userMessage])
       console.log(...messageState, 'user message')
       await petMessage(userMessage)
@@ -86,12 +95,12 @@ const Chat = _ => {
 
   const petMessage = async (userMessage) => {
     setSpinnerState(true)
-    // variable based on props-
+    // variable based on props
     await Noise.cat()
       .then(({ data }) => {
         const petMessage = {
           message: data,
-          user: 'dog'
+          user: 'pet'
         }
         setTimeout(() => {
           setSpinnerState(false)
@@ -106,18 +115,24 @@ const Chat = _ => {
     return (
       <>
         <Grid item xs={5}>
-          {props.message.user === 'dog' && <SimpleCard body={props.message.message} />}
+          {props.message.user === 'pet' && <SimpleCard body={props.message.message} />}
         </Grid>
         <Grid item xs={2} />
-        <Grid item xs={5}> 
+        <Grid item xs={5}>
           {props.message.user === 'user' && <SimpleCard body={props.message.message} />}
         </Grid>
       </>
     )
   }
 
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollIntoView({ behaviour: 'smooth' })
+    }
+  }, [messageState])
+
   return (
-    <>
+    <div className={classes.gradientStyle}>
       <Container maxWidth='sm'>
         <br /><br /><br /><br />
         <Hidden xsDown>
@@ -130,6 +145,7 @@ const Chat = _ => {
             {
               messageState.map((element, i) => (<GridItem message={element} key={i} />))
             }
+            <li style={{ listStyleType: 'none' }} ref={scrollRef} />
           </Grid>
         </Paper>
         <form noValidate autoComplete='off' onSubmit={handleSubmit}>
@@ -147,6 +163,7 @@ const Chat = _ => {
             value={formState.message}
             onChange={handleInputChange}
             error={formState.messageError}
+            style={{ backgroundColor: '#2f2f2f' }}
           />
           <Button
             type='submit'
@@ -158,11 +175,8 @@ const Chat = _ => {
           </Button>
         </form>
       </Container>
-      <div className={classes.cropping2}>
-        <img src={Image} className={classes.footerStyle} />
-      </div>
 
-    </>
+    </div>
   )
 }
 

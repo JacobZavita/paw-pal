@@ -9,6 +9,7 @@ const Pet = new Schema({
   address: String,
   city: String,
   state: String,
+  type: String,
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'

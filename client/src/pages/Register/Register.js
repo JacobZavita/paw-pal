@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Hidden from '@material-ui/core/Hidden'
 import withWidth from '@material-ui/core/withWidth'
 import User from '../../utils/UserAPI'
-import Image from '../../components/Images/footer.png'
+import Image from '../../components/Images/footerLong.png'
 import Left from '../../components/Images/registerLeft2.png'
 import Right from '../../components/Images/registerRight2.png'
 
@@ -52,6 +52,14 @@ const useStyles = makeStyles(_ => ({
     height: '625px',
     objectFit: 'cover',
     overflow: 'visible'
+  },
+  gradientStyle: {
+    background: 'linear-gradient(45deg, #595959 30%, #1c1c1c 90%)',
+    backgroundImage: `url(${Image})`,
+    backgroundSize: 'auto 50%',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'bottom',
+    height: '100vh'
   }
 }))
 
@@ -82,7 +90,7 @@ const Register = props => {
   }
 
   return (
-    <>
+    <div className={classes.gradientStyle}>
       <Container maxWidth='md'>
         <br /><br /><br /><br /><br /><br />
         <Grid container>
@@ -127,10 +135,10 @@ const Register = props => {
           </Hidden>
         </Grid>
       </Container>
-      <div className={classes.cropping}>
+      {/* <div className={classes.cropping}>
         <img src={Image} className={classes.footerStyle} />
-      </div>
-    </>
+      </div> */}
+    </div>
   )
 }
 

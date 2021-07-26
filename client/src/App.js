@@ -53,6 +53,9 @@ const theme = createTheme({
 })
 
 const App = () => {
+  const [chat, setChat] = useState({
+    id: ''
+  })
   const [petState, setPetState] = useState({
     pet: {},
     pets: []
@@ -82,7 +85,7 @@ const App = () => {
               />
             </Route>
             <Route path='/pets'>
-              <Pets 
+              <Pets
                 pet={petState.pet}
                 pets={petState.pets}
                 setPetState={setPetState}
@@ -93,14 +96,20 @@ const App = () => {
               <Profile />
             </Route>
             <Route path='/favorites'>
-              <Favorites />
+              <Favorites
+                chat={chat}
+                setChat={setChat}
+              />
             </Route>
             <Route exact path='/share'>
               <Err />
             </Route>
             <Route path='/share/:id' render={(props) => <Share {...props} />} />
             <Route path='/chat'>
-              <Chat />
+              <Chat
+                chat={chat}
+                chatPet={chat.pet}
+              />
             </Route>
           </Switch>
         </div>

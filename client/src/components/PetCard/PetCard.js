@@ -99,6 +99,7 @@ const ImgMediaCard = props => {
             image: (petData.primary_photo_cropped == null) ? 'https://pbs.twimg.com/profile_images/446279626831044608/aCs3t5qe_400x400.png' : petData.primary_photo_cropped.full,
             phone: petData.contact.phone,
             email: petData.contact.email,
+            type: petData.type,
             address: petData.contact.address.address1,
             city: petData.contact.address.city,
             state: petData.contact.address.state

@@ -3,7 +3,7 @@ import { Container, Typography, Paper } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import User from '../../utils/UserAPI'
-import Image from '../../components/Images/footer.png'
+import Image from '../../components/Images/footerLong.png'
 import Dogs from '../../components/Images/profile2.png'
 
 // components
@@ -54,6 +54,14 @@ const useStyles = makeStyles(_ => ({
     display: 'block',
     height: '130px',
     width: '100%'
+  },
+  gradientStyle: {
+    background: 'linear-gradient(45deg, #595959 30%, #1c1c1c 90%)',
+    backgroundImage: `url(${Image})`,
+    backgroundSize: 'auto 55%',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'bottom',
+    height: '100vh'
   }
 }))
 
@@ -86,7 +94,7 @@ const Login = _ => {
   }
 
   return (
-    <>
+    <div className={classes.gradientStyle}>
       <Container maxWidth='sm'>
         <br /><br /><br /><br /><br /><br />
         <Paper>
@@ -113,10 +121,7 @@ const Login = _ => {
           </div>
         </Paper>
       </Container>
-      <div className={classes.cropping}>
-        <img src={Image} className={classes.footerStyle} />
-      </div>
-    </>
+    </div>
   )
 }
 
