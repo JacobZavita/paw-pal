@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Client } from '@petfinder/petfinder-js'
 import Carousel from '../../components/Carousel'
 import { LinearProgress } from '@material-ui/core'
+import Petfinder from '../../utils/PetfinderAPI.js'
+
+const localStorage = window.localStorage
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,32 +19,29 @@ const Pets = props => {
   const classes = useStyles();
   const [loading, setLoading] = useState(false)
 
-  const client = new Client({ apiKey: process.env.REACT_APP_API_KEY, secret: process.env.REACT_APP_SECRET})
-
   // call the API inside useEffect in order to prevent it from continuously running
   useEffect(() => {
     // gets the query to make the API call, or an empty object if the query has not been passed yet
     const query = JSON.parse(localStorage.getItem('searchQuery')) || {}
 
-    client.animal.search(query)
-    .then(({data}) => {
-      // search data from petfinder
-      let petfinder = data.animals
-      console.log(petfinder)
-      
-      // this is for debugging
-      console.log(query)
+    Petfinder.get(query)
+      .then(({ data }) => {
+        console.log(data)
+        // console.log('query is:', query)
+        const petfinder = data
+        console.log(petfinder)
 
-      // code to add search data to petState.pets
-      props.setPetState({ ...props.petState, pets: petfinder })
+        // this is for debugging
+        console.log(query)
 
-      console.log(props.petState)
+        // code to add search data to petState.pets
+        props.setPetState({ ...props.petState, pets: petfinder })
 
-      setLoading(true)
-    })
-    .catch(error => {
-      console.log(error)
-    })
+        console.log(props.petState)
+
+        setLoading(true)
+      })
+      .catch(err => console.log('error in petfinder query front end ', err))
   }, [])
 
   return (
