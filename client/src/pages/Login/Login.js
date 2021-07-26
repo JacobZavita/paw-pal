@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import User from '../../utils/UserAPI'
 import Image from '../../components/Images/footer.png'
-import Dogs from '../../components/Images/profile.png'
+import Dogs from '../../components/Images/profile2.png'
 
 // components
 import AuthForm from '../../components/AuthForm'

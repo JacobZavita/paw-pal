@@ -1,20 +1,11 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
+import { Drawer, AppBar, Toolbar, CssBaseline, List, Typography, Divider, IconButton, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import SearchIcon from '@material-ui/icons/Search';
@@ -22,6 +13,8 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import { Link, NavLink } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
+// active icon link stuff
+import { useLocation } from 'react-router-dom'
 
 const drawerWidth = 240;
 
@@ -85,15 +78,22 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none'
   },
   linkColor: {
-    color: '#A0DDFF',
+    color: '#758ecd',
     textDecoration: 'none'
   },
   activeLink: {
-    color: '#7189FF'
+    color: '#A0DDFF'
+  },
+  activeBG: {
+    backgroundColor: '#343433'
   }
 }))
 
+
 const NavBar = (props) => {
+  // active link stuff
+  const location = useLocation()
+
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -153,30 +153,45 @@ const NavBar = (props) => {
         </div>
         <Divider />
         <List>
-          <NavLink to='/profile' className={classes.linkColor} activeClassName={classes.activeLink}>
-            <ListItem button>
+          <NavLink
+            to='/profile'
+            className={classes.linkColor}
+            activeClassName={classes.activeLink}
+            onClick={handleDrawerClose}
+          >
+            <ListItem button className={location.pathname === '/profile' && classes.activeBG}>
               <ListItemIcon>
-                <AccountCircleIcon className={classes.linkColor}/>
+                <AccountCircleIcon className={location.pathname === '/profile' ? classes.activeLink : classes.linkColor} />
               </ListItemIcon>
               <ListItemText>
                 MyProfile
               </ListItemText>
             </ListItem>
           </NavLink>
-          <NavLink to='/favorites' className={classes.linkColor} activeClassName={classes.activeLink}>
-            <ListItem button>
+          <NavLink
+            to='/favorites'
+            className={classes.linkColor}
+            activeClassName={classes.activeLink}
+            onClick={handleDrawerClose}
+          >
+            <ListItem button className={location.pathname === '/favorites' && classes.activeBG}>
               <ListItemIcon>
-                <FavoriteIcon className={classes.linkColor} />
+                <FavoriteIcon className={location.pathname === '/favorites' ? classes.activeLink : classes.linkColor} />
               </ListItemIcon>
               <ListItemText>
                 Favorites
               </ListItemText>
             </ListItem>
           </NavLink>
-          <NavLink to='/search' className={classes.linkColor} activeClassName={classes.activeLink}>
-            <ListItem button>
+          <NavLink
+            to='/search'
+            className={classes.linkColor}
+            activeClassName={classes.activeLink}
+            onClick={handleDrawerClose}
+          >
+            <ListItem button className={location.pathname === '/search' && classes.activeBG}>
               <ListItemIcon>
-                <SearchIcon className={classes.linkColor} />
+                <SearchIcon className={location.pathname === '/search' ? classes.activeLink : classes.linkColor} />
               </ListItemIcon>
               <ListItemText>
                 Search
@@ -187,7 +202,11 @@ const NavBar = (props) => {
         <Divider />
           {(localStorage.getItem('token')) ? 
           (<Link className={classes.linkColor}>
-            <ListItem button color='inherit' onClick={handleLogOut}>
+            <ListItem
+              button
+              color='inherit'
+              onClick={handleLogOut}
+            >
               <ListItemIcon>
                 <ExitToAppIcon className={classes.linkColor} />
               </ListItemIcon>
