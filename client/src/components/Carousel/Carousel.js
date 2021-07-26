@@ -17,7 +17,7 @@ import Slide from '@material-ui/core/Slide';
 const useStyles = makeStyles((theme) => ({
   root: {
     
-    maxWidth: 600,
+    maxWidth: '70vh',
     flexGrow: 1,
     
     

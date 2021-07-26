@@ -10,7 +10,7 @@ import Pet from '../../utils/PetAPI'
 import { Popover  } from '@material-ui/core'
 import PetsIcon from '@material-ui/icons/Pets';
 import Divider from '@material-ui/core/Divider';
-import Image from '../../components/Images/footerLong.png'
+import Image from '../../components/Images/footer.png'
 import NoImage from '../Images/noimage.jpg'
 
 
