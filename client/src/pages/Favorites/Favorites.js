@@ -16,7 +16,7 @@ import Note from '../../utils/NoteAPI'
 
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-import ShareIcon from '@material-ui/icons/Share';
+import ShareIcon from '@material-ui/icons/Share'
 
 function rand () {
   return Math.round(Math.random() * 20) - 10
@@ -121,25 +121,27 @@ const Favorites = props => {
     setNoteState({ ...noteState, [target.name]: target.value })
   }
 
-  const handleCreateNote = animalID => {
+  const handleCreateNote = pet_id => {
     console.log(noteState)
-    console.log(animalID)
+    console.log()
     Note.create({
       body: noteState.body,
-      pet_id: animalID
+      pet_id
     })
       .then(({ data: note }) => {
-        Note.notes({ animalID })
+        Note.notes(pet_id)
           .then(({ data: note }) => {
-            const notes = [...noteState.notes]
+            // const notes = [...noteState.notes, note]
             console.log(note)
-            setNoteState({ ...noteState, notes, body: '', pet: '' })
+            setNoteState({ notes: note, body: '', pet: '' })
           })
       })
   }
   // END MAKING NOTE
   const handleOpen = (event) => {
+    setNoteState({ notes: favState.pets[event.target.id].notes })
     console.log(event.target.id)
+    console.log(favState.pets[event.target.id])
     setModalState({ index: event.target.id })
     setOpen(true)
   }
@@ -172,10 +174,9 @@ const Favorites = props => {
   const [copySuccess, setCopySuccess] = useState('')
 
   useEffect(() => {
-    setTimeout(() =>setCopySuccess(''), 2000)
+    setTimeout(() => setCopySuccess(''), 2000)
   }, [copySuccess])
 
-  
   const ModalBody = props => {
     const copyToClipboard = () => {
       const tempInput = document.createElement('input')
@@ -231,7 +232,7 @@ const Favorites = props => {
           }
         </Paper>
         <IconButton>
-          <ShareIcon aria-label='delete' onClick={() => copyToClipboard(props.pet._id)}/>
+          <ShareIcon aria-label='delete' onClick={() => copyToClipboard(props.pet._id)} />
         </IconButton>
       </div>
     )
