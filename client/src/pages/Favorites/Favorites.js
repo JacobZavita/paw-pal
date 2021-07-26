@@ -16,6 +16,7 @@ import Note from '../../utils/NoteAPI'
 
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
+import ShareIcon from '@material-ui/icons/Share';
 
 function rand () {
   return Math.round(Math.random() * 20) - 10
@@ -42,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
     height: 950,
     position: 'fixed',
     bottom: 25
+  },
+  imageListItem: {
+    cursor: 'pointer'
   },
   icon: {
     color: 'rgba(255, 255, 255, 0.54)'
@@ -157,9 +161,25 @@ const Favorites = props => {
       })
     }
   }
+
+  // For copy-to-clipboard
+  const [copySuccess, setCopySuccess] = useState('')
+
+  useEffect(() => {
+    setTimeout(() =>setCopySuccess(''), 2000)
+  }, [copySuccess])
+
+  
   const ModalBody = props => {
-    console.log(props.pet._id)
-    // setNoteState({ ...noteState, pet: props.pet._id })
+    const copyToClipboard = () => {
+      const tempInput = document.createElement('input')
+      tempInput.value = `https://pawpal.com/share/${props.pet._id}`
+      document.body.appendChild(tempInput)
+      tempInput.select()
+      document.execCommand('copy')
+      document.body.removeChild(tempInput)
+      setCopySuccess('Copied')
+    }
     return (
       <div style={modalStyle} className={classes.paper2}>
         <img className={classes.img} src={props.pet.image} alt={props.pet.name} />
@@ -205,6 +225,9 @@ const Favorites = props => {
             ))
           }
         </Paper>
+        <IconButton>
+          <ShareIcon aria-label='delete' onClick={() => copyToClipboard(props.pet._id)}/>
+        </IconButton>
       </div>
     )
   }

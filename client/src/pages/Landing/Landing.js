@@ -11,9 +11,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: '100vh',
-    backgroundImage: `url(https://i.ibb.co/806K2Z7/pexels-zen-chung-5749795.jpg)`,
+    backgroundImage: `url(https://i.ibb.co/ByFcCwK/edited-landing-background.jpg)`,
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
+    backgroundSize: 'cover'
   },
   container: {
     textAlign: 'center'
@@ -31,17 +31,25 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '10vh',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#7189FF'
+    backgroundColor: '#758ECD'
   },
   dividerText: {
     paddingTop: '15px'
   },
   button: {
-    marginBottom: '15px'
+    marginBottom: '15px',
+    background: '#624CAB',
+    border: 0,
+    borderRadius: 3,
+    color: 'white',
+    height: 48,
+    padding: '0 30px'
+  },
+  buttonLink: {
+    textDecoration: 'none'
   },
   root1: {
     minHeight: '100vh',
-    // backgroundColor: '#C1CEFE',
     backgroundSize: 'cover',
     display: 'flex',
     justifyContent: 'center',
@@ -107,12 +115,12 @@ const Landing = _ => {
           component='h4'
         >
           Find Local Animals Up For Adoption In Your Area
-        </Typography>
-        <Button className={classes.button} variant='contained'>
-          <Link to='/register'>
+        </Typography >
+        <Link to='/register' className={classes.buttonLink}>
+          <Button className={classes.button} variant='contained'>
             Get Started
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </Paper>
       <div className={classes.root1}>
           <Card className={classes.root2}>

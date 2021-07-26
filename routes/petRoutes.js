@@ -15,6 +15,17 @@ router.get('/pets/my', passport.authenticate('jwt'), (req, res) => {
     .catch(err => console.log(err))
 })
 
+// GET Pet by ID
+router.get('/pets/:id', (req, res) => {
+  Pet.findById(req.params.id)
+    .populate({
+      path: 'notes',
+      model: 'Note'
+    })
+    .then(pets => res.json(pets))
+    .catch(err => console.log(err))
+})
+
 // ADD Pet to User favorites
 router.post('/pets', passport.authenticate('jwt'), (req, res) => {
   Pet.create({

@@ -1,23 +1,20 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
+import { Drawer, AppBar, Toolbar, CssBaseline, List, Typography, Divider, IconButton, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import SearchIcon from '@material-ui/icons/Search';
-import { Link } from 'react-router-dom'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import { Link, NavLink } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
+// active icon link stuff
+import { useLocation } from 'react-router-dom'
 
 const drawerWidth = 240;
 
@@ -76,12 +73,27 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginRight: 0,
   },
+  logoLink: {
+    color: '#f2f2f2',
+    textDecoration: 'none'
+  },
   linkColor: {
-    color: '#f2f2f2'
+    color: '#758ecd',
+    textDecoration: 'none'
+  },
+  activeLink: {
+    color: '#A0DDFF'
+  },
+  activeBG: {
+    backgroundColor: '#343433'
   }
 }))
 
+
 const NavBar = (props) => {
+  // active link stuff
+  const location = useLocation()
+
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -94,6 +106,11 @@ const NavBar = (props) => {
     setOpen(false);
   };
 
+  const handleLogOut = () => {
+    localStorage.removeItem('token')
+    window.location = '/login'
+  }
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -105,7 +122,9 @@ const NavBar = (props) => {
       >
         <Toolbar>
           <Typography variant="h6" noWrap className={classes.title}>
+          <NavLink exact to='/' className={classes.logoLink}>
             PawPal
+          </NavLink>
           </Typography>
           <IconButton
             color="inherit"
@@ -134,29 +153,78 @@ const NavBar = (props) => {
         </div>
         <Divider />
         <List>
-          <ListItem button>
-            <AccountCircleIcon />
-            <Link to='/profile' className={classes.linkColor}>
-              <Typography>My Profile</Typography>
-            </Link>
-          </ListItem>
-          <ListItem button>
-            <FavoriteIcon />
-            <Link to='/favorites' className={classes.linkColor}>
-              <Typography>Favorites</Typography>
-            </Link>
-          </ListItem>
-          <ListItem button>
-            <SearchIcon />
-            <Link to='/search' className={classes.linkColor}>
-              <Typography>Search</Typography>
-            </Link>
-          </ListItem>
+          <NavLink
+            to='/profile'
+            className={classes.linkColor}
+            activeClassName={classes.activeLink}
+            onClick={handleDrawerClose}
+          >
+            <ListItem button className={location.pathname === '/profile' && classes.activeBG}>
+              <ListItemIcon>
+                <AccountCircleIcon className={location.pathname === '/profile' ? classes.activeLink : classes.linkColor} />
+              </ListItemIcon>
+              <ListItemText>
+                MyProfile
+              </ListItemText>
+            </ListItem>
+          </NavLink>
+          <NavLink
+            to='/favorites'
+            className={classes.linkColor}
+            activeClassName={classes.activeLink}
+            onClick={handleDrawerClose}
+          >
+            <ListItem button className={location.pathname === '/favorites' && classes.activeBG}>
+              <ListItemIcon>
+                <FavoriteIcon className={location.pathname === '/favorites' ? classes.activeLink : classes.linkColor} />
+              </ListItemIcon>
+              <ListItemText>
+                Favorites
+              </ListItemText>
+            </ListItem>
+          </NavLink>
+          <NavLink
+            to='/search'
+            className={classes.linkColor}
+            activeClassName={classes.activeLink}
+            onClick={handleDrawerClose}
+          >
+            <ListItem button className={location.pathname === '/search' && classes.activeBG}>
+              <ListItemIcon>
+                <SearchIcon className={location.pathname === '/search' ? classes.activeLink : classes.linkColor} />
+              </ListItemIcon>
+              <ListItemText>
+                Search
+              </ListItemText>
+            </ListItem>
+          </NavLink>
         </List>
         <Divider />
-        <Link className={ classes.linkColor } to='/login'>
-          <Button color='inherit'>Login/Logout</Button>
-        </Link>
+          {(localStorage.getItem('token')) ? 
+          (<Link className={classes.linkColor}>
+            <ListItem
+              button
+              color='inherit'
+              onClick={handleLogOut}
+            >
+              <ListItemIcon>
+                <ExitToAppIcon className={classes.linkColor} />
+              </ListItemIcon>
+              <ListItemText>
+                Logout
+              </ListItemText>
+            </ListItem>
+          </Link>) :
+          (<Link className={classes.linkColor} to='/login'>
+            <ListItem button color='inherit'>
+              <ListItemIcon>
+                <VpnKeyIcon className={classes.linkColor} />
+              </ListItemIcon>
+              <ListItemText>
+                Login
+              </ListItemText>
+            </ListItem>
+          </Link>)}
       </Drawer>
     </div>
   );

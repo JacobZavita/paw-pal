@@ -63,19 +63,6 @@ const AuthForm = props => {
           </> 
           : null
       }
-      <TextField
-        className={classes.field}
-        id='password'
-        name='password'
-        value={props.formState.password}
-        onChange={props.handleInputChange}
-        variant='outlined'
-        label='Password'
-        type='password'
-        color='primary'
-        fullWidth
-      />
-      <br /><br />
       {
         (props.register)
           ? <>
@@ -94,6 +81,19 @@ const AuthForm = props => {
           </> 
           : null
       }
+      <TextField
+        className={classes.field}
+        id='password'
+        name='password'
+        value={props.formState.password}
+        onChange={props.handleInputChange}
+        variant='outlined'
+        label='Password'
+        type='password'
+        color='primary'
+        fullWidth
+      />
+      <br /><br />
       <Button
         fullWidth
         type='submit'

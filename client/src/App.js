@@ -21,6 +21,7 @@ import Register from './pages/Register'
 import Search from './pages/Search'
 import Share from './pages/Share'
 import Chat from './pages/Chat'
+import Err from './pages/Err'
 
 // component imports
 import NavBar from './components/Drawer'
@@ -94,9 +95,10 @@ const App = () => {
             <Route path='/favorites'>
               <Favorites />
             </Route>
-            <Route path='/share'>
-              <Share />
+            <Route exact path='/share'>
+              <Err />
             </Route>
+            <Route path='/share/:id' render={(props) => <Share {...props} />} />
             <Route path='/chat'>
               <Chat />
             </Route>

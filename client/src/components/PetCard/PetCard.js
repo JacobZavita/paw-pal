@@ -52,19 +52,34 @@ const ImgMediaCard = props => {
 
   let petData = props.petState.pets[props.activeStep]
 
-  const handleOnClick = () => {
-    const newPet = {
-      id: petData.id,
-      name: petData.name,
-      image: (petData.primary_photo_cropped == null) ? 'https://pbs.twimg.com/profile_images/446279626831044608/aCs3t5qe_400x400.png' : petData.primary_photo_cropped.full,
-      phone: petData.contact.phone,
-      email: petData.contact.email,
-      address: petData.contact.address.address1,
-      city: petData.contact.address.city,
-      state: petData.contact.address.state
-    }
-    Pet.add(newPet)
-      .then(console.log('added new pet'))
+  const handleOnClick = animalID => {
+    // checks if there are duplicate pet in favorites list
+    Pet.favorites()
+      .then(({data}) => {
+        console.log(`This animal's ID is: ${animalID}`)
+        let isDuplicate = false
+        data.forEach(pet => {
+          if (animalID === pet.id) {
+            isDuplicate = true
+          }
+        })
+        console.log(`Duplicate?: ${isDuplicate}`)
+        if (!isDuplicate) {
+          const newPet = {
+            id: petData.id,
+            name: petData.name,
+            image: (petData.primary_photo_cropped == null) ? 'https://pbs.twimg.com/profile_images/446279626831044608/aCs3t5qe_400x400.png' : petData.primary_photo_cropped.full,
+            phone: petData.contact.phone,
+            email: petData.contact.email,
+            address: petData.contact.address.address1,
+            city: petData.contact.address.city,
+            state: petData.contact.address.state
+          }
+          Pet.add(newPet)
+            .then(console.log('added new pet'))
+            .catch(err => console.log(err))
+        }
+      })
       .catch(err => console.log(err))
   }
 
@@ -116,7 +131,7 @@ const ImgMediaCard = props => {
           {/* <IconButton color='secondary' onClick={props.handleClickPass}>
             <ClearIcon />
           </IconButton> */}
-          <IconButton color='primary' onClick={handleOnClick}>
+          <IconButton color='primary' onClick={() => {handleOnClick(petData.id)}}>
             <FavoriteIcon />
           </IconButton>
           <IconButton
