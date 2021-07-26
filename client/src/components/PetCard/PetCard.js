@@ -1,16 +1,21 @@
 import { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardActionArea, CardActions, CardContent, CardMedia, Typography, Grid, Collapse, IconButton } from '@material-ui/core'
+import { Card, CardActionArea, CardActions, CardContent, CardMedia, Typography, Grid, Collapse, IconButton, Paper } from '@material-ui/core'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import ClearIcon from '@material-ui/icons/Clear'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import clsx from 'clsx'
 import Background from './pawprints.jpg'
 import Pet from '../../utils/PetAPI'
+import { Popover  } from '@material-ui/core'
+import PetsIcon from '@material-ui/icons/Pets';
+import Divider from '@material-ui/core/Divider';
+import Image from '../../components/Images/footer.png'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    minWidth: 275,
+    minWidth: 275, 
+    
   },
   bullet: {
     display: 'inline-block',
@@ -36,21 +41,42 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.shortest,
     })
-    },
-    expandOpen: {
-      transform: 'rotate(180deg)'
-    }
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)'
+  },
+  typography: {
+    padding: theme.spacing(2),
+  }
 }));
 
 const ImgMediaCard = props => {
   const classes = useStyles()
   const [expanded, setExpanded] = useState(false)
+  const [anchorEl, setAnchorEl] = useState(null)  // this is for popover component
+  const [popoverText, setPopoverText] = useState(false)  // this is for the popover when the user adds a pet to their favorites
   
   const handleExpandClick = () => {
     setExpanded(!expanded)
   }
 
+  const handlePopoverClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null)
+  }
+
+  const handlePopoverText = myText => {
+    setPopoverText(myText)
+  }
+
   let petData = props.petState.pets[props.activeStep]
+
+  // for popover component
+  const open = Boolean(anchorEl)
+  const id = open ? 'simple-popover' : undefined
 
   const handleOnClick = animalID => {
     // checks if there are duplicate pet in favorites list
@@ -61,10 +87,12 @@ const ImgMediaCard = props => {
         data.forEach(pet => {
           if (animalID === pet.id) {
             isDuplicate = true
+            handlePopoverText(isDuplicate)
           }
         })
         console.log(`Duplicate?: ${isDuplicate}`)
         if (!isDuplicate) {
+          handlePopoverText(isDuplicate)
           const newPet = {
             id: petData.id,
             name: petData.name,
@@ -84,10 +112,13 @@ const ImgMediaCard = props => {
   }
 
   return (
-    <>
+    
+    
       <Card
-        className={classes.root}
-        style={{ backgroundImage: `url(${Background})` }}
+        className={classes.root.theme}
+        style={{
+          backgroundImage: `url(${Background})`, borderRadius: "20px", color:"#212121" }}
+  
       >
         <CardActionArea>
           <CardMedia
@@ -97,33 +128,35 @@ const ImgMediaCard = props => {
             src={(petData.primary_photo_cropped == null) ? 'https://pbs.twimg.com/profile_images/446279626831044608/aCs3t5qe_400x400.png' : petData.primary_photo_cropped.full}
             title={petData.name}
           />
-          <CardContent>
-                <Typography gutterBottom variant="h4" component="h4">
-                    {petData.name}
+        <CardContent>
+          <Typography gutterBottom variant="h4" component="h4">
+            <b> Hi, I'm {petData.name}</b> <PetsIcon />
                 </Typography>
+            
             <Grid container spacing={2}>
-              <Grid item xs={4}>
-                <Typography variant="h6" color="textSecondary" component="h6">
-                  Primary Breed: {petData.breeds.primary}
+              <Grid item xs={8}>
+                <Typography variant="h6" color="#9fa8da" component="h6" align="left">
+                 <b> Primary Breed:</b> {petData.breeds.primary}
                 </Typography>
               </Grid>
-              <Grid item xs={4}>
+              
+              <Grid item xs={8}>
               {(petData.breeds.secondary) ?
                 <Grid item>
-                  <Typography variant="h6" color="textSecondary" component="h6">
-                    Secondary Breed: {petData.breeds.secondary}
+                  <Typography variant="h6" component="h6" align="left">
+                      <b> Secondary Breed:</b> {petData.breeds.secondary}
                   </Typography>
                 </Grid> : null}
               </Grid>
-              <Grid item xs={4}>
-                <Typography variant="h6" color="textSecondary" component="h6">
-                  Age: {petData.age}
+              <Grid item xs={8} align="left">
+                <Typography variant="h6" component="h6" align="left">
+                  <b> Age Range:</b> {petData.age}
                 </Typography>
-                <Typography variant="h6" color="textSecondary" component="h6">
-                  Sex: {petData.gender}
+                <Typography variant="h6" component="h6" align="left">
+                <b>  Gender:</b> {petData.gender} 
                 </Typography>
               </Grid>
-            </Grid>
+            </Grid> 
           </CardContent>
         </CardActionArea>
 
@@ -131,9 +164,25 @@ const ImgMediaCard = props => {
           {/* <IconButton color='secondary' onClick={props.handleClickPass}>
             <ClearIcon />
           </IconButton> */}
-          <IconButton color='primary' onClick={() => {handleOnClick(petData.id)}}>
+          <IconButton color='primary' aria-describedby={id} onClick={(event) => {handleOnClick(petData.id); handlePopoverClick(event)}}>
             <FavoriteIcon />
           </IconButton>
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handlePopoverClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }}
+          >
+            <Typography className={classes.typography}>{popoverText ? 'Already in favorites' : 'Added to favorites!'}</Typography>
+          </Popover>
           <IconButton
             className={clsx(classes.expand, {
               [classes.expandOpen]: expanded,
@@ -146,23 +195,30 @@ const ImgMediaCard = props => {
           </IconButton>
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
-              <Typography paragraph>
-                More About {petData.name}<br />{petData.description}
+            <Typography variant="h6" align="center">
+                <b> More About {petData.name}:</b><br />
               </Typography>
-              <Typography paragraph>
-                Email: {petData.contact.email}
+            <Typography paragraph align="left">
+              <b> {petData.description}</b>
               </Typography>
-              <Typography paragraph>
-                Phone: {petData.contact.phone}
+              <Typography paragraph align="left">
+              <b> Email: {(petData.contact.email == null) ? 'N/A' : petData.contact.email}</b>
               </Typography>
-              <Typography paragraph>
-                Address: {petData.contact.address.address1}<br />{petData.contact.address.city}, {petData.contact.address.state}
+              <Typography paragraph align="left">
+              <b>Phone: {(petData.contact.phone == null) ? 'N/A' : petData.contact.phone} </b>
+              </Typography>
+              <Typography paragraph align="left">
+              <b> Location: {petData.contact.address.address1}<br />{petData.contact.address.city}, {petData.contact.address.state}</b>
               </Typography>
             </CardContent>
           </Collapse>
         </CardActions>
       </Card>
-    </>
+      
+      
+      
+    
+    
   );
 }
 

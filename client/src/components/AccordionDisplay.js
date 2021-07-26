@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import AdvancedSearch from './AdvancedSearch'
 
-// Generic Accordion component used for displaying data
+// Generic Accordion component used for displaying Image
 
 const useStyles = makeStyles((theme) => ({
   root: {
