@@ -1,20 +1,23 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, Typography, Grid, Collapse, IconButton, Paper } from '@material-ui/core'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import ClearIcon from '@material-ui/icons/Clear'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import clsx from 'clsx'
-import Background from './pawprints.jpg'
+import Background from '../Images/footer.png'
 import Pet from '../../utils/PetAPI'
 import { Popover  } from '@material-ui/core'
 import PetsIcon from '@material-ui/icons/Pets';
 import Divider from '@material-ui/core/Divider';
-import Image from '../../components/Images/footer.png'
+import Image from '../../components/Images/footerLong.png'
+import NoImage from '../Images/noimage.jpg'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    minWidth: 275, 
+    minWidth: '300px',
+    
     
   },
   bullet: {
@@ -32,9 +35,16 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: `url(${Background})`
   },
     image: {
-      height: '600px',
+      height: '500px',
+      width: '70vh',
       objectFit: 'cover',
-  },
+      borderRadius: '15px',
+      // align: 'center'
+      },
+      // cardWidth: {
+      //   width: '30vh',
+      //   align: 'left',
+      // },
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
@@ -47,7 +57,15 @@ const useStyles = makeStyles((theme) => ({
   },
   typography: {
     padding: theme.spacing(2),
-  }
+  },
+  gradientStyle: {
+    background: 'linear-gradient(45deg, #595959 30%, #1c1c1c 90%)',
+    backgroundImage: `url(${Image})`,
+    backgroundSize: 'auto 55%',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'bottom',
+    height: '100vh'
+  },
 }));
 
 const ImgMediaCard = props => {
@@ -96,7 +114,7 @@ const ImgMediaCard = props => {
           const newPet = {
             id: petData.id,
             name: petData.name,
-            image: (petData.primary_photo_cropped == null) ? 'https://pbs.twimg.com/profile_images/446279626831044608/aCs3t5qe_400x400.png' : petData.primary_photo_cropped.full,
+            image: (petData.primary_photo_cropped == null) ? 'https://peoplewithpets.com/wp-content/uploads/2019/11/people-with-pets-no-image-available.jpg' : petData.primary_photo_cropped.full,
             phone: petData.contact.phone,
             email: petData.contact.email,
             type: petData.type,
@@ -118,43 +136,45 @@ const ImgMediaCard = props => {
       <Card
         className={classes.root.theme}
         style={{
-          backgroundImage: `url(${Background})`, borderRadius: "20px", color:"#212121" }}
+          
+          width: "70vh",
+          borderRadius: "20px", 
+        // backgroundImage: `url(${Background})` 
+      }}
   
       >
         <CardActionArea>
           <CardMedia
             className={classes.image}
             component="img"
+            
             alt={petData.name}
-            src={(petData.primary_photo_cropped == null) ? 'https://pbs.twimg.com/profile_images/446279626831044608/aCs3t5qe_400x400.png' : petData.primary_photo_cropped.full}
+          src={(petData.primary_photo_cropped == null) ? 'https://peoplewithpets.com/wp-content/uploads/2019/11/people-with-pets-no-image-available.jpg' : petData.primary_photo_cropped.full}
             title={petData.name}
           />
-        <CardContent>
+        <CardContent className={classes.cardWidth}>
           <Typography gutterBottom variant="h4" component="h4">
             <b> Hi, I'm {petData.name}</b> <PetsIcon />
                 </Typography>
             
-            <Grid container spacing={2}>
+            <Grid container spacing={1}>
               <Grid item xs={8}>
-                <Typography variant="h6" color="#9fa8da" component="h6" align="left">
-                 <b> Primary Breed:</b> {petData.breeds.primary}
+              <Typography variant="h6" component="h6" align="left">
+                <b style={{ color: "#7189FF" }}> Primary Breed:</b> {petData.breeds.primary}
                 </Typography>
-              </Grid>
-              
-              <Grid item xs={8}>
               {(petData.breeds.secondary) ?
                 <Grid item>
                   <Typography variant="h6" component="h6" align="left">
-                      <b> Secondary Breed:</b> {petData.breeds.secondary}
+                      <b style={{color:"#7189FF"}}> Secondary Breed:</b> {petData.breeds.secondary}
                   </Typography>
                 </Grid> : null}
               </Grid>
               <Grid item xs={8} align="left">
                 <Typography variant="h6" component="h6" align="left">
-                  <b> Age Range:</b> {petData.age}
+                <b style={{ color: "#7189FF" }}> Age Range:</b> {petData.age}
                 </Typography>
                 <Typography variant="h6" component="h6" align="left">
-                <b>  Gender:</b> {petData.gender} 
+                <b style={{ color: "#7189FF" }}>  Gender:</b> {petData.gender}
                 </Typography>
               </Grid>
             </Grid> 
@@ -197,19 +217,19 @@ const ImgMediaCard = props => {
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
             <Typography variant="h6" align="center">
-                <b> More About {petData.name}:</b><br />
+              <b style={{ color: "#7189FF" }}> More About {petData.name}:</b><br />
               </Typography>
             <Typography paragraph align="left">
               <b> {petData.description}</b>
               </Typography>
               <Typography paragraph align="left">
-              <b> Email: {(petData.contact.email == null) ? 'N/A' : petData.contact.email}</b>
+              <b style={{ color: "#7189FF" }}> Email:</b> <b>{(petData.contact.email == null) ? 'N/A' : petData.contact.email}</b>
               </Typography>
               <Typography paragraph align="left">
-              <b>Phone: {(petData.contact.phone == null) ? 'N/A' : petData.contact.phone} </b>
+              <b style={{ color: "#7189FF" }}>Phone:</b> <b> {(petData.contact.phone == null) ? 'N/A' : petData.contact.phone} </b>
               </Typography>
               <Typography paragraph align="left">
-              <b> Location: {petData.contact.address.address1}<br />{petData.contact.address.city}, {petData.contact.address.state}</b>
+              <b style={{ color: "#7189FF" }}> Location: </b> <b>{petData.contact.address.address1}<br />{petData.contact.address.city}, {petData.contact.address.state}</b>
               </Typography>
             </CardContent>
           </Collapse>
