@@ -21,6 +21,8 @@ import ForumOutlinedIcon from '@material-ui/icons/ForumOutlined'
 
 const localStorage = window.localStorage
 
+import Image from '../../components/Images/finalfrfr.png'
+
 function rand () {
   return Math.round(Math.random() * 20) - 10
 }
@@ -42,10 +44,10 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   imageList: {
-    width: 1000,
-    height: 950,
+    width: 900,
+    height: 800,
     position: 'fixed',
-    bottom: 25
+    bottom: 40
   },
   imageListItem: {
     cursor: 'pointer'
@@ -73,7 +75,20 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   },
   borderedbox: {
-    border: '80px solid #484444'
+    border: '80px solid #2c2c2c'
+  },
+  gradientStyle: {
+    background: 'linear-gradient(45deg, #595959 30%, #1c1c1c 90%)',
+    backgroundImage: `url(${Image})`,
+    backgroundSize: 'auto 55%',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'bottom',
+    height: '100vh',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper
   }
 }))
 
@@ -185,7 +200,33 @@ const Favorites = props => {
     }
   }
   // delete a note from a pet
-  // const noteHandleDelete = 
+  const noteHandleDelete = (noteID, pet_id) => {
+    console.log(noteID)
+    if (noteState.notes.length) {
+      noteState.notes.forEach(note => {
+        if (noteID === note._id) {
+          Note.delete(note._id)
+            .then(() => {
+              const newNoteList = noteState.notes.filter(note => note._id !== noteID)
+              console.log('Note deleted')
+              console.log(newNoteList)
+              // delete
+              let pets = JSON.parse(JSON.stringify(favState.pets))
+              pets = pets.map(pet => {
+                if (pet._id === pet_id) {
+                  pet.notes = newNoteList
+                }
+                return pet
+              })
+              setFavState({ pets })
+              // delete
+              setNoteState({ notes: newNoteList })
+            })
+            .catch(err => console.log(err))
+        }
+      })
+    }
+  }
 
   // For copy-to-clipboard
   const [copySuccess, setCopySuccess] = useState('')
@@ -233,7 +274,7 @@ const Favorites = props => {
         <IconButton href='/chat'>
           <ForumOutlinedIcon button onClick={() => localStorage.setItem('chatID', props.pet._id)} />
         </IconButton>
-        <Paper component='div' style={{ backgroundColor: 'black', padding: '20px' }}>
+        <Paper component='div' style={{ backgroundColor: 'black', padding: '20px', maxHeight: '250px', overflow: 'auto' }}>
           <NoteForm
             body={bodyState.body}
             pet_id={props.pet._id}
@@ -249,10 +290,10 @@ const Favorites = props => {
               >
                 <Typography variant='h6'>
                   {note.body}
+                  <IconButton aria-label='delete' onClick={() => { noteHandleDelete(note._id, props.pet._id) }}>
+                    <DeleteIcon fontSize='md' />
+                  </IconButton>
                 </Typography>
-                {/* <IconButton aria-label='delete'>
-                  <DeleteIcon fontSize='md' />
-                </IconButton> */}
               </Paper>
             ))
           }
@@ -262,7 +303,7 @@ const Favorites = props => {
   }
   return (
     <>
-      <div className={classes.root}>
+      <div className={classes.gradientStyle}>
         <ImageListItem key='Subheader' cols={2} style={{ height: 'auto' }}>
           <ListSubheader color='primary' component='div' style={{ textTransform: 'uppercase', textAlign: 'center', fontSize: '50px' }} />
         </ImageListItem>
