@@ -24,7 +24,7 @@ const Note = {
   }),
 
   // delete note
-  delete: _id => axios.delete(`/api/notes${_id}`, {
+  delete: _id => axios.delete(`/api/notes/${_id}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     }
