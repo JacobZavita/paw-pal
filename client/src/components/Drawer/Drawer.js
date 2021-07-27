@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+
   },
   hide: {
     display: 'none',
@@ -122,13 +123,12 @@ const NavBar = (props) => {
         })}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap className={classes.title}>
-          <NavLink exact to='/' className={classes.logoLink}>
-              PawPal<img src={Logo} alt="Logo" style={{ "height": "65px", "padding": 5 }} align="center" />
-          </NavLink>
-          
-            
+          <Typography variant="h5" noWrap className={classes.title} style={{ align: 'center' }}>
+            <NavLink exact to='/' className={classes.logoLink}>
+              <img src={Logo} alt="Logo" style={{ height: "60px", padding: 5, marginRight: '7px' }} align="center" />PawPal
+            </NavLink>
           </Typography>
+
           <IconButton
             color="inherit"
             aria-label="open drawer"

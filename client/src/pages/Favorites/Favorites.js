@@ -18,10 +18,10 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import ShareIcon from '@material-ui/icons/Share'
 import ForumOutlinedIcon from '@material-ui/icons/ForumOutlined'
+import Image from '../../components/Images/finalfrfr.png'
 
 const localStorage = window.localStorage
 
-import Image from '../../components/Images/finalfrfr.png'
 
 function rand () {
   return Math.round(Math.random() * 20) - 10
