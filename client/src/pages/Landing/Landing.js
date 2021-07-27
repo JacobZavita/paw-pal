@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import { Card, CardContent, Button, IconButton, Typography, Paper, Collapse, CardMedia } from '@material-ui/core'
+import { Card, CardContent, CardActionArea, Button, IconButton, Typography, Paper, Collapse, CardMedia } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { Link as Scroll } from 'react-scroll'
 
@@ -19,26 +19,27 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center'
   },
   title: {
-    color: '#fff',
+    color: '#e6e6e6',
     fontSize: '4rem',
+    fontWeight: '450',
     textShadow: '2px 2px #000000'
   },
   goDown: {
-    color: '#624CAB',
+    color: '#758ECD',
     fontSize: '4rem'
   },
   divider: {
     minHeight: '10vh',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#758ECD'
+    backgroundColor: '#445299'
   },
   dividerText: {
     paddingTop: '15px'
   },
   button: {
     marginBottom: '15px',
-    background: '#624CAB',
+    // background: '#624CAB',
     border: 0,
     borderRadius: 3,
     color: 'white',
@@ -84,6 +85,10 @@ const Landing = _ => {
     setChecked(true)
   }, [])
 
+  const scroll = _ => {
+    window.scrollBy(0, 875)
+  }
+
   return (
     <>
       <div className={classes.root}>
@@ -94,19 +99,21 @@ const Landing = _ => {
             <h1 className={classes.title}>
               Welcome to PawPal <br />Find Your Next Pet
             </h1>
-            <Scroll to='about-pawpal' smooth={true}>
-              <IconButton>
-                <ExpandMoreIcon className={classes.goDown} />
-              </IconButton>
-            </Scroll>
+            {/* <Scroll to='about-pawpal' smooth={true}> */}
+            <IconButton onClick={scroll}>
+              <ExpandMoreIcon className={classes.goDown} />
+            </IconButton>
+            {/* </Scroll> */}
+            {/* <div style={{ height: '10vh' }} /> */}
           </div>
         </Collapse>
       </div>
+      <div name='about-pawpal' />
       <Paper
         className={classes.divider}
         elevation={3}
         align='center'
-        name={'about-pawpal'}
+        // name={'about-pawpal'}
       >
         <Typography
           className={classes.dividerText}
@@ -117,19 +124,21 @@ const Landing = _ => {
           Find Local Animals Up For Adoption In Your Area
         </Typography >
         <Link to='/register' className={classes.buttonLink}>
-          <Button className={classes.button} variant='contained'>
+          <Button className={classes.button} variant='contained' color='primary'>
             Get Started
           </Button>
         </Link>
       </Paper>
       <div className={classes.root1}>
           <Card className={classes.root2}>
+            <CardActionArea href={'/search'}>
               <CardMedia
                 className={classes.media}
                 component='img'
                 src={'https://i.ibb.co/jvrtfpC/pexels-helena-lopes-1904105.jpg'}
                 title="Card Image"
               />
+            </CardActionArea>
             <CardContent>
               <Typography
                 gutterBottom
@@ -149,12 +158,14 @@ const Landing = _ => {
             </CardContent>
           </Card>
         <Card className={classes.root2}>
-          <CardMedia
-            className={classes.media}
-            component='img'
-            src={'https://i.ibb.co/F4F9kWC/pexels-anastasia-shuraeva-5124967.jpg'}
-            title="Card Image"
-          />
+          <CardActionArea href='/favorites'>
+            <CardMedia
+              className={classes.media}
+              component='img'
+              src={'https://i.ibb.co/F4F9kWC/pexels-anastasia-shuraeva-5124967.jpg'}
+              title="Card Image"
+            />
+          </CardActionArea>
           <CardContent>
             <Typography
               gutterBottom
