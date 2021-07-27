@@ -95,24 +95,33 @@ const Share = ({ match }) => {
           />
           <List>
             <Hidden xsDown>
-              <ListItem className={classes.wordMargin}>
-                <ListItemIcon><MailOutlineIcon color='primary' /></ListItemIcon>
-                <Typography color='textSecondary'>
-                  {pet.email}
-                </Typography>
-              </ListItem>
-              <ListItem className={classes.wordMargin}>
-                <ListItemIcon><PhoneAndroidIcon color='primary' /></ListItemIcon>
-                <Typography color='textSecondary'>
-                  {pet.phone}
-                </Typography>
-              </ListItem>
-              <ListItem className={classes.wordMargin}>
-                <ListItemIcon><HomeOutlinedIcon color='primary' /></ListItemIcon>
-                <Typography color='textSecondary'>
-                  {pet.address}, {pet.city} {pet.state}
-                </Typography>
-              </ListItem>
+              {
+                pet.email &&
+                  <ListItem className={classes.wordMargin}>
+                    <ListItemIcon><MailOutlineIcon color='primary' /></ListItemIcon>
+                    <Typography color='textSecondary'>
+                      {pet.email}
+                    </Typography>
+                  </ListItem>
+              }
+              {
+                pet.phone &&
+                  <ListItem className={classes.wordMargin}>
+                    <ListItemIcon><PhoneAndroidIcon color='primary' /></ListItemIcon>
+                    <Typography color='textSecondary'>
+                      {pet.phone}
+                    </Typography>
+                  </ListItem>
+              }
+              {
+                pet.address &&
+                  <ListItem className={classes.wordMargin}>
+                    <ListItemIcon><HomeOutlinedIcon color='primary' /></ListItemIcon>
+                    <Typography color='textSecondary'>
+                      {pet.address}, {pet.city} {pet.state}
+                    </Typography>
+                  </ListItem>
+              }
             </Hidden>
             <Hidden smUp>
               <ListItem>
