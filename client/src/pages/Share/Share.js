@@ -118,28 +118,49 @@ const Share = ({ match }) => {
                   <ListItem className={classes.wordMargin}>
                     <ListItemIcon><HomeOutlinedIcon color='primary' /></ListItemIcon>
                     <Typography color='textSecondary'>
-                      {pet.address}, {pet.city} {pet.state}
+                      {pet.address}
+                    </Typography>
+                  </ListItem>
+              }
+              {
+                pet.city &&
+                  <ListItem className={classes.wordMargin}>
+                    <ListItemIcon><LocationOnOutlinedIcon color='primary' /></ListItemIcon>
+                    <Typography color='textSecondary'>
+                      {pet.city}, {pet.state}
                     </Typography>
                   </ListItem>
               }
             </Hidden>
             <Hidden smUp>
-              <ListItem>
-                <ListItemIcon><MailOutlineIcon color='primary' /></ListItemIcon>
-                <Typography align='center' color='textSecondary'>{pet.email}</Typography>
-              </ListItem>
-              <ListItem>
-                <ListItemIcon><PhoneAndroidIcon color='primary' /></ListItemIcon>
-                <Typography align='center' color='textSecondary'>{pet.phone}</Typography>
-              </ListItem>
-              <ListItem>
-                <ListItemIcon><HomeOutlinedIcon color='primary' /></ListItemIcon>
-                <Typography align='center' color='textSecondary'>{pet.address}</Typography>
-              </ListItem>
-              <ListItem>
-                <ListItemIcon><LocationOnOutlinedIcon color='primary' /></ListItemIcon>
-                <Typography align='center' color='textSecondary'>{pet.city}, {pet.state}</Typography>
-              </ListItem>
+              {
+                pet.email &&
+                  <ListItem>
+                    <ListItemIcon><MailOutlineIcon color='primary' /></ListItemIcon>
+                    <Typography align='center' color='textSecondary'>{pet.email}</Typography>
+                  </ListItem>
+              }
+              {
+                pet.phone &&
+                  <ListItem>
+                    <ListItemIcon><PhoneAndroidIcon color='primary' /></ListItemIcon>
+                    <Typography align='center' color='textSecondary'>{pet.phone}</Typography>
+                  </ListItem>
+              }
+              {
+                pet.address &&
+                  <ListItem>
+                    <ListItemIcon><HomeOutlinedIcon color='primary' /></ListItemIcon>
+                    <Typography align='center' color='textSecondary'>{pet.address}</Typography>
+                  </ListItem>
+              }
+              {
+                pet.city &&
+                  <ListItem>
+                    <ListItemIcon><LocationOnOutlinedIcon color='primary' /></ListItemIcon>
+                    <Typography align='center' color='textSecondary'>{pet.city}, {pet.state}</Typography>
+                  </ListItem>
+              }
             </Hidden>
           </List>
         </Paper>
