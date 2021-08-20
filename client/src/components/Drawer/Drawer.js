@@ -12,7 +12,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import { Link, NavLink } from 'react-router-dom'
-import Button from '@material-ui/core/Button'
+// import Button from '@material-ui/core/Button'
 // active icon link stuff
 import { useLocation } from 'react-router-dom'
 import Logo from '../Images/logo.png'

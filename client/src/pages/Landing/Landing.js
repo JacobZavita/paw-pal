@@ -99,11 +99,11 @@ const Landing = _ => {
             <h1 className={classes.title}>
               Welcome to PawPal <br />Find Your Next Pet
             </h1>
-            {/* <Scroll to='about-pawpal' smooth={true}> */}
+            <Scroll to='about-pawpal' smooth={true}>
             <IconButton onClick={scroll}>
               <ExpandMoreIcon className={classes.goDown} />
             </IconButton>
-            {/* </Scroll> */}
+            </Scroll>
             {/* <div style={{ height: '10vh' }} /> */}
           </div>
         </Collapse>

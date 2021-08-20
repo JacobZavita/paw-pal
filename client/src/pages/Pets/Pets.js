@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Pets = props => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const [loading, setLoading] = useState(false)
 
   // call the API inside useEffect in order to prevent it from continuously running

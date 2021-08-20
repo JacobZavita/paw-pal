@@ -117,7 +117,7 @@ const Login = _ => {
             </Container>
           </Paper>
           <div className={classes.croppingDog}>
-            <img src={Dogs} className={classes.dogsStyle} />
+            <img src={Dogs} alt='' className={classes.dogsStyle} />
           </div>
         </Paper>
       </Container>

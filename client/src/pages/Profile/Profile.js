@@ -168,13 +168,13 @@ const Profile = _ => {
         <br /><br /><br /><br /><br />
         <Hidden xsDown>
           <div className={classes.croppingDog}>
-            <img src={Dog} className={classes.dogStyle} />
+            <img src={Dog} alt='' className={classes.dogStyle} />
           </div>
         </Hidden>
         <Paper>
           <Paper elevation={0} className={classes.paperStyle}>
             <div className={classes.cropping}>
-              <img src={userState.avatar} className={classes.avatarStyle} onClick={handleOpenAvatar} />
+              <img src={userState.avatar} alt='' className={classes.avatarStyle} onClick={handleOpenAvatar} />
             </div>
             <br /><br />
             <Typography variant='h4' align='center'>

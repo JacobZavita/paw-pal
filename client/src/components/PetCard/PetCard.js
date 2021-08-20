@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardActionArea, CardActions, CardContent, CardMedia, Typography, Grid, Collapse, IconButton, Paper } from '@material-ui/core'
+import { Card, CardActionArea, CardActions, CardContent, CardMedia, Typography, Grid, Collapse, IconButton } from '@material-ui/core'
 import FavoriteIcon from '@material-ui/icons/Favorite'
-import ClearIcon from '@material-ui/icons/Clear'
+// import ClearIcon from '@material-ui/icons/Clear'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import clsx from 'clsx'
 import Background from '../Images/footer.png'
 import Pet from '../../utils/PetAPI'
 import { Popover  } from '@material-ui/core'
 import PetsIcon from '@material-ui/icons/Pets';
-import Divider from '@material-ui/core/Divider';
+// import Divider from '@material-ui/core/Divider';
 import Image from '../../components/Images/footer.png'
-import NoImage from '../Images/noimage.jpg'
+// import NoImage from '../Images/noimage.jpg'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -131,8 +131,6 @@ const ImgMediaCard = props => {
   }
 
   return (
-    
-    
       <Card
         className={classes.root.theme}
         style={{
@@ -182,9 +180,6 @@ const ImgMediaCard = props => {
         </CardActionArea>
 
         <CardActions>
-          {/* <IconButton color='secondary' onClick={props.handleClickPass}>
-            <ClearIcon />
-          </IconButton> */}
           <IconButton color='primary' aria-describedby={id} onClick={(event) => {handleOnClick(petData.id); handlePopoverClick(event)}}>
             <FavoriteIcon />
           </IconButton>
@@ -235,11 +230,6 @@ const ImgMediaCard = props => {
           </Collapse>
         </CardActions>
       </Card>
-      
-      
-      
-    
-    
   );
 }
 

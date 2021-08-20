@@ -83,7 +83,7 @@ const Share = ({ match }) => {
       <br /><br /><br /><br /><br /><br />
       <Container maxWidth='sm'>
         <Paper className={classes.padding}>
-          <img src={pet.image} className={classes.image} />
+          <img src={pet.image} alt='' className={classes.image} />
           <br /><br />
           <Typography variant='h4' align='center'>
             <div button>

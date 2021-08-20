@@ -100,7 +100,7 @@ const Register = props => {
           </Hidden>
           <Hidden xsDown>
             <Grid item sm={2} className={classes.croppingSides}>
-              <img src={Left} className={classes.catStyle} />
+              <img src={Left} alt='' className={classes.catStyle} />
             </Grid>
           </Hidden>
           <Grid item md={6} sm={8} xs={12}>
@@ -127,7 +127,7 @@ const Register = props => {
           </Grid>
           <Hidden xsDown>
             <Grid item sm={2} className={classes.croppingSides}>
-              <img src={Right} className={classes.catStyle} />
+              <img src={Right} alt='' className={classes.catStyle} />
             </Grid>
           </Hidden>
           <Hidden smDown>

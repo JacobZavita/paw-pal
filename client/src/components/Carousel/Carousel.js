@@ -11,7 +11,7 @@ import ImgMediaCard from '../PetCard'
 import Image from '../../components/Images/footerLong.png'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import Slide from '@material-ui/core/Slide';
+// import Slide from '@material-ui/core/Slide';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -64,7 +64,7 @@ const Carousel = props => {
 
   const [activeStep, setActiveStep] = useState(0);
 
-  const maxSteps = props.petState.pets.length;
+  // const maxSteps = props.petState.pets.length;
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
